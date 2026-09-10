@@ -71,7 +71,7 @@ export default function CaseStudyModal({ project, onClose }) {
           </div>
           <div>
             <span>Services</span>
-            <p>{project.services.join(' · ')}</p>
+            <p>{project.services && project.services.length ? project.services.join(' · ') : 'To be announced'}</p>
           </div>
           <div>
             <span>Year</span>
@@ -105,12 +105,14 @@ export default function CaseStudyModal({ project, onClose }) {
           <p>{project.solution}</p>
         </section>
 
-        <section className="cs-section">
-          <h3>Key Features</h3>
-          <ul className="cs-features">
-            {project.features.map((f) => (<li key={f}>{f}</li>))}
-          </ul>
-        </section>
+        {project.features && project.features.length > 0 && (
+          <section className="cs-section">
+            <h3>Key Features</h3>
+            <ul className="cs-features">
+              {project.features.map((f) => (<li key={f}>{f}</li>))}
+            </ul>
+          </section>
+        )}
 
         <section className="cs-section">
           <h3>Technology</h3>

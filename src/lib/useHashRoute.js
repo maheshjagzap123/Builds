@@ -2,13 +2,29 @@ import { useEffect, useState } from 'react';
 
 /**
  * Minimal hash-based router.
- * Treats `#/work` as a page route ("/work").
- * Treats `#services` (no leading slash) as an in-page anchor and returns "/".
+ *   #/work                 → { path: '/work', params: {} }
+ *   #/industries/healthcare → { path: '/industries/:slug', params: { slug: 'healthcare' } }
+ *   #services               → { path: '/', params: {}, anchor: 'services' }
+ *   (empty)                 → { path: '/', params: {} }
  */
 function parse() {
   const raw = (window.location.hash || '').replace(/^#/, '');
-  if (raw.startsWith('/')) return raw || '/';
-  return '/';
+  if (!raw) return { path: '/', params: {}, anchor: '' };
+
+  if (raw.startsWith('/')) {
+    // Page route
+    const segments = raw.split('/').filter(Boolean);
+    if (segments.length === 0) return { path: '/', params: {} };
+    if (segments[0] === 'industries' && segments[1]) {
+      return { path: '/industries/:slug', params: { slug: segments[1] } };
+    }
+    if (segments[0] === 'work') {
+      return { path: '/work', params: {} };
+    }
+    return { path: '/' + segments.join('/'), params: {} };
+  }
+
+  return { path: '/', params: {}, anchor: raw };
 }
 
 export function useHashRoute() {
@@ -19,13 +35,4 @@ export function useHashRoute() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
   return route;
-}
-
-export function navigate(to) {
-  if (to.startsWith('/')) {
-    window.location.hash = to === '/' ? '' : to;
-  } else {
-    window.location.hash = to;
-  }
-  window.scrollTo({ top: 0, behavior: 'auto' });
 }

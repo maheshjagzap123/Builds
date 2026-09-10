@@ -48,12 +48,12 @@ export default function Ecosystem() {
       <div className="container">
         <div className="section-head">
           <h2 className="h-section">
-            <RevealText>One digital</RevealText>{' '}
-            <em className="serif"><RevealText delay={0.1}>ecosystem.</RevealText></em>
+            <RevealText>From idea</RevealText>{' '}
+            <em className="serif"><RevealText delay={0.1}>to growth.</RevealText></em>
           </h2>
           <FadeUp className="meta">
-            Website, application, API, database and mobile app — built as connected pieces
-            of a single system, not as isolated projects.
+            A business idea becomes a website, an application, a connected system, a mobile
+            experience and an automated workflow — all working together.
           </FadeUp>
         </div>
 

@@ -166,15 +166,16 @@ export const principles = [
   },
 ];
 
-// Ecosystem — signature diagram nodes (top to bottom).
+// Ecosystem — signature scroll journey.
 export const ecosystem = [
-  { id: 'idea', label: 'Idea', hint: 'The business problem to solve' },
-  { id: 'website', label: 'Website', hint: 'Public surface & marketing' },
-  { id: 'api', label: 'API', hint: 'The connective tissue' },
-  { id: 'webapp', label: 'Web Application', hint: 'Customer & team surfaces' },
-  { id: 'database', label: 'Database', hint: 'The source of truth' },
-  { id: 'mobile', label: 'Mobile App', hint: 'In the customer’s pocket' },
-  { id: 'admin', label: 'Admin Dashboard', hint: 'Operational control' },
+  { id: 'idea', label: 'Idea', hint: 'Have a business idea? We turn it into a practical digital product plan.' },
+  { id: 'discover', label: 'Discover', hint: 'Understand the business, users, workflows and real constraints.' },
+  { id: 'design', label: 'Design', hint: 'We design the experience before engineering the product.' },
+  { id: 'build', label: 'Build', hint: 'Website, web application, mobile app or custom software.' },
+  { id: 'connect', label: 'Connect', hint: 'APIs, databases, third-party services and business tools.' },
+  { id: 'automate', label: 'Automate', hint: 'Remove the repetitive manual work.' },
+  { id: 'launch', label: 'Launch', hint: 'Put the product into real-world use.' },
+  { id: 'grow', label: 'Grow', hint: 'Improve, maintain and extend the system as the business grows.' },
 ];
 
 // Extended lifecycle (8 steps).
@@ -191,11 +192,11 @@ export const processSteps = [
 
 // Technology stack — grouped.
 export const technologies = {
-  Frontend: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS'],
-  Backend: ['.NET', 'C#', 'Node.js', 'REST APIs'],
-  Database: ['SQL Server', 'PostgreSQL', 'MongoDB'],
-  Mobile: ['Android', 'iOS', 'React Native'],
-  Tooling: ['Git', 'GitHub', 'Docker', 'Azure'],
+  Frontend: ['React', 'React.js', 'Next.js', 'Angular', 'TypeScript', 'JavaScript', 'HTML', 'CSS'],
+  Backend: ['.NET', 'C#', 'Node.js', 'Java', 'C++'],
+  Database: ['SQL Server', 'PostgreSQL', 'MongoDB', 'Supabase'],
+  Mobile: ['Android', 'iOS', 'Flutter', 'Dart', 'React Native'],
+  Other: ['REST APIs', 'API Integrations', 'Git', 'GitHub', 'Docker', 'Azure'],
 };
 
 // Value / outcome section (no invented numbers).

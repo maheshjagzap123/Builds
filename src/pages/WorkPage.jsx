@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { projects } from '../data/projects.js';
+import { activeProjects as projects } from '../data/projects.js';
 import RevealText from '../components/animation/RevealText.jsx';
 import FadeUp from '../components/animation/FadeUp.jsx';
 import MagneticButton from '../components/animation/MagneticButton.jsx';

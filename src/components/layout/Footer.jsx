@@ -13,10 +13,10 @@ export default function Footer() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         wordmarkRef.current,
-        { yPercent: 30, letterSpacing: '-0.02em' },
+        { yPercent: 20, opacity: 0.4 },
         {
           yPercent: 0,
-          letterSpacing: '-0.05em',
+          opacity: 1,
           duration: 1.4,
           ease: 'expo.out',
           scrollTrigger: {
@@ -38,33 +38,38 @@ export default function Footer() {
       <div className="container">
         <div className="footer-top">
           <div className="footer-brand">
-            <h3>Mahesh<br />Builds<em style={{ fontFamily: 'var(--font-serif)', color: 'var(--accent)' }}>.</em></h3>
-            <p>
-              A digital studio building websites, business software, dashboards and automation for growing businesses.
+            <h3>Mahesh Builds</h3>
+            <p>Digital Product &amp; Software Studio.</p>
+            <p className="footer-sub">
+              We design, build, launch and maintain websites, mobile apps and custom
+              business software for growing businesses.
             </p>
           </div>
           <div className="footer-col">
-            <h5>Studio</h5>
+            <h5>Explore</h5>
             <ul>
-              <li><a href="#about" data-cursor="hover">About</a></li>
+              <li><a href="#what-we-build" data-cursor="hover">What We Build</a></li>
+              <li><a href="#industries" data-cursor="hover">Industries</a></li>
+              <li><a href="#/work" data-cursor="hover">What We've Built</a></li>
               <li><a href="#process" data-cursor="hover">Process</a></li>
-              <li><a href="#/work" data-cursor="hover">Work</a></li>
+              <li><a href="#technology" data-cursor="hover">Technology</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>Services</h5>
             <ul>
-              <li><a href="#services" data-cursor="hover">Web Development</a></li>
-              <li><a href="#services" data-cursor="hover">Business Software</a></li>
-              <li><a href="#services" data-cursor="hover">Dashboards</a></li>
-              <li><a href="#services" data-cursor="hover">Automation</a></li>
+              <li><a href="#what-we-build" data-cursor="hover">Websites</a></li>
+              <li><a href="#what-we-build" data-cursor="hover">Web Applications</a></li>
+              <li><a href="#what-we-build" data-cursor="hover">Mobile Apps</a></li>
+              <li><a href="#what-we-build" data-cursor="hover">Business Software</a></li>
+              <li><a href="#maintenance" data-cursor="hover">Maintenance</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>Contact</h5>
             <ul>
               <li><a href="mailto:hello@maheshbuilds.com" data-cursor="hover">hello@maheshbuilds.com</a></li>
-              <li><a href="#contact" data-cursor="hover">Start a Project</a></li>
+              <li><a href="#contact" data-cursor="hover">Start a Project ↗</a></li>
             </ul>
           </div>
         </div>
@@ -74,8 +79,8 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <span>© {year} Mahesh Builds — All rights reserved</span>
-          <span>Digital Systems Studio</span>
+          <span>© {year} Mahesh Builds. All rights reserved.</span>
+          <span>Digital Product &amp; Software Studio</span>
         </div>
       </div>
     </footer>

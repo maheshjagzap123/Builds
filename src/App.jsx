@@ -24,6 +24,7 @@ import CTA from './components/sections/CTA.jsx';
 import Contact from './components/sections/Contact.jsx';
 
 import WorkPage from './pages/WorkPage.jsx';
+import IndustryDetail from './pages/IndustryDetail.jsx';
 
 import { useLenis } from './lib/useLenis.js';
 import { useHashRoute } from './lib/useHashRoute.js';
@@ -57,18 +58,19 @@ export default function App() {
   useLenis();
 
   useEffect(() => {
-    const raw = window.location.hash.replace(/^#/, '');
-    if (raw.startsWith('/') || raw === '') {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    } else {
+    if (route.anchor) {
       setTimeout(() => {
-        const el = document.getElementById(raw);
+        const el = document.getElementById(route.anchor);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 80);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   }, [route]);
 
-  const isWork = route === '/work';
+  let page = <HomePage />;
+  if (route.path === '/work') page = <WorkPage />;
+  else if (route.path === '/industries/:slug') page = <IndustryDetail slug={route.params.slug} />;
 
   return (
     <>
@@ -80,7 +82,7 @@ export default function App() {
       <Navbar />
 
       <main style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.6s ease' }}>
-        {isWork ? <WorkPage /> : <HomePage />}
+        {page}
       </main>
 
       <Footer />

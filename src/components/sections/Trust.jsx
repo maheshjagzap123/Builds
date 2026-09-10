@@ -1,30 +1,18 @@
 import { useMemo } from 'react';
-import { projects } from '../../data/projects.js';
-import { whatWeBuild, industries } from '../../data/services.js';
+import { activeProjects } from '../../data/projects.js';
+import { whatWeBuild, technologies } from '../../data/services.js';
+import { industries } from '../../data/industries.js';
 import RevealText from '../animation/RevealText.jsx';
 import FadeUp from '../animation/FadeUp.jsx';
 
-/**
- * Trust section — verifiable proof only.
- * Numbers come from real data (project count, service categories, industries covered).
- */
 export default function Trust() {
   const stats = useMemo(() => {
-    const projectCount = projects.length;
-    const techCount = new Set(
-      projects.flatMap((p) => [
-        ...(p.technologies.frontend || []),
-        ...(p.technologies.backend || []),
-        ...(p.technologies.database || []),
-        ...(p.technologies.mobile || []),
-        ...(p.technologies.tools || []),
-      ])
-    ).size;
+    const techCount = Object.values(technologies).reduce((sum, arr) => sum + arr.length, 0);
     return [
-      { value: projectCount, label: 'Projects & Concepts' },
+      { value: `${activeProjects.length}+`, label: 'Live Projects' },
       { value: whatWeBuild.length, label: 'Capability Areas' },
-      { value: techCount, label: 'Technologies' },
-      { value: industries.length, label: 'Industries Covered' },
+      { value: `${techCount}+`, label: 'Technologies' },
+      { value: `${industries.length}+`, label: 'Industries Served' },
     ];
   }, []);
 
@@ -36,8 +24,7 @@ export default function Trust() {
           <em className="serif"><RevealText delay={0.1}>earn trust.</RevealText></em>
         </h2>
         <FadeUp className="meta">
-          No fabricated numbers. The work itself is the proof — and here's what the studio
-          actually covers.
+          No fabricated numbers. Real capabilities, honest scope, and work we can point to.
         </FadeUp>
       </div>
 
