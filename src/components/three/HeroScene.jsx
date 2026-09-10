@@ -10,8 +10,9 @@ function ParticleField() {
     const count = 1800;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const c1 = new THREE.Color('#ff4d18');
-    const c2 = new THREE.Color('#f5e0c8');
+    const c1 = new THREE.Color('#8a7dff'); // electric violet
+    const c2 = new THREE.Color('#ffd583'); // warm star gold
+    const c3 = new THREE.Color('#58c8ff'); // nebula cyan
     for (let i = 0; i < count; i++) {
       const r = 3 + Math.random() * 5;
       const theta = Math.random() * Math.PI * 2;
@@ -19,10 +20,11 @@ function ParticleField() {
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.6;
       positions[i * 3 + 2] = r * Math.cos(phi);
-      const mixed = c1.clone().lerp(c2, Math.random());
-      colors[i * 3] = mixed.r;
-      colors[i * 3 + 1] = mixed.g;
-      colors[i * 3 + 2] = mixed.b;
+      const t = Math.random();
+      const base = t < 0.5 ? c1.clone().lerp(c3, t * 2) : c1.clone().lerp(c2, (t - 0.5) * 2);
+      colors[i * 3] = base.r;
+      colors[i * 3 + 1] = base.g;
+      colors[i * 3 + 2] = base.b;
     }
     return { positions, colors };
   }, []);

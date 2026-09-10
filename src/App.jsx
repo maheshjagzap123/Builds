@@ -71,13 +71,15 @@ export default function App() {
   return (
     <>
       <Preloader onDone={() => setLoaded(true)} />
+      <div className="universe" aria-hidden="true" />
+      <div className="stars" aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
       <ScrollProgress />
       <CursorSpotlight />
       <CustomCursor />
       <Navbar />
 
-      <main style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.6s ease' }}>
+      <main style={{ position: 'relative', zIndex: 2, opacity: loaded ? 1 : 0, transition: 'opacity 0.6s ease' }}>
         {page}
       </main>
 
