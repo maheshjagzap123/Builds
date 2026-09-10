@@ -48,7 +48,7 @@ export default function Process() {
     <section className="section process container" id="process" ref={ref}>
       <div className="section-head">
         <div>
-          <span className="eyebrow">10 — Our process</span>
+          <span className="eyebrow">09 — How we build</span>
           <h2 className="h-section" style={{ marginTop: 24 }}>
             <RevealText>How we</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>work.</RevealText></em>

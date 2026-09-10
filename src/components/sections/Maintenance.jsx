@@ -8,7 +8,7 @@ export default function Maintenance() {
     <section className="section container maintenance-section" id="maintenance">
       <div className="maintenance-grid">
         <div>
-          <div className="eyebrow">09 — Maintenance & support</div>
+          <div className="eyebrow">08 — Maintenance & support</div>
           <h2 className="h-section" style={{ marginTop: 20 }}>
             <RevealText>We don't</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>disappear after launch.</RevealText></em>

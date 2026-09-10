@@ -20,10 +20,13 @@ export default function Contact() {
   return (
     <section className="contact container" id="contact">
       <div className="section-head">
-        <h2 className="h-section">
-          <RevealText>Send a</RevealText>{' '}
-          <em className="serif"><RevealText delay={0.1}>project enquiry.</RevealText></em>
-        </h2>
+        <div>
+          <span className="eyebrow">12 — Contact</span>
+          <h2 className="h-section" style={{ marginTop: 24 }}>
+            <RevealText>Send a</RevealText>{' '}
+            <em className="serif"><RevealText delay={0.1}>project enquiry.</RevealText></em>
+          </h2>
+        </div>
         <FadeUp className="meta">
           Share a brief, an idea or a rough problem. Free initial conversation — no sales pitch.
         </FadeUp>

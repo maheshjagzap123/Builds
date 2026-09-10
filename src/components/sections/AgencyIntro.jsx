@@ -61,7 +61,7 @@ export default function AgencyIntro() {
       <section className="section not-just container" id="about" ref={ref}>
         <div className="section-head">
           <div>
-            <span className="eyebrow">01 — What we do</span>
+            <span className="eyebrow">01 — Not just websites</span>
             <h2 className="h-section" style={{ marginTop: 24 }}>
               <RevealText>Not just websites.</RevealText>
             </h2>
