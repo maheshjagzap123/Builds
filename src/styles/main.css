@@ -408,46 +408,29 @@ button { font-family: inherit; cursor: pointer; }
   will-change: transform;
 }
 
-/* Custom cursor */
-.cursor-dot, .cursor-ring {
+/* Cursor spotlight — soft radial glow trailing the pointer */
+.cursor-spotlight {
   position: fixed;
   top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9998;
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
-  will-change: transform;
-  mix-blend-mode: difference;
-}
-.cursor-dot {
-  width: 6px; height: 6px;
-  background: #fff;
-  transform: translate(-50%, -50%);
-}
-.cursor-ring {
-  width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,0.5);
-  transform: translate(-50%, -50%);
-  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), background 0.3s;
-}
-.cursor-ring.hover {
-  width: 64px; height: 64px;
-  background: rgba(255,255,255,0.06);
-  border-color: transparent;
-}
-.cursor-ring .cursor-label {
-  color: #fff;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 2;
   opacity: 0;
-  transition: opacity 0.25s;
-  display: block;
-  text-align: center;
-  line-height: 64px;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    circle,
+    rgba(255, 77, 24, 0.18) 0%,
+    rgba(255, 77, 24, 0.08) 25%,
+    transparent 60%
+  );
+  filter: blur(20px);
+  mix-blend-mode: screen;
+  will-change: transform;
 }
-.cursor-ring.hover .cursor-label { opacity: 1; }
 @media (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
+  .cursor-spotlight { display: none; }
 }
 
 /* =========================================================
@@ -1271,7 +1254,7 @@ section { position: relative; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 12px; }
   .hero { padding-top: 100px; }
-  .cursor-dot, .cursor-ring { display: none; }
+  .cursor-spotlight { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
