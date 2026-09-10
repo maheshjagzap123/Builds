@@ -9,11 +9,11 @@ export default function WorkTeaser() {
     <section className="section container" id="work-teaser">
       <div className="section-head">
         <h2 className="h-section">
-          <RevealText>Selected work.</RevealText>
+          <RevealText>What we've built.</RevealText>
         </h2>
         <FadeUp className="meta">
-          A snapshot of recent builds — from live projects to concept systems.
-          The full gallery lives on the work page.
+          A look at the digital products, websites and systems we've designed and developed.
+          The full catalog lives on the projects page.
         </FadeUp>
       </div>
 

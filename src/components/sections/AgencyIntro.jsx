@@ -35,12 +35,12 @@ export default function AgencyIntro() {
 
   return (
     <>
-      <Marquee items={['Websites', 'Business Software', 'Dashboards', 'Automation', 'CRM', 'Digital Experiences']} />
+      <Marquee items={['Websites', 'Mobile Apps', 'Business Software', 'Dashboards', 'Automation', 'CRM', 'Digital Products', 'Maintenance']} />
       <section className="intro container" id="about" ref={ref}>
         <h2 className="intro-title">
-          <RevealText>We build more than websites.</RevealText>
+          <RevealText>Not just websites.</RevealText>
           <br />
-          <em><RevealText delay={0.15}>We build systems.</RevealText></em>
+          <em><RevealText delay={0.15}>Digital systems.</RevealText></em>
         </h2>
         <div className="intro-statements">
           {STATEMENTS.map((s) => (

@@ -1,22 +1,27 @@
-// Selected work — the source of truth for case studies.
-// Only Majhi Paithani is a real client build. Others are concept builds
-// (labeled explicitly) that showcase capability without fabricating client claims.
+// Selected work — the single source of truth for case studies.
+// Rich schema per project. Only fill fields that can be honestly claimed.
+// projectType values: 'client' | 'concept' | 'internal' | 'demo'
 
 export const projects = [
   {
     id: 'majhi-paithani',
     number: '01',
+    slug: 'majhi-paithani',
     title: 'Majhi Paithani',
-    label: 'Live Project',
-    category: 'E-commerce / Heritage Retail',
-    tagline:
+    label: 'Client Project',
+    projectType: 'client',
+    categories: ['Website', 'E-commerce'],
+    industry: 'Heritage Retail',
+    shortDescription:
       'A heritage-driven e-commerce experience for a traditional Paithani saree brand.',
-    description:
-      'A digital storefront and brand experience for a legacy Paithani weaver, translating decades of craft into a considered online presence with a modern product-discovery flow.',
+    overview:
+      'A digital storefront and brand experience for a legacy Paithani weaver — translating decades of craft into a considered online presence with a modern product-discovery flow.',
     challenge:
-      'The brand had a strong offline reputation but no digital presence capable of representing the craft, communicating heritage, or supporting online enquiries and orders.',
+      'The brand had a strong offline reputation but no digital presence capable of representing the craft, communicating heritage, or handling online enquiries and orders.',
+    approach:
+      'Started with the customer journey and the weave-story that makes each saree unique, then built the catalog, editorial sections and enquiry flow around it.',
     solution:
-      'Designed and built a bespoke e-commerce experience with editorial product presentation, weave-story sections, WhatsApp-first enquiry flow and a lightweight admin surface for catalog updates.',
+      'A bespoke storefront with editorial product presentation, weave-story sections, WhatsApp-first enquiry flow and a lightweight admin surface for catalog updates.',
     features: [
       'Custom product catalog',
       'Editorial storytelling sections',
@@ -25,8 +30,22 @@ export const projects = [
       'Mobile-first experience',
       'SEO foundations',
     ],
-    services: ['Web Development', 'UI/UX', 'Backend'],
-    technologies: ['React', 'Node.js', 'MongoDB', 'Cloud hosting'],
+    services: [
+      'UI/UX Design',
+      'Frontend Development',
+      'Backend Development',
+      'Database Development',
+      'Deployment',
+    ],
+    technologies: {
+      frontend: ['React', 'Vite', 'CSS'],
+      backend: ['Node.js', 'REST APIs'],
+      database: ['MongoDB'],
+      integrations: ['WhatsApp'],
+      tools: ['Git', 'Cloud hosting'],
+    },
+    outcome:
+      'A live storefront ready for enquiries and orders, plus a repeatable base to grow the catalog and add sales channels.',
     cover: '/assets/img/portfolio/MajhiPaithani-1.JPG',
     gallery: [
       '/assets/img/portfolio/MajhiPaithani-1.JPG',
@@ -35,20 +54,26 @@ export const projects = [
       '/assets/img/portfolio/MajhiPaithani-4.JPG',
     ],
     liveUrl: '',
+    githubUrl: '',
     featured: true,
   },
   {
     id: 'hospitality-suite',
     number: '02',
+    slug: 'hospitality-suite',
     title: 'Hospitality Booking Suite',
     label: 'Concept Build',
-    category: 'Hospitality / Booking',
-    tagline:
+    projectType: 'concept',
+    categories: ['Website', 'Web Application'],
+    industry: 'Hospitality',
+    shortDescription:
       'A booking-first hotel experience with enquiry management for independent properties.',
-    description:
+    overview:
       'A concept build exploring how independent hotels can present rooms, availability and enquiry flows without depending on third-party platforms.',
     challenge:
       'Independent hospitality properties lose margin to aggregators and struggle to represent their identity on generic booking platforms.',
+    approach:
+      'Prioritized room presentation and direct enquiries over feature bloat, keeping the admin surface simple enough for front-desk staff.',
     solution:
       'A property-owned website with room presentation, direct enquiry, seasonal offers and a lightweight enquiry-management panel.',
     features: [
@@ -57,25 +82,42 @@ export const projects = [
       'Seasonal offer surfaces',
       'Admin enquiry panel',
     ],
-    services: ['Web Development', 'UI/UX'],
-    technologies: ['React', '.NET', 'SQL Server'],
+    services: [
+      'UI/UX Design',
+      'Frontend Development',
+      'Backend Development',
+    ],
+    technologies: {
+      frontend: ['React'],
+      backend: ['.NET', 'C#'],
+      database: ['SQL Server'],
+      tools: ['Git'],
+    },
+    outcome:
+      'A demonstration of what independent property websites can look like when built around direct bookings.',
     cover: '/assets/img/portfolio/portfolio-7.webp',
     gallery: ['/assets/img/portfolio/portfolio-7.webp'],
     liveUrl: '',
+    githubUrl: '',
     featured: true,
   },
   {
     id: 'edu-management',
     number: '03',
+    slug: 'institute-management-system',
     title: 'Institute Management System',
     label: 'Concept Build',
-    category: 'Education',
-    tagline:
+    projectType: 'concept',
+    categories: ['Web Application', 'Business Software'],
+    industry: 'Education',
+    shortDescription:
       'Admissions, students and staff — one internal system for an education institute.',
-    description:
+    overview:
       'A concept internal platform showing how an education institute can move admissions, student records and attendance off spreadsheets and into a single system.',
     challenge:
-      'Institutes juggle admissions data, student records, fees and staff across scattered spreadsheets and paper.',
+      'Institutes juggle admissions, student records, fees, attendance and staff across scattered spreadsheets and paper.',
+    approach:
+      'Modelled the real academic workflow first, then wrapped each role in a dedicated surface — admin, staff and parent-facing.',
     solution:
       'A role-based admin platform with admissions, student profiles, attendance and fee tracking, plus a public-facing institute website.',
     features: [
@@ -85,25 +127,43 @@ export const projects = [
       'Fee & receipt management',
       'Public institute website',
     ],
-    services: ['Business Software', 'Web Development'],
-    technologies: ['React', '.NET', 'SQL Server', 'C#'],
+    services: [
+      'UI/UX Design',
+      'Frontend Development',
+      'Backend Development',
+      'Database Development',
+    ],
+    technologies: {
+      frontend: ['React'],
+      backend: ['.NET', 'C#', 'REST APIs'],
+      database: ['SQL Server'],
+      tools: ['Git'],
+    },
+    outcome:
+      'A blueprint for institute operations that can be shaped to a specific campus.',
     cover: '/assets/img/portfolio/portfolio-8.webp',
     gallery: ['/assets/img/portfolio/portfolio-8.webp'],
     liveUrl: '',
+    githubUrl: '',
     featured: true,
   },
   {
     id: 'commerce-ops',
     number: '04',
+    slug: 'commerce-operations-dashboard',
     title: 'Commerce Operations Dashboard',
     label: 'Concept Build',
-    category: 'E-commerce / Internal Tools',
-    tagline:
+    projectType: 'concept',
+    categories: ['Dashboard', 'Internal Tool'],
+    industry: 'E-commerce',
+    shortDescription:
       'An internal dashboard for orders, inventory and customer support across a small e-commerce team.',
-    description:
+    overview:
       'A concept internal dashboard exploring how a small e-commerce operation can unify orders, inventory, support and analytics.',
     challenge:
       'Small e-commerce teams switch between five tools to run a single order — losing time and context on every step.',
+    approach:
+      'Designed for the daily rhythm of an operations team first, with role-based access so each function only sees what it needs.',
     solution:
       'A single dashboard consolidating orders, inventory, customer messages and daily KPIs, with role-based access for team members.',
     features: [
@@ -113,25 +173,42 @@ export const projects = [
       'Daily KPI overview',
       'Role-based access',
     ],
-    services: ['Business Software', 'Dashboards'],
-    technologies: ['React', 'Node.js', 'PostgreSQL'],
+    services: [
+      'UI/UX Design',
+      'Frontend Development',
+      'Backend Development',
+    ],
+    technologies: {
+      frontend: ['React'],
+      backend: ['Node.js', 'REST APIs'],
+      database: ['PostgreSQL'],
+      tools: ['Git'],
+    },
+    outcome:
+      'A pattern for consolidating fragmented e-commerce operations into a single internal surface.',
     cover: '/assets/img/portfolio/portfolio-10.webp',
     gallery: ['/assets/img/portfolio/portfolio-10.webp'],
     liveUrl: '',
+    githubUrl: '',
     featured: false,
   },
   {
     id: 'realestate-crm',
     number: '05',
+    slug: 'property-leads-crm',
     title: 'Property Leads CRM',
     label: 'Concept Build',
-    category: 'Real Estate',
-    tagline:
+    projectType: 'concept',
+    categories: ['Web Application', 'CRM'],
+    industry: 'Real Estate',
+    shortDescription:
       'A property-listing site with a lead-management CRM for a growing real estate desk.',
-    description:
+    overview:
       'A concept build combining a property discovery site with a lightweight CRM to track enquiries from first tap to visit.',
     challenge:
       'Real estate teams collect enquiries across WhatsApp, calls and portals — with no single view of where each lead stands.',
+    approach:
+      'Built the lead pipeline first — where every enquiry lives — and layered the public site on top so nothing falls through the cracks.',
     solution:
       'A public property site backed by a lead CRM with stages, notes, follow-up reminders and assignment.',
     features: [
@@ -140,11 +217,28 @@ export const projects = [
       'Lead stages & follow-ups',
       'Agent assignment',
     ],
-    services: ['Web Development', 'CRM'],
-    technologies: ['React', 'Node.js', 'PostgreSQL'],
+    services: [
+      'UI/UX Design',
+      'Frontend Development',
+      'Backend Development',
+      'Database Development',
+    ],
+    technologies: {
+      frontend: ['React'],
+      backend: ['Node.js', 'REST APIs'],
+      database: ['PostgreSQL'],
+      tools: ['Git'],
+    },
+    outcome:
+      'A pattern for real estate desks to consolidate lead pipelines without abandoning existing channels.',
     cover: '/assets/img/portfolio/portfolio-11.webp',
     gallery: ['/assets/img/portfolio/portfolio-11.webp'],
     liveUrl: '',
+    githubUrl: '',
     featured: false,
   },
 ];
+
+export function getProjectBySlug(slug) {
+  return projects.find((p) => p.slug === slug);
+}

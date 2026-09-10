@@ -63,7 +63,7 @@ export default function Hero() {
           <span className="word"><span>We&nbsp;</span></span>
           <span className="word"><span>build&nbsp;</span></span>
           <span className="word"><span><em>digital</em>&nbsp;</span></span>
-          <span className="word"><span>systems</span></span>
+          <span className="word"><span>products</span></span>
           <br />
           <span className="word"><span>that&nbsp;</span></span>
           <span className="word"><span>move&nbsp;</span></span>
@@ -73,15 +73,15 @@ export default function Hero() {
 
         <div className="hero-bottom">
           <p className="hero-sub">
-            Websites, business software, dashboards and automation engineered for growing businesses.
-            Built end-to-end — not stitched from templates.
+            Websites, mobile apps, business software, automation and digital experiences — designed,
+            built and maintained for growing businesses.
           </p>
           <div className="hero-ctas">
-            <MagneticButton href="#/work" className="btn" data-cursor-label="View">
-              Explore Our Work <span className="arrow">↗</span>
+            <MagneticButton href="#contact" className="btn" data-cursor-label="Start">
+              Start a Project <span className="arrow">↗</span>
             </MagneticButton>
-            <MagneticButton href="#contact" className="btn btn-ghost">
-              Start a Project
+            <MagneticButton href="#what-we-build" className="btn btn-ghost">
+              Explore What We Build ↓
             </MagneticButton>
           </div>
         </div>
