@@ -1,48 +1,77 @@
-import { useEffect, useState } from 'react'
-import Preloader from './components/Preloader.jsx'
-import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
-import Differentiator from './components/Differentiator.jsx'
-import Services from './components/Services.jsx'
-import BuildInPublic from './components/BuildInPublic.jsx'
-import Process from './components/Process.jsx'
-import About from './components/About.jsx'
-import Focus from './components/Focus.jsx'
-import Contact from './components/Contact.jsx'
-import Footer from './components/Footer.jsx'
-import ScrollTop from './components/ScrollTop.jsx'
-import ScrollProgress from './components/ScrollProgress.jsx'
-import CursorSpotlight from './components/CursorSpotlight.jsx'
+import { useEffect, useState } from 'react';
+import Preloader from './components/layout/Preloader.jsx';
+import Navbar from './components/layout/Navbar.jsx';
+import CustomCursor from './components/layout/CustomCursor.jsx';
+import ScrollProgress from './components/layout/ScrollProgress.jsx';
+import Footer from './components/layout/Footer.jsx';
+
+import Hero from './components/sections/Hero.jsx';
+import AgencyIntro from './components/sections/AgencyIntro.jsx';
+import Capabilities from './components/sections/Capabilities.jsx';
+import Solutions from './components/sections/Solutions.jsx';
+import WorkTeaser from './components/sections/WorkTeaser.jsx';
+import Process from './components/sections/Process.jsx';
+import Technology from './components/sections/Technology.jsx';
+import Differentiator from './components/sections/Differentiator.jsx';
+import CTA from './components/sections/CTA.jsx';
+import Contact from './components/sections/Contact.jsx';
+
+import WorkPage from './pages/WorkPage.jsx';
+
+import { useLenis } from './lib/useLenis.js';
+import { useHashRoute } from './lib/useHashRoute.js';
+
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <AgencyIntro />
+      <Capabilities />
+      <Solutions />
+      <WorkTeaser />
+      <Process />
+      <Technology />
+      <Differentiator />
+      <CTA />
+      <Contact />
+    </>
+  );
+}
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false);
+  const route = useHashRoute();
+  useLenis();
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme')
-    if (saved) document.documentElement.setAttribute('data-theme', saved)
-    document.documentElement.style.scrollBehavior = 'smooth'
-    const t = setTimeout(() => setLoaded(true), 500)
-    return () => clearTimeout(t)
-  }, [])
+    // Route changed. Either scroll to top (page route) or to anchor section.
+    const raw = window.location.hash.replace(/^#/, '');
+    if (raw.startsWith('/') || raw === '') {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    } else {
+      // Wait a tick so home page has mounted, then scroll to anchor.
+      setTimeout(() => {
+        const el = document.getElementById(raw);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  }, [route]);
+
+  const isWork = route === '/work';
 
   return (
     <>
-      <Preloader hidden={loaded} />
+      <Preloader onDone={() => setLoaded(true)} />
+      <div className="grain" aria-hidden="true" />
       <ScrollProgress />
-      <CursorSpotlight />
-      <Header />
-      <main>
-        <Hero />
-        <Differentiator />
-        <Services />
-        <BuildInPublic />
-        <Process />
-        <About />
-        <Focus />
-        <Contact />
+      <CustomCursor />
+      <Navbar />
+
+      <main style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.6s ease' }}>
+        {isWork ? <WorkPage /> : <HomePage />}
       </main>
+
       <Footer />
-      <ScrollTop />
     </>
-  )
+  );
 }
