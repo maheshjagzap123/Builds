@@ -165,7 +165,7 @@ button { font-family: inherit; cursor: pointer; }
 .btn:hover .arrow { transform: translate(4px, -4px); }
 
 /* =========================================================
-   Preloader
+   Preloader (V3.1 — monogram + wordmark reveal)
    ========================================================= */
 .preloader {
   position: fixed;
@@ -174,6 +174,15 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--bg);
   display: grid;
   place-items: center;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: clip-path, transform, opacity;
+}
+.preloader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 55%, rgba(255,77,24,0.10), transparent 55%);
   pointer-events: none;
 }
 .preloader-inner {
@@ -2969,4 +2978,141 @@ section { position: relative; }
 @media (max-width: 768px) {
   .industry-page { padding-top: 100px; }
   .related-grid { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   V3.1 — Preloader (rebuild) — override earlier preloader rules
+   ========================================================= */
+.preloader .preloader-stage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 0 var(--gutter);
+  gap: 40px;
+  grid-auto-rows: min-content;
+  align-content: center;
+}
+.preloader .pl-symbol {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: grid;
+  place-items: center;
+}
+.preloader .pl-ring-svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+.preloader .pl-ring-svg circle { will-change: stroke-dashoffset, transform, opacity; }
+.preloader .pl-mb-mono {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(72px, 8vw, 108px);
+  line-height: 1;
+  color: var(--fg);
+  will-change: transform, opacity, letter-spacing;
+}
+.preloader .pl-cycle {
+  position: relative;
+  height: 22px;
+  overflow: hidden;
+  width: 220px;
+  text-align: center;
+}
+.preloader .pl-cycle > span {
+  position: absolute;
+  inset: 0;
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  will-change: transform, opacity;
+}
+.preloader .pl-wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: 14vh;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.preloader .pl-word {
+  font-size: clamp(36px, 7.5vw, 84px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--fg);
+  will-change: clip-path, opacity;
+}
+.preloader-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0 var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  will-change: transform, opacity;
+}
+.pl-meta-top { top: 24px; }
+.pl-meta-bottom { bottom: 24px; }
+
+/* Hide only the newer monogram bits (unused now) */
+.preloader .pl-symbol,
+.preloader .pl-cycle,
+.preloader .pl-wordmark,
+.preloader .pl-figure,
+.preloader .pl-mb,
+.preloader .preloader-meta { display: none !important; }
+
+@media (max-width: 768px) {
+  .preloader .pl-symbol { width: 200px; height: 200px; }
+  .preloader .pl-ring-svg { transform: scale(0.8); }
+  .preloader .pl-word { font-size: clamp(30px, 11vw, 60px); }
+  .preloader .pl-wordmark { bottom: 18vh; gap: 12px; }
+  .pl-meta-top, .pl-meta-bottom {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+  }
+}
+
+/* Final restore — earlier preloader wordmark stacks vertically */
+.preloader .preloader-wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+.preloader .preloader-wordmark .pl-word {
+  overflow: hidden;
+  display: inline-block;
+  padding-bottom: 0.06em;
+}
+.preloader .preloader-wordmark .pl-word > span {
+  display: inline-block;
+  font-size: clamp(40px, 8vw, 96px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  will-change: transform, opacity;
+}
+@media (max-width: 768px) {
+  .preloader .preloader-wordmark .pl-word > span { font-size: clamp(32px, 12vw, 56px); }
 }
