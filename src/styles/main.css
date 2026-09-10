@@ -1248,8 +1248,8 @@ section { position: relative; }
 }
 .footer-top {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 60px;
   margin-bottom: 80px;
 }
 .footer-brand h3 {
@@ -3115,4 +3115,376 @@ section { position: relative; }
 }
 @media (max-width: 768px) {
   .preloader .preloader-wordmark .pl-word > span { font-size: clamp(32px, 12vw, 56px); }
+}
+
+/* =========================================================
+   V3.2 — Section head consistency: left-align label + heading, right-aligned meta
+   ========================================================= */
+.section-head {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: end;
+  gap: 40px;
+  margin-bottom: clamp(50px, 8vw, 100px);
+}
+.section-head > div .eyebrow { color: var(--fg-dim); }
+.section-head .meta {
+  max-width: 46ch;
+  color: var(--fg-dim);
+  font-size: 15px;
+  line-height: 1.6;
+}
+@media (max-width: 900px) {
+  .section-head { grid-template-columns: 1fr; gap: 20px; align-items: start; }
+}
+
+/* =========================================================
+   V3.2 — Not Just Websites ladder
+   ========================================================= */
+.not-just { padding-top: 40px; }
+.nj-ladder {
+  border-top: 1px solid var(--line);
+}
+.nj-row {
+  display: grid;
+  grid-template-columns: 80px 260px 1fr 40px;
+  gap: 32px;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.nj-n {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--fg-dim);
+}
+.nj-label {
+  font-size: clamp(24px, 3.4vw, 44px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+.nj-text {
+  color: var(--fg-dim);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 48ch;
+}
+.nj-arrow {
+  color: var(--fg-dim);
+  font-size: 16px;
+  justify-self: end;
+}
+@media (max-width: 900px) {
+  .nj-row {
+    grid-template-columns: 50px 1fr;
+    gap: 14px 20px;
+  }
+  .nj-row .nj-label { grid-column: 2; }
+  .nj-row .nj-text { grid-column: 2; }
+  .nj-row .nj-arrow { display: none; }
+}
+
+/* =========================================================
+   V3.2 — When You Need Us
+   ========================================================= */
+.wyn-list {
+  border-top: 1px solid var(--line);
+}
+.wyn-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding 0.4s var(--ease-out);
+}
+.wyn-row:hover { padding-left: 16px; padding-right: 16px; }
+.wyn-num {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--fg-dim);
+}
+.wyn-problem {
+  font-size: clamp(20px, 2.6vw, 32px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--fg);
+  margin: 0;
+}
+.wyn-solution {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 26px);
+  color: var(--accent-2);
+  line-height: 1.2;
+  margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.wyn-solution span { color: var(--accent); font-family: var(--font-sans); font-style: normal; }
+@media (max-width: 900px) {
+  .wyn-row {
+    grid-template-columns: 50px 1fr;
+    row-gap: 8px;
+  }
+  .wyn-row .wyn-solution { grid-column: 2; }
+  .wyn-row:hover { padding-left: 0; padding-right: 0; }
+}
+
+/* =========================================================
+   V3.2 — Industries preview (homepage)
+   ========================================================= */
+.ind-preview {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 60px;
+  align-items: start;
+  border-top: 1px solid var(--line);
+  padding-top: 40px;
+}
+.ind-list { list-style: none; padding: 0; margin: 0; }
+.ind-list li { border-bottom: 1px solid var(--line); }
+.ind-list li:last-child { border-bottom: none; }
+
+.ind-preview-panel {
+  padding: 40px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--bg-2);
+  min-height: 340px;
+  animation: indFade 0.4s var(--ease-out);
+}
+.ind-preview-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--accent-2);
+  margin: 16px 0 24px;
+  line-height: 1.15;
+  font-weight: 400;
+  max-width: 20ch;
+}
+.ind-preview-packages {
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  margin-bottom: 28px;
+}
+.ipp-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 16px;
+  padding: 10px 0;
+  align-items: center;
+}
+.ipp-num { font-family: var(--font-serif); font-style: italic; color: var(--accent); font-size: 18px; }
+.ipp-title { font-size: 15px; color: var(--fg); }
+
+.ind-mobile { display: none; list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.ind-mobile li { border-bottom: 1px solid var(--line); }
+.ind-mobile-card {
+  display: grid;
+  grid-template-columns: 50px 1fr 24px;
+  gap: 16px;
+  padding: 20px 0;
+  align-items: center;
+  color: var(--fg);
+}
+.ind-mobile-num { font-size: 11px; letter-spacing: 0.2em; color: var(--fg-dim); }
+.ind-mobile-card h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+.ind-mobile-card p { color: var(--fg-dim); font-size: 13px; margin: 0; }
+.ind-mobile-card svg { color: var(--fg-dim); }
+
+@media (max-width: 1024px) {
+  .ind-preview { display: none; }
+  .ind-mobile { display: block; }
+}
+
+/* =========================================================
+   V3.2 — WorkTeaser / WorkPage solo card
+   ========================================================= */
+.solo-card, .wp-card-solo {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  cursor: pointer;
+  color: var(--fg);
+  padding: 20px 0;
+}
+.solo-media, .wp-card-solo .wp-media {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background: var(--bg-2);
+}
+.solo-media img, .wp-card-solo .wp-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+.solo-card:hover .solo-media img,
+.wp-card-solo:hover .wp-media img { transform: scale(1.04); }
+.solo-tag, .wp-card-solo .wp-tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+.solo-body { display: flex; flex-direction: column; gap: 20px; }
+.solo-meta, .wp-card-solo .wp-meta {
+  display: flex; flex-wrap: wrap; gap: 20px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.solo-title, .wp-card-solo .wp-title {
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0;
+}
+.solo-desc, .wp-card-solo .wp-desc {
+  font-size: 16px;
+  color: var(--fg-dim);
+  line-height: 1.55;
+  max-width: 50ch;
+  margin: 0;
+}
+.solo-cta, .wp-card-solo .wp-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--fg);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  transition: gap 0.4s var(--ease-out);
+}
+.solo-card:hover .solo-cta,
+.wp-card-solo:hover .wp-cta { gap: 20px; }
+@media (max-width: 900px) {
+  .solo-card, .wp-card-solo { grid-template-columns: 1fr; gap: 30px; }
+}
+
+.work-solo { padding: 40px 0 100px; }
+
+/* Work grid tile — unify with new naming (wp-card) */
+.wp-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.wp-card .wp-media {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background: var(--bg-2);
+}
+.wp-card .wp-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  will-change: transform;
+}
+.wp-card .wp-tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+.wp-card .wp-body { display: flex; flex-direction: column; gap: 12px; }
+.wp-card .wp-meta {
+  display: flex; flex-wrap: wrap; gap: 20px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.wp-card .wp-title {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.wp-card .wp-desc {
+  color: var(--fg-dim);
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 50ch;
+}
+.wp-card .wp-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  transition: gap 0.3s var(--ease-out);
+}
+.wp-card:hover .wp-cta { gap: 14px; }
+
+/* =========================================================
+   V3.2 — Ecosystem layout with description panel
+   ========================================================= */
+.eco-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.eco-panel {
+  border-left: 1px solid var(--line);
+  padding-left: 40px;
+  animation: indFade 0.4s var(--ease-out);
+}
+.eco-panel .eyebrow { color: var(--fg-dim); margin-bottom: 16px; display: block; }
+.eco-panel-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.25;
+  color: var(--accent-2);
+  margin: 0;
+  max-width: 26ch;
+}
+.eco-node:focus-visible { outline: 1px dashed var(--accent); outline-offset: 4px; }
+.eco-node.is-focus .eco-node-label { color: var(--accent); }
+.eco-node.is-focus .eco-node-dot { background: var(--accent); border-color: var(--accent); }
+@media (max-width: 1024px) {
+  .eco-layout { grid-template-columns: 1fr; gap: 40px; }
+  .eco-panel { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 24px; }
 }

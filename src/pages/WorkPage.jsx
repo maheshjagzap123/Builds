@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowUpRight } from 'lucide-react';
 import { activeProjects as projects } from '../data/projects.js';
 import RevealText from '../components/animation/RevealText.jsx';
 import FadeUp from '../components/animation/FadeUp.jsx';
@@ -21,7 +22,7 @@ export default function WorkPage() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
-      gsap.utils.toArray('.work-card').forEach((card) => {
+      gsap.utils.toArray('.wp-card').forEach((card) => {
         const img = card.querySelector('img');
         if (img) {
           gsap.fromTo(img,
@@ -30,7 +31,7 @@ export default function WorkPage() {
               scrollTrigger: { trigger: card, start: 'top 90%', end: 'bottom 20%', scrub: 1 },
             });
         }
-        gsap.from(card.querySelectorAll('.work-card-text > *'), {
+        gsap.from(card.querySelectorAll('.wp-body > *'), {
           y: 30, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06,
           scrollTrigger: { trigger: card, start: 'top 85%', once: true },
         });
@@ -39,81 +40,100 @@ export default function WorkPage() {
     return () => ctx.revert();
   }, [filter]);
 
+  const showFilters = projects.length > 1;
   const visible = filter === 'All'
     ? projects
-    : projects.filter((p) => p.categories.includes(filter));
+    : projects.filter((p) => p.categories?.includes(filter));
+
+  const soloMode = projects.length === 1;
 
   return (
     <div className="work-page" ref={rootRef}>
       <section className="work-hero container">
-        <span className="eyebrow">Projects</span>
+        <span className="eyebrow">Work</span>
         <h1 className="work-hero-title">
           <RevealText>What we've built.</RevealText>
         </h1>
         <FadeUp className="body-lg" delay={0.15}>
-          A look at the digital products, websites and business systems we've designed
-          and developed — a mix of live client work and concept builds.
+          A look at the digital products, websites and business systems we've designed and developed.
         </FadeUp>
 
-        <div className="work-filters">
-          {CATEGORIES.map((c) => (
-            <button
-              key={c}
-              onClick={() => setFilter(c)}
-              className={`work-filter ${filter === c ? 'active' : ''}`}
-              data-cursor="hover"
-            >
-              {c}
-            </button>
-          ))}
-        </div>
+        {showFilters && (
+          <div className="work-filters">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c}
+                onClick={() => setFilter(c)}
+                className={`work-filter ${filter === c ? 'active' : ''}`}
+                data-cursor="hover"
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        )}
       </section>
 
-      <section className="work-grid container">
-        {visible.length === 0 && (
-          <p className="body-lg" style={{ gridColumn: '1 / -1' }}>
-            No projects in this category yet.
-          </p>
-        )}
-        {visible.map((p) => {
-          const stackPreview = [
-            ...(p.technologies.frontend || []).slice(0, 2),
-            ...(p.technologies.backend || []).slice(0, 1),
-            ...(p.technologies.database || []).slice(0, 1),
-          ].slice(0, 4);
-          return (
+      {soloMode ? (
+        <section className="work-solo container">
+          {visible.map((p) => (
             <article
               key={p.id}
-              className="work-card"
+              className="wp-card wp-card-solo"
               onClick={() => setActive(p)}
               data-cursor="view"
               data-cursor-label="View"
             >
-              <div className="work-card-media">
+              <div className="wp-media">
                 <img src={p.cover} alt={p.title} loading="lazy" />
-                <span className="work-card-tag">{p.label}</span>
+                <span className="wp-tag">{p.label}</span>
               </div>
-              <div className="work-card-text">
-                <div className="work-card-meta">
+              <div className="wp-body">
+                <div className="wp-meta">
                   <span>{p.number}</span>
-                  <span>{p.categories.join(' · ')}</span>
-                  <span>{p.industry}</span>
+                  <span>{p.categories?.join(' · ')}</span>
+                  {p.industry && <span>{p.industry}</span>}
                 </div>
-                <h3>{p.title}</h3>
-                <p>{p.shortDescription}</p>
-                <div className="work-card-services">
-                  <span className="wcs-label">Services</span>
-                  <span className="wcs-list">{p.services.slice(0, 4).join(' · ')}</span>
-                </div>
-                <div className="work-card-tech">
-                  {stackPreview.map((tt) => (<span key={tt}>{tt}</span>))}
-                </div>
-                <span className="work-card-cta">View Case Study <span className="arrow">↗</span></span>
+                <h2 className="wp-title">{p.title}</h2>
+                <p className="wp-desc">{p.shortDescription}</p>
+                <span className="wp-cta">View Case Study <ArrowUpRight size={20} /></span>
               </div>
             </article>
-          );
-        })}
-      </section>
+          ))}
+        </section>
+      ) : (
+        <section className="work-grid container">
+          {visible.length === 0 && (
+            <p className="body-lg" style={{ gridColumn: '1 / -1' }}>
+              No projects in this category yet.
+            </p>
+          )}
+          {visible.map((p) => (
+            <article
+              key={p.id}
+              className="wp-card"
+              onClick={() => setActive(p)}
+              data-cursor="view"
+              data-cursor-label="View"
+            >
+              <div className="wp-media">
+                <img src={p.cover} alt={p.title} loading="lazy" />
+                <span className="wp-tag">{p.label}</span>
+              </div>
+              <div className="wp-body">
+                <div className="wp-meta">
+                  <span>{p.number}</span>
+                  <span>{p.categories?.join(' · ')}</span>
+                  {p.industry && <span>{p.industry}</span>}
+                </div>
+                <h3 className="wp-title">{p.title}</h3>
+                <p className="wp-desc">{p.shortDescription}</p>
+                <span className="wp-cta">View Case Study <ArrowUpRight size={18} /></span>
+              </div>
+            </article>
+          ))}
+        </section>
+      )}
 
       <section className="work-cta container">
         <h2 className="h-section">

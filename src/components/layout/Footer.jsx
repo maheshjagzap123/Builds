@@ -48,21 +48,11 @@ export default function Footer() {
           <div className="footer-col">
             <h5>Explore</h5>
             <ul>
-              <li><a href="#what-we-build" data-cursor="hover">What We Build</a></li>
+              <li><a href="#/work" data-cursor="hover">Work</a></li>
               <li><a href="#industries" data-cursor="hover">Industries</a></li>
-              <li><a href="#/work" data-cursor="hover">What We've Built</a></li>
+              <li><a href="#what-we-build" data-cursor="hover">Services</a></li>
               <li><a href="#process" data-cursor="hover">Process</a></li>
               <li><a href="#technology" data-cursor="hover">Technology</a></li>
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h5>Services</h5>
-            <ul>
-              <li><a href="#what-we-build" data-cursor="hover">Websites</a></li>
-              <li><a href="#what-we-build" data-cursor="hover">Web Applications</a></li>
-              <li><a href="#what-we-build" data-cursor="hover">Mobile Apps</a></li>
-              <li><a href="#what-we-build" data-cursor="hover">Business Software</a></li>
-              <li><a href="#maintenance" data-cursor="hover">Maintenance</a></li>
             </ul>
           </div>
           <div className="footer-col">

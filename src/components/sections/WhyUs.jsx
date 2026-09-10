@@ -6,10 +6,13 @@ export default function WhyUs() {
   return (
     <section className="section container" id="why-us">
       <div className="section-head">
-        <h2 className="h-section">
-          <RevealText>More than</RevealText>{' '}
-          <em className="serif"><RevealText delay={0.1}>a development team.</RevealText></em>
-        </h2>
+        <div>
+          <span className="eyebrow">08 — Why us</span>
+          <h2 className="h-section" style={{ marginTop: 24 }}>
+            <RevealText>More than</RevealText>{' '}
+            <em className="serif"><RevealText delay={0.1}>a development team.</RevealText></em>
+          </h2>
+        </div>
         <FadeUp className="meta">
           Five principles that shape how the studio builds — and why the work outlasts the launch.
         </FadeUp>

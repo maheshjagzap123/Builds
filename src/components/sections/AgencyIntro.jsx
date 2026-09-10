@@ -3,30 +3,51 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Marquee from '../animation/Marquee.jsx';
 import RevealText from '../animation/RevealText.jsx';
+import FadeUp from '../animation/FadeUp.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const STATEMENTS = [
-  { num: '01', label: 'Digital Experiences', desc: 'Websites and product surfaces engineered for clarity and conversion.' },
-  { num: '02', label: 'Business Software', desc: 'Internal tools that replace spreadsheets and stitch operations together.' },
-  { num: '03', label: 'Automation Systems', desc: 'Workflows that remove the repetitive work from the team.' },
-  { num: '04', label: 'Custom Solutions', desc: 'Systems shaped around the business — not the other way around.' },
+const LADDER = [
+  {
+    n: '01',
+    label: 'Presence',
+    text: 'Websites that give your business a professional digital surface — modern, mobile-first and SEO-ready.',
+  },
+  {
+    n: '02',
+    label: 'Engagement',
+    text: 'Enquiries, appointments, leads and callbacks — capture and manage them in one place.',
+  },
+  {
+    n: '03',
+    label: 'Operations',
+    text: 'CRMs, dashboards and management systems built around how your team actually works.',
+  },
+  {
+    n: '04',
+    label: 'Automation',
+    text: 'APIs, notifications and workflows that remove the repetitive manual work.',
+  },
+  {
+    n: '05',
+    label: 'Growth',
+    text: 'A better digital experience — measurable, maintainable and ready to scale.',
+  },
 ];
 
 export default function AgencyIntro() {
   const ref = useRef(null);
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
-      gsap.utils.toArray('.intro-row').forEach((row) => {
-        gsap.from(row.querySelectorAll('.num, .label, .desc'), {
+      gsap.utils.toArray('.nj-row').forEach((row, i) => {
+        gsap.from(row.querySelectorAll('.nj-n, .nj-label, .nj-text'), {
           y: 40,
           opacity: 0,
-          duration: 0.9,
+          duration: 0.8,
           ease: 'expo.out',
-          stagger: 0.08,
-          scrollTrigger: { trigger: row, start: 'top 85%', once: true },
+          stagger: 0.06,
+          scrollTrigger: { trigger: row, start: 'top 88%', once: true },
         });
       });
     }, ref);
@@ -35,19 +56,29 @@ export default function AgencyIntro() {
 
   return (
     <>
-      <Marquee items={['Websites', 'Mobile Apps', 'Business Software', 'Dashboards', 'Automation', 'CRM', 'Digital Products', 'Maintenance']} />
-      <section className="intro container" id="about" ref={ref}>
-        <h2 className="intro-title">
-          <RevealText>Not just websites.</RevealText>
-          <br />
-          <em><RevealText delay={0.15}>Digital systems.</RevealText></em>
-        </h2>
-        <div className="intro-statements">
-          {STATEMENTS.map((s) => (
-            <div key={s.num} className="intro-row">
-              <span className="num">{s.num}</span>
-              <span className="label">{s.label}</span>
-              <span className="desc">{s.desc}</span>
+      <Marquee items={['Website', 'Web App', 'Mobile App', 'Business Software', 'Automation', 'Maintenance']} />
+
+      <section className="section not-just container" id="about" ref={ref}>
+        <div className="section-head">
+          <div>
+            <span className="eyebrow">01 — What we do</span>
+            <h2 className="h-section" style={{ marginTop: 24 }}>
+              <RevealText>Not just websites.</RevealText>
+            </h2>
+          </div>
+          <FadeUp className="meta">
+            A website gives your business a digital presence. A digital system can change how your
+            business actually operates.
+          </FadeUp>
+        </div>
+
+        <div className="nj-ladder">
+          {LADDER.map((step, i) => (
+            <div key={step.n} className="nj-row">
+              <span className="nj-n">{step.n}</span>
+              <span className="nj-label">{step.label}</span>
+              <span className="nj-text">{step.text}</span>
+              {i < LADDER.length - 1 && <span className="nj-arrow" aria-hidden="true">↓</span>}
             </div>
           ))}
         </div>

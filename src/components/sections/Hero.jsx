@@ -73,8 +73,8 @@ export default function Hero() {
 
         <div className="hero-bottom">
           <p className="hero-sub">
-            Websites, mobile apps, business software, automation and digital experiences — designed,
-            built and maintained for growing businesses.
+            Websites, web applications, mobile apps and custom business software — designed to help
+            businesses attract customers, simplify operations and grow.
           </p>
           <div className="hero-ctas">
             <MagneticButton href="#contact" className="btn" data-cursor-label="Start">

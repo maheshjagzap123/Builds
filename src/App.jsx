@@ -9,7 +9,7 @@ import Footer from './components/layout/Footer.jsx';
 import Hero from './components/sections/Hero.jsx';
 import AgencyIntro from './components/sections/AgencyIntro.jsx';
 import WhatWeBuild from './components/sections/WhatWeBuild.jsx';
-import BusinessProblems from './components/sections/BusinessProblems.jsx';
+import WhenYouNeedUs from './components/sections/WhenYouNeedUs.jsx';
 import Industries from './components/sections/Industries.jsx';
 import WorkTeaser from './components/sections/WorkTeaser.jsx';
 import WhyUs from './components/sections/WhyUs.jsx';
@@ -17,8 +17,6 @@ import Ecosystem from './components/sections/Ecosystem.jsx';
 import Process from './components/sections/Process.jsx';
 import Technology from './components/sections/Technology.jsx';
 import Maintenance from './components/sections/Maintenance.jsx';
-import MobileCapability from './components/sections/MobileCapability.jsx';
-import Trust from './components/sections/Trust.jsx';
 import FAQ from './components/sections/FAQ.jsx';
 import CTA from './components/sections/CTA.jsx';
 import Contact from './components/sections/Contact.jsx';
@@ -35,16 +33,14 @@ function HomePage() {
       <Hero />
       <AgencyIntro />
       <WhatWeBuild />
-      <BusinessProblems />
+      <WhenYouNeedUs />
       <Industries />
       <WorkTeaser />
-      <WhyUs />
       <Ecosystem />
+      <WhyUs />
+      <Maintenance />
       <Process />
       <Technology />
-      <Maintenance />
-      <MobileCapability />
-      <Trust />
       <FAQ />
       <CTA />
       <Contact />

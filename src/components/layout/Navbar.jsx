@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
 const LINKS = [
-  { href: '#what-we-build', label: 'What We Build' },
+  { href: '#/work', label: 'Work' },
   { href: '#industries', label: 'Industries' },
-  { href: '#/work', label: "What We've Built" },
+  { href: '#what-we-build', label: 'Services' },
   { href: '#process', label: 'Process' },
   { href: '#technology', label: 'Technology' },
   { href: '#contact', label: 'Contact' },
@@ -42,14 +42,9 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="nav-cta-group">
-            <a href="#/work" className="nav-cta nav-cta-secondary" data-cursor="hover">
-              View Work ↗
-            </a>
-            <a href="#contact" className="nav-cta" data-cursor="hover">
-              Start a Project ↗
-            </a>
-          </div>
+          <a href="#contact" className="nav-cta" data-cursor="hover">
+            Start a Project ↗
+          </a>
           <button
             className={`nav-burger ${open ? 'open' : ''}`}
             aria-label={open ? 'Close menu' : 'Open menu'}

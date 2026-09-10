@@ -11,18 +11,20 @@ export default function Industries() {
   return (
     <section className="section container industries-section" id="industries">
       <div className="section-head">
-        <h2 className="h-section">
-          <RevealText>Built for</RevealText>{' '}
-          <em className="serif"><RevealText delay={0.1}>different industries.</RevealText></em>
-        </h2>
+        <div>
+          <span className="eyebrow">04 — Industries</span>
+          <h2 className="h-section" style={{ marginTop: 24 }}>
+            <RevealText>Built for</RevealText>{' '}
+            <em className="serif"><RevealText delay={0.1}>different industries.</RevealText></em>
+          </h2>
+        </div>
         <FadeUp className="meta">
-          Different businesses have different workflows. We build digital systems around
-          the way each business actually operates.
+          Digital systems designed around the way your business actually works.
         </FadeUp>
       </div>
 
-      {/* Desktop split explorer */}
-      <div className="ind-explorer">
+      {/* Desktop — preview: left list + right short summary + Explore CTA */}
+      <div className="ind-preview">
         <ul className="ind-list" role="tablist">
           {industries.map((ind, i) => (
             <li key={ind.id}>
@@ -31,8 +33,9 @@ export default function Industries() {
                 role="tab"
                 aria-selected={active === i}
                 className={`ind-btn ${active === i ? 'is-active' : ''}`}
-                onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                onClick={() => { window.location.hash = `/industries/${ind.slug}`; }}
                 data-cursor="hover"
               >
                 <span className="ind-btn-num">{String(i + 1).padStart(2, '0')}</span>
@@ -43,30 +46,17 @@ export default function Industries() {
           ))}
         </ul>
 
-        <div className="ind-panel" key={current.id}>
-          <div className="ind-panel-head">
-            <span className="eyebrow">{String(active + 1).padStart(2, '0')} · {current.title}</span>
-            <h3 className="ind-panel-title">{current.tagline}</h3>
-          </div>
+        <div className="ind-preview-panel" key={current.id}>
+          <span className="eyebrow">{String(active + 1).padStart(2, '0')} · {current.title}</span>
+          <h3 className="ind-preview-title">{current.tagline}</h3>
 
-          <div className="ind-panel-problems">
-            <div className="ind-subheading">Common problems</div>
-            <ul>
-              {current.problems.map((p) => (<li key={p}>{p}</li>))}
-            </ul>
-          </div>
-
-          <div className="ind-panel-packages">
-            <div className="ind-subheading">Solution packages</div>
-            <ol>
-              {current.packages.map((p) => (
-                <li key={p.num}>
-                  <span className="ip-num">{p.num}</span>
-                  <span className="ip-title">{p.title}</span>
-                  <span className="ip-pitch">{p.pitch}</span>
-                </li>
-              ))}
-            </ol>
+          <div className="ind-preview-packages">
+            {current.packages.map((p) => (
+              <div key={p.num} className="ipp-row">
+                <span className="ipp-num">{p.num}</span>
+                <span className="ipp-title">{p.title}</span>
+              </div>
+            ))}
           </div>
 
           <a href={`#/industries/${current.slug}`} className="ind-cta" data-cursor="hover">
@@ -76,45 +66,21 @@ export default function Industries() {
         </div>
       </div>
 
-      {/* Mobile accordion */}
-      <div className="ind-accordion">
-        {industries.map((ind, i) => {
-          const isOpen = active === i;
-          return (
-            <div key={ind.id} className={`ind-acc-row ${isOpen ? 'is-open' : ''}`}>
-              <button
-                type="button"
-                className="ind-acc-head"
-                onClick={() => setActive(isOpen ? -1 : i)}
-                aria-expanded={isOpen}
-              >
-                <span className="ind-btn-num">{String(i + 1).padStart(2, '0')}</span>
-                <span className="ind-btn-title">{ind.title}</span>
-                <span className="ind-plus" aria-hidden="true"><span /><span /></span>
-              </button>
-              <div className="ind-acc-body">
-                <div className="ind-acc-body-inner">
-                  <p className="ind-acc-tagline">{ind.tagline}</p>
-                  <ul className="ind-acc-list">
-                    {ind.packages.map((p) => (
-                      <li key={p.num}>
-                        <span className="ip-num">{p.num}</span>
-                        <div>
-                          <div className="ip-title">{p.title}</div>
-                          <div className="ip-pitch">{p.pitch}</div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                  <a href={`#/industries/${ind.slug}`} className="ind-cta" data-cursor="hover">
-                    Explore {ind.title} <ArrowUpRight size={16} />
-                  </a>
-                </div>
+      {/* Mobile — simple list of preview cards */}
+      <ul className="ind-mobile">
+        {industries.map((ind, i) => (
+          <li key={ind.id}>
+            <a href={`#/industries/${ind.slug}`} className="ind-mobile-card" data-cursor="hover">
+              <span className="ind-mobile-num">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{ind.title}</h3>
+                <p>{ind.tagline}</p>
               </div>
-            </div>
-          );
-        })}
-      </div>
+              <ArrowUpRight size={18} />
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

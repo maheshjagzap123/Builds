@@ -9,12 +9,15 @@ export default function WhatWeBuild() {
   return (
     <section className="section container" id="what-we-build">
       <div className="section-head">
-        <h2 className="h-section">
-          <RevealText>What we build.</RevealText>
-        </h2>
+        <div>
+          <span className="eyebrow">02 — Services</span>
+          <h2 className="h-section" style={{ marginTop: 24 }}>
+            <RevealText>What we build.</RevealText>
+          </h2>
+        </div>
         <FadeUp className="meta">
           Six capability areas covering the surface, the systems and everything in between —
-          delivered end-to-end without hand-offs between teams.
+          delivered end-to-end without hand-offs.
         </FadeUp>
       </div>
 

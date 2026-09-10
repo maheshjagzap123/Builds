@@ -47,12 +47,15 @@ export default function Process() {
   return (
     <section className="section process container" id="process" ref={ref}>
       <div className="section-head">
-        <h2 className="h-section">
-          <RevealText>From idea</RevealText>{' '}
-          <em className="serif"><RevealText delay={0.1}>to growth.</RevealText></em>
-        </h2>
+        <div>
+          <span className="eyebrow">10 — Our process</span>
+          <h2 className="h-section" style={{ marginTop: 24 }}>
+            <RevealText>How we</RevealText>{' '}
+            <em className="serif"><RevealText delay={0.1}>work.</RevealText></em>
+          </h2>
+        </div>
         <FadeUp className="meta">
-          The full lifecycle — from first conversation to production, and everything after.
+          A clear lifecycle — from the first conversation to production, and everything after.
         </FadeUp>
       </div>
 

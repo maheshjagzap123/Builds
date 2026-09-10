@@ -9,10 +9,13 @@ export default function FAQ() {
   return (
     <section className="section container faq-section" id="faq">
       <div className="section-head">
-        <h2 className="h-section">
-          <RevealText>Common</RevealText>{' '}
-          <em className="serif"><RevealText delay={0.1}>questions.</RevealText></em>
-        </h2>
+        <div>
+          <span className="eyebrow">12 — FAQ</span>
+          <h2 className="h-section" style={{ marginTop: 24 }}>
+            <RevealText>Common</RevealText>{' '}
+            <em className="serif"><RevealText delay={0.1}>questions.</RevealText></em>
+          </h2>
+        </div>
         <FadeUp className="meta">
           Quick answers to what most businesses ask before starting a project.
         </FadeUp>
