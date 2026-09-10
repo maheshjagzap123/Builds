@@ -71,8 +71,6 @@ export default function App() {
   return (
     <>
       <Preloader onDone={() => setLoaded(true)} />
-      <div className="universe" aria-hidden="true" />
-      <div className="stars" aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
       <ScrollProgress />
       <CursorSpotlight />
