@@ -23,7 +23,7 @@ export default function WorkTeaser() {
             key={p.id}
             href="#/work"
             className="teaser-card"
-            data-cursor="hover"
+            data-cursor="view"
             data-cursor-label="View"
           >
             <div className="teaser-media">

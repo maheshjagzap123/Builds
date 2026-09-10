@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Preloader from './components/layout/Preloader.jsx';
 import Navbar from './components/layout/Navbar.jsx';
 import CursorSpotlight from './components/layout/CursorSpotlight.jsx';
+import CustomCursor from './components/layout/CustomCursor.jsx';
 import ScrollProgress from './components/layout/ScrollProgress.jsx';
 import Footer from './components/layout/Footer.jsx';
 
@@ -65,6 +66,7 @@ export default function App() {
       <div className="grain" aria-hidden="true" />
       <ScrollProgress />
       <CursorSpotlight />
+      <CustomCursor />
       <Navbar />
 
       <main style={{ opacity: loaded ? 1 : 0, transition: 'opacity 0.6s ease' }}>

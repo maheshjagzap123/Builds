@@ -77,7 +77,7 @@ export default function WorkPage() {
 
       <section className="work-grid container">
         {visible.map((p) => (
-          <article key={p.id} className="work-card" onClick={() => setActive(p)} data-cursor="hover" data-cursor-label="View">
+          <article key={p.id} className="work-card" onClick={() => setActive(p)} data-cursor="view" data-cursor-label="View">
             <div className="work-card-media">
               <img src={p.cover} alt={p.title} loading="lazy" />
               <span className="work-card-tag">{p.label}</span>
