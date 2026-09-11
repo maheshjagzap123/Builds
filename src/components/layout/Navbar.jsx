@@ -64,6 +64,9 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+        <a href="#contact" className="mobile-menu-cta" onClick={close}>
+          Start a Project ↗
+        </a>
         <div className="mobile-menu-footer">
           <span>Mahesh Builds</span>
           <span>© {new Date().getFullYear()}</span>
