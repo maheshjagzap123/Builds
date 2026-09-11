@@ -39,6 +39,18 @@
     </script>
   </head>
   <body>
+    <script>
+      // Apply the saved / preferred theme before paint to avoid a flash.
+      (function () {
+        try {
+          var saved = localStorage.getItem('mb.theme');
+          var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

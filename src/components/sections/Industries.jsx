@@ -12,8 +12,8 @@ export default function Industries() {
     <section className="section container industries-section" id="industries">
       <div className="section-head">
         <div>
-          <span className="eyebrow">04 — Industries</span>
-          <h2 className="h-section" style={{ marginTop: 24 }}>
+          <span className="eyebrow">05 — Industries</span>
+          <h2 className="h-section">
             <RevealText>Built for</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>different industries.</RevealText></em>
           </h2>

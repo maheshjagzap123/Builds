@@ -38,7 +38,7 @@ export default function WhenYouNeedUs() {
       <div className="section-head">
         <div>
           <span className="eyebrow">03 — When you need us</span>
-          <h2 className="h-section" style={{ marginTop: 24 }}>
+          <h2 className="h-section">
             <RevealText>Situations we</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>solve for.</RevealText></em>
           </h2>

@@ -10,6 +10,7 @@ import Hero from './components/sections/Hero.jsx';
 import AgencyIntro from './components/sections/AgencyIntro.jsx';
 import WhatWeBuild from './components/sections/WhatWeBuild.jsx';
 import WhenYouNeedUs from './components/sections/WhenYouNeedUs.jsx';
+import BuiltForBusinesses from './components/sections/BuiltForBusinesses.jsx';
 import Industries from './components/sections/Industries.jsx';
 // ERPSystems is intentionally kept in the codebase (component + src/data/erp.js)
 // but removed from the homepage flow to avoid conceptual overlap with
@@ -39,6 +40,7 @@ function HomePage({ loaded }) {
       <AgencyIntro />
       <WhatWeBuild />
       <WhenYouNeedUs />
+      <BuiltForBusinesses />
       <Industries />
       <WorkTeaser />
       <Ecosystem />

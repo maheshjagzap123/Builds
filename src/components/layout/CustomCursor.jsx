@@ -30,10 +30,18 @@ export default function CustomCursor() {
       gsap.set(dot, { x: state.x, y: state.y });
     };
 
-    const raf = () => {
-      // Ring eases toward pointer
-      state.rx += (state.x - state.rx) * 0.18;
-      state.ry += (state.y - state.ry) * 0.18;
+    // Frame-rate-independent easing: the ring closes a fixed fraction of the
+    // remaining distance per 60fps-equivalent frame, so it feels the same on
+    // 60Hz and 120Hz displays. Higher `follow` = snappier, less lag.
+    const follow = 0.32;
+    let last = performance.now();
+
+    const raf = (now) => {
+      const dt = Math.min((now - last) / (1000 / 60), 3); // frames elapsed, capped
+      last = now;
+      const f = 1 - Math.pow(1 - follow, dt);
+      state.rx += (state.x - state.rx) * f;
+      state.ry += (state.y - state.ry) * f;
       if (ring) ring.style.transform = `translate3d(${state.rx}px, ${state.ry}px, 0) translate(-50%, -50%)`;
       req = requestAnimationFrame(raf);
     };

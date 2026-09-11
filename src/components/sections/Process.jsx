@@ -59,7 +59,7 @@ export default function Process() {
       <div className="section-head">
         <div>
           <span className="eyebrow">10 — How we build</span>
-          <h2 className="h-section" style={{ marginTop: 24 }}>
+          <h2 className="h-section">
             <RevealText>How we</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>work.</RevealText></em>
           </h2>

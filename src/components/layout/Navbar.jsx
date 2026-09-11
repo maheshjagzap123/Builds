@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ThemeToggle from './ThemeToggle.jsx';
 
 const LINKS = [
   { href: '#/work', label: 'Work' },
@@ -25,6 +26,14 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
+  // Close the mobile menu on Escape for keyboard accessibility.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
   const close = () => setOpen(false);
 
   return (
@@ -42,9 +51,13 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <a href="#contact" className="nav-cta" data-cursor="hover">
-            Start a Project ↗
-          </a>
+          <div className="nav-actions">
+            <ThemeToggle className="nav-theme" />
+            <a href="#contact" className="nav-cta" data-cursor="hover">
+              Start a Project ↗
+            </a>
+          </div>
+          <ThemeToggle className="nav-theme-mobile" />
           <button
             className={`nav-burger ${open ? 'open' : ''}`}
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -60,16 +73,16 @@ export default function Navbar() {
         <ul>
           {LINKS.map((l) => (
             <li key={l.href}>
-              <a href={l.href} onClick={close}>{l.label}</a>
+              <a href={l.href} onClick={close} tabIndex={open ? 0 : -1}>{l.label}</a>
             </li>
           ))}
         </ul>
-        <a href="#contact" className="mobile-menu-cta" onClick={close}>
+        <a href="#contact" className="mobile-menu-cta" onClick={close} tabIndex={open ? 0 : -1}>
           Start a Project ↗
         </a>
         <div className="mobile-menu-footer">
           <span>Mahesh Builds</span>
-          <span>© {new Date().getFullYear()}</span>
+          <ThemeToggle className="mobile-theme" />
         </div>
       </div>
     </>

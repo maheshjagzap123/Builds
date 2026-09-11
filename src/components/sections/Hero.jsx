@@ -73,6 +73,7 @@ export default function Hero({ loaded = true }) {
           <span className="word"><span>move&nbsp;</span></span>
           <span className="word"><span>business&nbsp;</span></span>
           <span className="word"><span><em>forward.</em></span></span>
+          {/* headline reads: "We build digital products that move business forward." */}
         </h1>
 
         <div className="hero-bottom">

@@ -11,7 +11,7 @@ export default function FAQ() {
       <div className="section-head">
         <div>
           <span className="eyebrow">12 — FAQ</span>
-          <h2 className="h-section" style={{ marginTop: 24 }}>
+          <h2 className="h-section">
             <RevealText>Common</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>questions.</RevealText></em>
           </h2>

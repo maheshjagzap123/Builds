@@ -62,7 +62,7 @@ export default function AgencyIntro() {
         <div className="section-head">
           <div>
             <span className="eyebrow">01 — Not just websites</span>
-            <h2 className="h-section" style={{ marginTop: 24 }}>
+            <h2 className="h-section">
               <RevealText>Not just websites.</RevealText>
             </h2>
           </div>

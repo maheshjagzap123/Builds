@@ -22,7 +22,7 @@ export default function Contact() {
       <div className="section-head">
         <div>
           <span className="eyebrow">13 — Contact</span>
-          <h2 className="h-section" style={{ marginTop: 24 }}>
+          <h2 className="h-section">
             <RevealText>Send a</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>project enquiry.</RevealText></em>
           </h2>
@@ -36,7 +36,7 @@ export default function Contact() {
         <div>
           <p className="body-lg">
             Websites, mobile apps, business software, dashboards, automation or long-term
-            maintenance — send the details and we'll reply within 24 hours.
+            maintenance — share the details and we'll take a look.
           </p>
           <div className="contact-meta">
             <div>
@@ -46,8 +46,8 @@ export default function Contact() {
               </a>
             </div>
             <div>
-              <div className="contact-meta-label">Response Time</div>
-              <div className="contact-meta-value">Within 24 hours, Mon – Fri</div>
+              <div className="contact-meta-label">Prefer email?</div>
+              <div className="contact-meta-value">Send the brief directly — we read every enquiry.</div>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function Contact() {
           <div className="contact-success" role="status" aria-live="polite">
             <div className="cs-check"><Check size={40} strokeWidth={1.4} /></div>
             <h3>Project enquiry received</h3>
-            <p>We'll review your requirements and get back to you within 24 hours.</p>
+            <p>Thanks — we've noted your requirements and will be in touch about next steps.</p>
             <button
               type="button"
               className="btn btn-ghost"
@@ -95,8 +95,9 @@ export default function Contact() {
                   <option value="">Select one</option>
                   <option>Website</option>
                   <option>Web Application</option>
-                  <option>Mobile App</option>
+                  <option>Mobile Application</option>
                   <option>Business Software</option>
+                  <option>CRM</option>
                   <option>Automation</option>
                   <option>Maintenance</option>
                   <option>Other</option>
@@ -130,7 +131,7 @@ export default function Contact() {
             </div>
 
             <MagneticButton type="submit" className="btn" data-cursor-label="Send">
-              Send Project Enquiry <span className="arrow">↗</span>
+              Submit Project Enquiry <span className="arrow">↗</span>
             </MagneticButton>
           </form>
         )}

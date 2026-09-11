@@ -8,9 +8,9 @@ export default function WhyUs() {
       <div className="section-head">
         <div>
           <span className="eyebrow">08 — Why us</span>
-          <h2 className="h-section" style={{ marginTop: 24 }}>
-            <RevealText>More than</RevealText>{' '}
-            <em className="serif"><RevealText delay={0.1}>a development team.</RevealText></em>
+          <h2 className="h-section">
+            <RevealText>Why businesses</RevealText>{' '}
+            <em className="serif"><RevealText delay={0.1}>choose us.</RevealText></em>
           </h2>
         </div>
         <FadeUp className="meta">

@@ -19,6 +19,17 @@
   --nebula-2: rgba(88, 200, 255, 0.10);
   --nebula-3: rgba(255, 213, 131, 0.06);
 
+  /* Semantic tokens — theme-aware. Overridden in [data-theme="light"]. */
+  --on-accent: #0a0a0b;                    /* text on a solid --fg / --accent surface */
+  --surface: rgba(255, 255, 255, 0.06);    /* subtle raised surface / hover */
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --nav-bg: rgba(12, 14, 30, 0.6);
+  --nav-bg-scrolled: rgba(12, 14, 30, 0.82);
+  --tag-bg: rgba(0, 0, 0, 0.55);           /* image-overlay tags/labels */
+  --tag-fg: #ffffff;
+  --scrollbar-thumb: #232326;
+  --scrollbar-thumb-hover: #333338;
+
   --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Instrument Serif', 'Times New Roman', serif;
 
@@ -43,6 +54,42 @@
 
   --container: 1400px;
   --gutter: clamp(20px, 4vw, 56px);
+
+  color-scheme: dark;
+}
+
+/* =========================================================
+   LIGHT THEME — override palette + semantic tokens.
+   Everything else reads from these variables, so components adapt.
+   ========================================================= */
+[data-theme="light"] {
+  --bg: #f6f6f4;
+  --bg-2: #eeeef0;
+  --bg-3: #e6e6ea;
+  --fg: #14141c;
+  --fg-dim: #55555f;
+  --muted: #8a8a95;
+  --line: rgba(20, 20, 28, 0.10);
+  --line-strong: rgba(20, 20, 28, 0.20);
+  --accent: #6a4bff;          /* slightly deeper violet for contrast on light */
+  --accent-2: #b07d1a;        /* warm gold darkened so it reads on light */
+  --accent-cyan: #1f8fd6;
+  --nebula-1: rgba(106, 75, 255, 0.10);
+  --nebula-2: rgba(31, 143, 214, 0.07);
+  --nebula-3: rgba(176, 125, 26, 0.05);
+
+  --on-accent: #f6f6f4;        /* text on solid --fg (now dark) reads light */
+  --surface: rgba(20, 20, 28, 0.05);
+  --surface-hover: rgba(20, 20, 28, 0.08);
+  --nav-bg: rgba(246, 246, 244, 0.7);
+  --nav-bg-scrolled: rgba(246, 246, 244, 0.9);
+  /* Image-overlay tags stay dark — they sit on top of photos in both themes. */
+  --tag-bg: rgba(0, 0, 0, 0.55);
+  --tag-fg: #ffffff;
+  --scrollbar-thumb: #c9c9d0;
+  --scrollbar-thumb-hover: #b4b4bd;
+
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -69,13 +116,13 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
 /* Selection */
-::selection { background: var(--accent); color: #0a0a0b; }
+::selection { background: var(--accent); color: var(--on-accent); }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #232326; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #333338; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
 
 /* Container */
 .container {
@@ -94,6 +141,9 @@ button { font-family: inherit; cursor: pointer; }
   z-index: 1;
   opacity: 0.04;
   mix-blend-mode: overlay;
+}
+[data-theme="light"] .grain { opacity: 0.02; mix-blend-mode: multiply; }
+.grain {
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
 }
 
@@ -165,7 +215,7 @@ body::before {
    ========================================================= */
 .btn {
   --btn-bg: var(--fg);
-  --btn-fg: #0a0a0b;
+  --btn-fg: var(--on-accent);
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -186,7 +236,7 @@ body::before {
   --btn-fg: var(--fg);
   border-color: var(--line-strong);
 }
-.btn-ghost:hover { background: rgba(255,255,255,0.05); }
+.btn-ghost:hover { background: var(--surface); }
 .btn .arrow {
   display: inline-block;
   transition: transform 0.4s var(--ease-out);
@@ -303,7 +353,9 @@ body::before {
   mix-blend-mode: difference;
 }
 .nav.scrolled { mix-blend-mode: normal; padding: 14px var(--gutter); }
-.nav.scrolled .nav-inner { background: rgba(12,12,14,0.72); backdrop-filter: blur(12px); border: 1px solid var(--line); }
+/* Difference blend is a dark-theme trick; in light mode it muddies the nav. */
+[data-theme="light"] .nav { mix-blend-mode: normal; }
+.nav.scrolled .nav-inner { background: var(--nav-bg-scrolled); backdrop-filter: blur(12px); border: 1px solid var(--line); }
 /* When the mobile menu is open, drop blend mode so burger + logo read cleanly */
 .nav.menu-open { mix-blend-mode: normal; }
 .nav-inner {
@@ -320,7 +372,7 @@ body::before {
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0;
-  color: #fff;
+  color: var(--fg);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -337,7 +389,7 @@ body::before {
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: #fff;
+  color: var(--fg);
 }
 .nav-links a {
   position: relative;
@@ -364,8 +416,8 @@ body::before {
   gap: 10px;
   padding: 12px 22px;
   border-radius: 999px;
-  background: #fff;
-  color: #0a0a0b;
+  background: var(--fg);
+  color: var(--on-accent);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -380,11 +432,11 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  background: rgba(20, 22, 40, 0.6);
+  background: var(--surface);
   border: 1px solid var(--line-strong);
   width: 46px; height: 46px;
   border-radius: 50%;
-  color: #fff;
+  color: var(--fg);
   padding: 0;
   flex-shrink: 0;
 }
@@ -482,6 +534,16 @@ body::before {
   mix-blend-mode: screen;
   will-change: transform;
 }
+/* Screen blend is invisible on light backgrounds — use multiply + a tinted glow. */
+[data-theme="light"] .cursor-spotlight {
+  mix-blend-mode: multiply;
+  background: radial-gradient(
+    circle,
+    rgba(106, 75, 255, 0.14) 0%,
+    rgba(31, 143, 214, 0.07) 30%,
+    transparent 65%
+  );
+}
 
 /* ---------- Cursor: custom dot + ring ---------- */
 body.has-custom-cursor,
@@ -494,7 +556,9 @@ body.has-custom-cursor * {
   top: 0; left: 0;
   width: 5px;
   height: 5px;
-  background: var(--fg);
+  /* Constant white + difference blend => auto-inverts against any background,
+     so the dot stays visible in both dark and light themes. */
+  background: #ffffff;
   border-radius: 50%;
   transform: translate3d(-100px, -100px, 0);
   margin: -2.5px 0 0 -2.5px;
@@ -509,7 +573,7 @@ body.has-custom-cursor * {
   top: 0; left: 0;
   width: 40px;
   height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid color-mix(in srgb, var(--fg) 50%, transparent);
   border-radius: 50%;
   transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
   pointer-events: none;
@@ -517,6 +581,13 @@ body.has-custom-cursor * {
   mix-blend-mode: difference;
   display: grid;
   place-items: center;
+}
+/* In light mode, show the ring's real (dark) border instead of difference-blending. */
+[data-theme="light"] .cursor-ring {
+  mix-blend-mode: normal;
+  border-color: color-mix(in srgb, var(--fg) 45%, transparent);
+}
+.cursor-ring {
   transition:
     width 0.35s var(--ease-out),
     height 0.35s var(--ease-out),
@@ -527,8 +598,8 @@ body.has-custom-cursor * {
 .cursor-ring.is-hover {
   width: 68px;
   height: 68px;
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--surface);
+  border-color: color-mix(in srgb, var(--fg) 20%, transparent);
 }
 .cursor-ring.is-view {
   width: 92px;
@@ -540,7 +611,7 @@ body.has-custom-cursor * {
   transform: translate3d(var(--rx, 0), var(--ry, 0), 0) translate(-50%, -50%) scale(0.85);
 }
 .cursor-ring-label {
-  color: #fff;
+  color: var(--fg);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -604,6 +675,10 @@ section { position: relative; }
   z-index: 0;
   opacity: 0.9;
 }
+/* The additive-blended particle field only reads on a dark backdrop.
+   On light theme it washes out, so hide it and lean on the grid instead. */
+[data-theme="light"] .hero-canvas { display: none; }
+[data-theme="light"] .hero-grid { opacity: 0.6; }
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -803,10 +878,10 @@ section { position: relative; }
   z-index: 0;
 }
 .cap-row:hover::before { transform: scaleY(1); transform-origin: top; }
-.cap-row:hover { color: #0a0a0b; }
+.cap-row:hover { color: var(--on-accent); }
 .cap-row > * { position: relative; z-index: 1; }
 .cap-row .cap-num { font-size: 12px; letter-spacing: 0.2em; color: var(--fg-dim); }
-.cap-row:hover .cap-num { color: #0a0a0b; }
+.cap-row:hover .cap-num { color: var(--on-accent); }
 .cap-row .cap-title {
   font-size: clamp(20px, 2.6vw, 36px);
   font-weight: 500;
@@ -921,9 +996,9 @@ section { position: relative; }
   position: absolute;
   top: 20px; left: 20px;
   padding: 6px 12px;
-  background: rgba(0,0,0,0.5);
+  background: var(--tag-bg);
   backdrop-filter: blur(8px);
-  color: #fff;
+  color: var(--tag-fg);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1000,9 +1075,9 @@ section { position: relative; }
   width: 48px; height: 48px;
   border-radius: 50%;
   border: 1px solid var(--line-strong);
-  background: rgba(12,12,14,0.7);
+  background: var(--nav-bg-scrolled);
   backdrop-filter: blur(10px);
-  color: #fff;
+  color: var(--fg);
   display: grid; place-items: center;
   z-index: 5;
 }
@@ -1450,7 +1525,7 @@ section { position: relative; }
 .work-filter:hover { color: var(--fg); }
 .work-filter.active {
   background: var(--fg);
-  color: #0a0a0b;
+  color: var(--on-accent);
   border-color: var(--fg);
 }
 
@@ -1484,9 +1559,9 @@ section { position: relative; }
   position: absolute;
   top: 16px; left: 16px;
   padding: 6px 12px;
-  background: rgba(0,0,0,0.55);
+  background: var(--tag-bg);
   backdrop-filter: blur(8px);
-  color: #fff;
+  color: var(--tag-fg);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1548,11 +1623,11 @@ section { position: relative; }
 /* Nav — add work button variant */
 .nav-cta.nav-cta-secondary {
   background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.35);
+  color: var(--fg);
+  border: 1px solid var(--line-strong);
   margin-right: 10px;
 }
-.nav-cta.nav-cta-secondary:hover { background: rgba(255,255,255,0.08); }
+.nav-cta.nav-cta-secondary:hover { background: var(--surface-hover); }
 .nav-cta-group { display: inline-flex; align-items: center; gap: 10px; }
 
 @media (max-width: 1024px) {
@@ -1593,9 +1668,9 @@ section { position: relative; }
   position: absolute;
   top: 14px; left: 14px;
   padding: 6px 12px;
-  background: rgba(0,0,0,0.55);
+  background: var(--tag-bg);
   backdrop-filter: blur(8px);
-  color: #fff;
+  color: var(--tag-fg);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1880,7 +1955,7 @@ section { position: relative; }
 }
 .industry-pill:hover {
   background: var(--fg);
-  color: #0a0a0b;
+  color: var(--on-accent);
   border-color: var(--fg);
 }
 
@@ -2321,7 +2396,7 @@ section { position: relative; }
   width: 80px; height: 80px;
   border-radius: 50%;
   background: var(--accent);
-  color: #0a0a0b;
+  color: var(--on-accent);
   display: grid; place-items: center;
   animation: csPop 0.6s var(--ease-out) both;
 }
@@ -2358,7 +2433,7 @@ section { position: relative; }
   letter-spacing: 0.2em;
   text-transform: uppercase;
   background: var(--accent);
-  color: #0a0a0b;
+  color: var(--on-accent);
   font-weight: 600;
 }
 .cs-badge-ghost {
@@ -2771,7 +2846,7 @@ section { position: relative; }
   padding: 14px 22px;
   border-radius: 999px;
   background: var(--fg);
-  color: #0a0a0b;
+  color: var(--on-accent);
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -3184,10 +3259,8 @@ section { position: relative; }
 }
 .section-head > div .eyebrow { color: var(--fg-dim); }
 /* Consistent eyebrow → heading rhythm (replaces per-component inline margins). */
-.section-head > div .eyebrow + .h-section,
-.section-head > div .eyebrow + .h-display,
-.section-head .eyebrow + .h-section,
-.section-head .eyebrow + .h-display { margin-top: var(--sp-3); }
+.eyebrow + .h-section,
+.eyebrow + .h-display { margin-top: var(--sp-3); }
 .section-head .meta {
   max-width: 46ch;
   color: var(--fg-dim);
@@ -3401,9 +3474,9 @@ section { position: relative; }
   position: absolute;
   top: 16px; left: 16px;
   padding: 6px 12px;
-  background: rgba(0,0,0,0.55);
+  background: var(--tag-bg);
   backdrop-filter: blur(8px);
-  color: #fff;
+  color: var(--tag-fg);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -3474,9 +3547,9 @@ section { position: relative; }
   position: absolute;
   top: 16px; left: 16px;
   padding: 6px 12px;
-  background: rgba(0,0,0,0.55);
+  background: var(--tag-bg);
   backdrop-filter: blur(8px);
-  color: #fff;
+  color: var(--tag-fg);
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -3804,7 +3877,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
   padding: 16px 26px;
   border-radius: 999px;
   background: var(--fg);
-  color: #05060d;
+  color: var(--on-accent);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -3830,12 +3903,12 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
   /* Nav pill breathing room */
   .nav { padding: 14px var(--gutter); }
   .nav-inner {
-    background: rgba(12, 14, 30, 0.6);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     border: 1px solid var(--line);
     padding: 8px 8px 8px 18px;
   }
-  .nav.scrolled .nav-inner { background: rgba(12, 14, 30, 0.82); }
+  .nav.scrolled .nav-inner { background: var(--nav-bg-scrolled); }
 
   /* ERP / grids that were 2-up drop appropriately */
   .erp-benefits { grid-template-columns: repeat(2, 1fr); }
@@ -3978,89 +4051,105 @@ html, body, #root {
 }
 
 /* =========================================================
-   INTRO PRELOADER — authoritative layer (wins the cascade)
-   ~2s Namaste mark → MB → "Welcome to Mahesh Builds." → Hero.
-   Replaces all earlier preloader visuals (V2 / V3 Namaste / V3.1).
+   BUILT FOR BUSINESSES — business-stage editorial rows
    ========================================================= */
-
-/* Neutralize stale preloader nodes from older layers so nothing leaks in. */
-.intro-preloader .preloader-inner,
-.intro-preloader .preloader-ring,
-.intro-preloader .preloader-mb,
-.intro-preloader .preloader-lines,
-.intro-preloader .preloader-wordmark,
-.intro-preloader .preloader-progress,
-.intro-preloader .preloader-count,
-.intro-preloader .preloader-bar,
-.intro-preloader .preloader-stage,
-.intro-preloader .pl-symbol,
-.intro-preloader .pl-ring,
-.intro-preloader .pl-ring-svg,
-.intro-preloader .pl-figure,
-.intro-preloader .pl-mb,
-.intro-preloader .pl-mb-mono,
-.intro-preloader .pl-cycle,
-.intro-preloader .pl-wordmark,
-.intro-preloader .pl-line,
-.intro-preloader .preloader-meta {
-  display: none !important;
+.bfb-list {
+  border-top: 1px solid var(--line);
 }
-
-.intro-preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: var(--bg);
+.bfb-row {
   display: grid;
-  place-items: center;
-  pointer-events: none;
-  overflow: hidden;
+  grid-template-columns: 64px 1.1fr 1.4fr;
+  align-items: baseline;
+  gap: var(--sp-5);
+  padding: var(--sp-5) 0;
+  border-bottom: 1px solid var(--line);
 }
-
-.intro-stage {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 26px;
-  padding: 0 var(--gutter);
-  will-change: transform, opacity;
+.bfb-num {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
-
-.intro-mark {
-  color: var(--fg);
-  line-height: 0;
-  will-change: transform, opacity;
-}
-.intro-mark svg { display: block; }
-.intro-mark .pl-fill { color: var(--accent); }
-
-.intro-mb {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(40px, 6vw, 60px);
-  line-height: 1;
-  color: var(--fg);
-  will-change: transform, opacity;
-}
-
-.intro-welcome {
-  font-family: var(--font-sans);
-  font-size: clamp(15px, 2.4vw, 20px);
+.bfb-title {
+  font-size: clamp(22px, 2.4vw, 32px);
   font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--fg-dim);
-  text-align: center;
-  will-change: clip-path, opacity;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
 }
-.intro-welcome .serif {
+.bfb-q {
+  margin: var(--sp-1) 0 0;
   font-family: var(--font-serif);
   font-style: italic;
-  color: var(--fg);
+  font-size: clamp(16px, 1.5vw, 20px);
+  color: var(--accent-2);
+}
+.bfb-text {
+  margin: 0;
+  color: var(--fg-dim);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55;
+  max-width: 46ch;
+}
+@media (max-width: 900px) {
+  .bfb-row {
+    grid-template-columns: 40px 1fr;
+    gap: var(--sp-1) var(--sp-3);
+    padding: var(--sp-4) 0;
+  }
+  .bfb-text { grid-column: 2 / -1; margin-top: var(--sp-2); }
+}
+@media (max-width: 640px) {
+  .bfb-row { grid-template-columns: 34px 1fr; }
+  .bfb-title { font-size: clamp(20px, 6.5vw, 26px); }
 }
 
-@media (max-width: 640px) {
-  .intro-stage { gap: 20px; }
-  .intro-mark svg { width: 92px; height: auto; }
+/* =========================================================
+   THEME TOGGLE — dark / light switch
+   ========================================================= */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.3s var(--ease-out), transform 0.3s var(--ease-out), color 0.3s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover { background: var(--surface-hover); transform: translateY(-2px); }
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Group the primary CTA + theme toggle so they sit together on the right. */
+.nav-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Desktop toggle lives in the nav pill; mobile variant hidden by default. */
+.nav-theme-mobile { display: none; }
+
+@media (max-width: 900px) {
+  /* Desktop nav toggle hides with the desktop nav; show the compact one by the burger. */
+  .nav-theme { display: none; }
+  .nav-theme-mobile {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    margin-right: 8px;
+  }
+}
+
+/* In the mobile menu footer, present it as a labelled pill-sized control. */
+.mobile-menu-footer .mobile-theme {
+  width: 44px;
+  height: 44px;
 }

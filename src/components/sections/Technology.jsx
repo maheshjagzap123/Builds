@@ -11,13 +11,14 @@ export default function Technology() {
         <div className="section-head">
           <div>
             <span className="eyebrow">11 — Technology</span>
-            <h2 className="h-section" style={{ marginTop: 24 }}>
+            <h2 className="h-section">
               <RevealText>The technology</RevealText>{' '}
               <em className="serif"><RevealText delay={0.1}>behind the build.</RevealText></em>
             </h2>
           </div>
           <FadeUp className="meta">
-            A pragmatic stack — modern, maintainable and picked to match the problem.
+            We choose technology around the product, the business requirements and the
+            long-term need — not the other way around.
           </FadeUp>
         </div>
 
