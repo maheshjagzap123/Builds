@@ -13,33 +13,43 @@ export default function Process() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
 
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches;
+
     const ctx = gsap.context(() => {
       const line = ref.current.querySelector('.process-line-fill');
       const steps = gsap.utils.toArray('.process-step');
 
-      ScrollTrigger.create({
-        trigger: ref.current,
-        start: 'top 70%',
-        end: 'bottom 60%',
-        scrub: 0.6,
-        onUpdate: (self) => {
-          if (line) line.style.transform = `scaleX(${self.progress})`;
-          steps.forEach((s, i) => {
-            const step = (i + 1) / steps.length;
-            if (self.progress >= step - 0.08) s.classList.add('is-active');
-            else s.classList.remove('is-active');
-          });
-        },
+      if (!isMobile) {
+        ScrollTrigger.create({
+          trigger: ref.current,
+          start: 'top 70%',
+          end: 'bottom 60%',
+          scrub: 0.6,
+          onUpdate: (self) => {
+            if (line) line.style.transform = `scaleX(${self.progress})`;
+            steps.forEach((s, i) => {
+              const step = (i + 1) / steps.length;
+              if (self.progress >= step - 0.08) s.classList.add('is-active');
+              else s.classList.remove('is-active');
+            });
+          },
+        });
+      } else {
+        steps.forEach((s) => s.classList.add('is-active'));
+      }
+
+      // Per-step reveal so it always fires, even far below the fold.
+      steps.forEach((s) => {
+        gsap.from(s, {
+          y: 30,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: s, start: 'top 92%', once: true },
+        });
       });
 
-      gsap.from('.process-step', {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'expo.out',
-        stagger: 0.06,
-        scrollTrigger: { trigger: ref.current, start: 'top 80%', once: true },
-      });
+      ScrollTrigger.refresh();
     }, ref);
     return () => ctx.revert();
   }, []);

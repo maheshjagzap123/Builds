@@ -3926,3 +3926,41 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
 /* Preloader fixed-width elements capped for tiny screens */
 .preloader-lines { max-width: 90vw; }
 .preloader .pl-cycle { max-width: 90vw; }
+
+/* =========================================================
+   OVERFLOW LOCKDOWN — kill any horizontal scroll on mobile
+   ========================================================= */
+html, body, #root {
+  max-width: 100vw;
+  overflow-x: clip;          /* clip is safe with position:sticky/fixed */
+}
+#root { position: relative; }
+
+/* Scroll progress must stay a horizontal top bar, never a vertical artifact */
+.scroll-progress {
+  height: 2px;
+  width: 100%;
+  transform-origin: left center;
+}
+
+/* Numbered row labels must not clip against the container edge */
+@media (max-width: 640px) {
+  .nj-row { grid-template-columns: 34px 1fr; column-gap: 12px; }
+  .nj-n { font-size: 10px; }
+  .wyn-row { grid-template-columns: 34px 1fr; column-gap: 12px; }
+  .wyn-num { font-size: 10px; }
+
+  /* Ensure section content never sits under 20px from the edge */
+  .container { padding-left: max(24px, env(safe-area-inset-left));
+               padding-right: max(24px, env(safe-area-inset-right)); }
+}
+
+/* =========================================================
+   Mobile scroll-reveal safety net
+   On touch devices, guarantee scroll-triggered content is visible even if a
+   ScrollTrigger fails to fire (prevents blank sections while scrolling).
+   ========================================================= */
+@media (hover: none), (max-width: 1024px) {
+  .process-step { opacity: 1 !important; }
+  .process-timeline { min-height: 0; }
+}
