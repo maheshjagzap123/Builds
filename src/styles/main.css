@@ -3675,7 +3675,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
 
 /* Tablet & below */
 @media (max-width: 900px) {
-  :root { --gutter: clamp(18px, 5vw, 32px); }
+  :root { --gutter: clamp(24px, 5vw, 40px); }
 
   /* Hero: change from bottom-anchored to natural top-down flow so the
      headline is never hidden under the fixed nav. */
@@ -3695,7 +3695,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
 
 /* Phones */
 @media (max-width: 640px) {
-  :root { --gutter: 18px; }
+  :root { --gutter: 24px; }
 
   /* Headings never overflow */
   .h-section { font-size: clamp(26px, 8.5vw, 40px); line-height: 1.05; }
@@ -3766,7 +3766,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
 
 /* Very small phones (320–360) */
 @media (max-width: 380px) {
-  :root { --gutter: 16px; }
+  :root { --gutter: 20px; }
   .hero-headline { font-size: clamp(27px, 11vw, 34px); }
   .h-section { font-size: clamp(24px, 9vw, 32px); }
   .hero-ctas { flex-direction: column; }
