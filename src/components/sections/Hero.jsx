@@ -4,21 +4,25 @@ import MagneticButton from '../animation/MagneticButton.jsx';
 
 const HeroScene = lazy(() => import('../three/HeroScene.jsx'));
 
-export default function Hero() {
+export default function Hero({ loaded = true }) {
   const rootRef = useRef(null);
   const [webglReady, setWebglReady] = useState(false);
 
+  // Load WebGL only on desktop, only after the preloader has handed off.
   useEffect(() => {
-    // Only load WebGL on desktop and after preloader
+    if (!loaded) return;
     const isSmall = window.matchMedia('(max-width: 768px)').matches;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!isSmall && !reduced) {
       const t = setTimeout(() => setWebglReady(true), 400);
       return () => clearTimeout(t);
     }
-  }, []);
+  }, [loaded]);
 
+  // Run the entrance animation when the Hero becomes visible (post-preloader),
+  // so the headline reveal isn't wasted behind the intro overlay.
   useEffect(() => {
+    if (!loaded) return;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
     const ctx = gsap.context(() => {
@@ -30,17 +34,17 @@ export default function Hero() {
           duration: 1.2,
           ease: 'expo.out',
           stagger: 0.07,
-          delay: 0.2,
+          delay: 0.1,
         }
       );
       gsap.fromTo(
         '.hero-top, .hero-bottom, .hero-scroll',
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1, delay: 0.9 }
+        { opacity: 1, y: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1, delay: 0.7 }
       );
     }, rootRef);
     return () => ctx.revert();
-  }, []);
+  }, [loaded]);
 
   return (
     <section ref={rootRef} className="hero" id="top">
@@ -55,7 +59,7 @@ export default function Hero() {
 
       <div className="container hero-content">
         <div className="hero-top">
-          <span className="eyebrow">Digital Systems Studio</span>
+          <span className="eyebrow">Digital Product &amp; Software Studio</span>
           <span className="location">India · Available Worldwide</span>
         </div>
 
@@ -80,8 +84,8 @@ export default function Hero() {
             <MagneticButton href="#contact" className="btn" data-cursor-label="Start">
               Start a Project <span className="arrow">↗</span>
             </MagneticButton>
-            <MagneticButton href="#what-we-build" className="btn btn-ghost">
-              Explore What We Build ↓
+            <MagneticButton href="#work-teaser" className="btn btn-ghost">
+              View What We've Built ↓
             </MagneticButton>
           </div>
         </div>

@@ -26,6 +26,18 @@
   --radius-m: 14px;
   --radius-l: 22px;
 
+  /* Spacing scale — use these tokens instead of ad-hoc pixel values.
+     8 · 16 · 24 · 32 · 48 · 64 · 96 · 128 · 160 */
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 24px;
+  --sp-4: 32px;
+  --sp-5: 48px;
+  --sp-6: 64px;
+  --sp-7: 96px;
+  --sp-8: 128px;
+  --sp-9: 160px;
+
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
@@ -563,16 +575,10 @@ section { position: relative; }
 .section {
   padding: clamp(80px, 12vw, 180px) 0;
 }
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 40px;
-  margin-bottom: clamp(50px, 8vw, 100px);
-  flex-wrap: wrap;
-}
+/* .section-head layout is defined authoritatively in the
+   "V3.2 — Section head consistency" layer below (grid: left label+heading /
+   right meta). Only shared, non-layout defaults live here. */
 .section-head .meta {
-  max-width: 380px;
   color: var(--fg-dim);
   font-size: 14px;
   line-height: 1.55;
@@ -587,9 +593,10 @@ section { position: relative; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 120px 0 100px;
+  padding: var(--sp-8) 0 var(--sp-7);
   position: relative;
   overflow: hidden;
+  text-align: left;
 }
 .hero-canvas {
   position: absolute;
@@ -616,8 +623,8 @@ section { position: relative; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
-  gap: 20px;
+  margin-bottom: var(--sp-5);
+  gap: var(--sp-3);
   flex-wrap: wrap;
 }
 .hero-top .location {
@@ -644,9 +651,9 @@ section { position: relative; }
 .hero-bottom {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 40px;
+  gap: var(--sp-5);
   align-items: end;
-  margin-top: 44px;
+  margin-top: var(--sp-5);
 }
 .hero-sub {
   max-width: 44ch;
@@ -656,7 +663,7 @@ section { position: relative; }
 }
 .hero-ctas {
   display: flex;
-  gap: 14px;
+  gap: var(--sp-2);
   flex-wrap: wrap;
 }
 .hero-scroll {
@@ -3172,10 +3179,15 @@ section { position: relative; }
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   align-items: end;
-  gap: 40px;
-  margin-bottom: clamp(50px, 8vw, 100px);
+  gap: var(--sp-5);
+  margin-bottom: clamp(var(--sp-5), 8vw, var(--sp-7));
 }
 .section-head > div .eyebrow { color: var(--fg-dim); }
+/* Consistent eyebrow → heading rhythm (replaces per-component inline margins). */
+.section-head > div .eyebrow + .h-section,
+.section-head > div .eyebrow + .h-display,
+.section-head .eyebrow + .h-section,
+.section-head .eyebrow + .h-display { margin-top: var(--sp-3); }
 .section-head .meta {
   max-width: 46ch;
   color: var(--fg-dim);
@@ -3183,7 +3195,7 @@ section { position: relative; }
   line-height: 1.6;
 }
 @media (max-width: 900px) {
-  .section-head { grid-template-columns: 1fr; gap: 20px; align-items: start; }
+  .section-head { grid-template-columns: 1fr; gap: var(--sp-3); align-items: start; }
 }
 
 /* =========================================================
@@ -3963,4 +3975,92 @@ html, body, #root {
 @media (hover: none), (max-width: 1024px) {
   .process-step { opacity: 1 !important; }
   .process-timeline { min-height: 0; }
+}
+
+/* =========================================================
+   INTRO PRELOADER — authoritative layer (wins the cascade)
+   ~2s Namaste mark → MB → "Welcome to Mahesh Builds." → Hero.
+   Replaces all earlier preloader visuals (V2 / V3 Namaste / V3.1).
+   ========================================================= */
+
+/* Neutralize stale preloader nodes from older layers so nothing leaks in. */
+.intro-preloader .preloader-inner,
+.intro-preloader .preloader-ring,
+.intro-preloader .preloader-mb,
+.intro-preloader .preloader-lines,
+.intro-preloader .preloader-wordmark,
+.intro-preloader .preloader-progress,
+.intro-preloader .preloader-count,
+.intro-preloader .preloader-bar,
+.intro-preloader .preloader-stage,
+.intro-preloader .pl-symbol,
+.intro-preloader .pl-ring,
+.intro-preloader .pl-ring-svg,
+.intro-preloader .pl-figure,
+.intro-preloader .pl-mb,
+.intro-preloader .pl-mb-mono,
+.intro-preloader .pl-cycle,
+.intro-preloader .pl-wordmark,
+.intro-preloader .pl-line,
+.intro-preloader .preloader-meta {
+  display: none !important;
+}
+
+.intro-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.intro-stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 0 var(--gutter);
+  will-change: transform, opacity;
+}
+
+.intro-mark {
+  color: var(--fg);
+  line-height: 0;
+  will-change: transform, opacity;
+}
+.intro-mark svg { display: block; }
+.intro-mark .pl-fill { color: var(--accent); }
+
+.intro-mb {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(40px, 6vw, 60px);
+  line-height: 1;
+  color: var(--fg);
+  will-change: transform, opacity;
+}
+
+.intro-welcome {
+  font-family: var(--font-sans);
+  font-size: clamp(15px, 2.4vw, 20px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--fg-dim);
+  text-align: center;
+  will-change: clip-path, opacity;
+}
+.intro-welcome .serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--fg);
+}
+
+@media (max-width: 640px) {
+  .intro-stage { gap: 20px; }
+  .intro-mark svg { width: 92px; height: auto; }
 }

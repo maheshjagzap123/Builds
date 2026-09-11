@@ -1,154 +1,180 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 /**
- * Cinematic preloader (restored earlier version):
- *   Frame 1: MB inside a small ring
- *   Frame 2: "Digital Product Studio" / "We build what businesses need next"
- *   Frame 3: MAHESH BUILDS wordmark assembles
- *   Frame 4: Ring expands to viewport, morphs into hero background
+ * Intro preloader — ~2s, plays once per browser session.
  *
- * Runs once per session. Optional non-blocking voice.
- * Respects prefers-reduced-motion.
+ *   Frame 1  (0.00–0.55s)  Namaste mark draws in (minimal line + solid, no emoji)
+ *   Frame 2  (0.45–0.95s)  MB monogram settles beneath the mark
+ *   Frame 3  (0.85–1.55s)  "Welcome to Mahesh Builds." reveals
+ *   Frame 4  (1.55–2.00s)  Whole stage lifts + fades → hands off to Hero
+ *
+ * - No loading counter, no filler copy.
+ * - Optional spoken welcome; never blocks the transition if autoplay is unavailable.
+ * - Skipped on internal hash navigation (session-once) and for prefers-reduced-motion.
+ * - Restores scroll on complete and on unmount; GSAP timeline is killed on cleanup.
  */
 
-const WELCOME_KEY = 'mb.welcomePlayed';
+const PLAYED_KEY = 'mb.introPlayed';
 
 export default function Preloader({ onDone }) {
   const rootRef = useRef(null);
-  const ringRef = useRef(null);
+  const markRef = useRef(null);
+  const strokeRefs = useRef([]);
   const mbRef = useRef(null);
-  const line1Ref = useRef(null);
-  const line2Ref = useRef(null);
-  const wordmarkRef = useRef(null);
-  const [count, setCount] = useState(0);
+  const welcomeRef = useRef(null);
+  const stageRef = useRef(null);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Note: session-once skip is disabled while iterating; animation plays on every refresh.
-    // To re-enable, gate the timeline behind: sessionStorage.getItem(WELCOME_KEY) === '1'.
-    if (prefersReduced) {
-      if (rootRef.current) rootRef.current.style.display = 'none';
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const alreadyPlayed =
+      typeof sessionStorage !== 'undefined' &&
+      sessionStorage.getItem(PLAYED_KEY) === '1';
+
+    const finish = () => {
+      document.body.style.overflow = '';
+      try { window.speechSynthesis?.cancel(); } catch (_) { /* silent */ }
       onDone?.();
+    };
+
+    // Skip entirely: reduced motion, or already shown this session (internal nav).
+    if (prefersReduced || alreadyPlayed) {
+      if (rootRef.current) rootRef.current.style.display = 'none';
+      finish();
       return;
     }
 
+    try { sessionStorage.setItem(PLAYED_KEY, '1'); } catch (_) { /* silent */ }
+
     document.body.style.overflow = 'hidden';
 
-    // Optional voice — never blocks the animation.
+    // Optional voice — fire-and-forget, wrapped so a blocked autoplay never stalls us.
     const speak = () => {
       try {
         if (!('speechSynthesis' in window)) return;
         const u = new SpeechSynthesisUtterance('Welcome to Mahesh Builds');
-        u.rate = 0.95;
+        u.rate = 0.98;
         u.pitch = 1.0;
-        u.volume = 0.85;
+        u.volume = 0.8;
         const voices = window.speechSynthesis.getVoices();
-        const preferred = voices.find((v) => /en(-|_)?(gb|us|in)/i.test(v.lang)) || voices[0];
+        const preferred =
+          voices.find((v) => /en(-|_)?(gb|in|us)/i.test(v.lang)) || voices[0];
         if (preferred) u.voice = preferred;
         window.speechSynthesis.cancel();
         window.speechSynthesis.speak(u);
       } catch (_) { /* silent */ }
     };
 
-    const counter = { v: 0 };
-    gsap.to(counter, {
-      v: 100,
-      duration: 3.4,
-      ease: 'power2.inOut',
-      onUpdate: () => setCount(Math.round(counter.v)),
+    const strokes = strokeRefs.current.filter(Boolean);
+
+    // Prime stroke-draw for the namaste mark.
+    strokes.forEach((el) => {
+      const len = el.getTotalLength ? el.getTotalLength() : 200;
+      gsap.set(el, { strokeDasharray: len, strokeDashoffset: len });
     });
 
     const tl = gsap.timeline({
       defaults: { ease: 'expo.out' },
-      onComplete: () => {
-        document.body.style.overflow = '';
-        try { window.speechSynthesis?.cancel(); } catch (_) {}
-        onDone?.();
-      },
+      onComplete: finish,
     });
 
-    // Frame 1: MB inside ring — calm entry
-    tl.fromTo(ringRef.current,
-      { scale: 0.4, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.1, ease: 'expo.out' }
+    // Frame 1 — namaste mark: container settles, strokes draw, solid fill fades up.
+    tl.fromTo(markRef.current,
+      { opacity: 0, scale: 0.86, y: 8 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.5 },
+      0
     )
-    .fromTo(mbRef.current,
-      { yPercent: 100, opacity: 0 },
-      { yPercent: 0, opacity: 1, duration: 0.9 },
-      '-=0.6'
-    )
-    .call(speak, null, 0.6)
+      .to(strokes, { strokeDashoffset: 0, duration: 0.55, stagger: 0.05 }, 0.05)
+      .fromTo('.pl-fill',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4 },
+        0.35
+      )
+      .call(speak, null, 0.5)
 
-    // Frame 2: intro lines — held longer, calmer
-    .fromTo(line1Ref.current.children,
-      { yPercent: 100 },
-      { yPercent: 0, duration: 0.7, stagger: 0.04 },
-      0.9
-    )
-    .to(line1Ref.current.children,
-      { yPercent: -100, duration: 0.6, stagger: 0.03, ease: 'expo.in' },
-      1.9
-    )
-    .fromTo(line2Ref.current.children,
-      { yPercent: 100 },
-      { yPercent: 0, duration: 0.7, stagger: 0.02 },
-      2.15
-    )
-    .to(line2Ref.current.children,
-      { yPercent: -100, duration: 0.6, stagger: 0.02, ease: 'expo.in' },
-      3.05
-    )
+      // Frame 2 — MB monogram rises beneath the mark.
+      .fromTo(mbRef.current,
+        { yPercent: 60, opacity: 0, letterSpacing: '0.2em' },
+        { yPercent: 0, opacity: 1, letterSpacing: '0.02em', duration: 0.5 },
+        0.5
+      )
 
-    // Frame 3: wordmark assembles
-    .fromTo(wordmarkRef.current.querySelectorAll('.pl-word > span'),
-      { yPercent: 110, opacity: 0 },
-      { yPercent: 0, opacity: 1, duration: 1.0, stagger: 0.07 },
-      2.9
-    )
-    .to(mbRef.current, { opacity: 0, scale: 0.75, duration: 0.6 }, 3.0)
+      // Frame 3 — welcome line clips in.
+      .fromTo(welcomeRef.current,
+        { clipPath: 'inset(0 100% 0 0)', opacity: 0 },
+        { clipPath: 'inset(0 0% 0 0)', opacity: 1, duration: 0.6, ease: 'power3.out' },
+        0.9
+      )
 
-    // Frame 4: cinematic ring expansion → dissolves into hero
-    .to(ringRef.current,
-      { scale: 45, borderColor: 'rgba(255,255,255,0)', duration: 1.4, ease: 'expo.inOut' },
-      3.9
-    )
-    .to(wordmarkRef.current, { opacity: 0, duration: 0.6 }, 4.6)
-    .to(rootRef.current, { autoAlpha: 0, duration: 0.55, ease: 'power2.out' }, 4.9)
-    .set(rootRef.current, { display: 'none' });
+      // Frame 4 — stage lifts + fades, then the whole overlay clears for the Hero.
+      .to(stageRef.current,
+        { y: -24, opacity: 0, duration: 0.45, ease: 'power2.in' },
+        1.55
+      )
+      .to(rootRef.current,
+        { autoAlpha: 0, duration: 0.4, ease: 'power2.out' },
+        1.6
+      )
+      .set(rootRef.current, { display: 'none' });
 
     return () => {
       tl.kill();
       document.body.style.overflow = '';
-      try { window.speechSynthesis?.cancel(); } catch (_) {}
+      try { window.speechSynthesis?.cancel(); } catch (_) { /* silent */ }
     };
   }, [onDone]);
 
+  const setStroke = (i) => (el) => { strokeRefs.current[i] = el; };
+
   return (
-    <div className="preloader" ref={rootRef}>
-      <div className="preloader-stage">
-        <div className="preloader-ring" ref={ringRef}>
-          <span className="preloader-mb" ref={mbRef}>MB</span>
+    <div className="preloader intro-preloader" ref={rootRef} aria-hidden="true">
+      <div className="intro-stage" ref={stageRef}>
+        {/* Namaste mark — geometric line + solid, deliberately not illustrative */}
+        <div className="intro-mark" ref={markRef}>
+          <svg viewBox="0 0 120 140" width="112" height="130" fill="none" role="presentation">
+            {/* head */}
+            <circle
+              className="pl-fill"
+              cx="60" cy="26" r="12"
+              fill="currentColor"
+            />
+            {/* joined hands / prayer diamond — line stroke that draws in */}
+            <path
+              ref={setStroke(0)}
+              d="M60 44 L88 92 L60 108 L32 92 Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+            {/* shoulders / arms rising to the hands */}
+            <path
+              ref={setStroke(1)}
+              d="M32 92 C20 104, 18 120, 22 132 M88 92 C100 104, 102 120, 98 132"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            {/* centre line of the pressed palms */}
+            <path
+              ref={setStroke(2)}
+              d="M60 50 L60 104"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              opacity="0.55"
+            />
+          </svg>
         </div>
 
-        <div className="preloader-lines">
-          <div className="pl-line" ref={line1Ref}>
-            <span>DIGITAL</span><span>&nbsp;</span><span>PRODUCT</span><span>&nbsp;</span><span>STUDIO</span>
-          </div>
-          <div className="pl-line pl-line-2" ref={line2Ref}>
-            <span>WE&nbsp;BUILD&nbsp;WHAT&nbsp;BUSINESSES&nbsp;NEED&nbsp;NEXT.</span>
-          </div>
-        </div>
+        <div className="intro-mb" ref={mbRef}>MB</div>
 
-        <div className="preloader-wordmark" ref={wordmarkRef}>
-          <span className="pl-word"><span>MAHESH</span></span>
-          <span className="pl-word"><span>BUILDS</span></span>
+        <div className="intro-welcome" ref={welcomeRef}>
+          Welcome to <span className="serif">Mahesh Builds.</span>
         </div>
-      </div>
-
-      <div className="preloader-bar">
-        <span className="preloader-tag">LOADING</span>
-        <span className="preloader-count">{String(count).padStart(3, '0')}</span>
       </div>
     </div>
   );

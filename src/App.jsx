@@ -11,7 +11,11 @@ import AgencyIntro from './components/sections/AgencyIntro.jsx';
 import WhatWeBuild from './components/sections/WhatWeBuild.jsx';
 import WhenYouNeedUs from './components/sections/WhenYouNeedUs.jsx';
 import Industries from './components/sections/Industries.jsx';
-import ERPSystems from './components/sections/ERPSystems.jsx';
+// ERPSystems is intentionally kept in the codebase (component + src/data/erp.js)
+// but removed from the homepage flow to avoid conceptual overlap with
+// Industries and What We Build. Reuse its content in Business Software /
+// industry detail pages / case studies as needed.
+// import ERPSystems from './components/sections/ERPSystems.jsx';
 import WorkTeaser from './components/sections/WorkTeaser.jsx';
 import WhyUs from './components/sections/WhyUs.jsx';
 import Ecosystem from './components/sections/Ecosystem.jsx';
@@ -28,15 +32,14 @@ import IndustryDetail from './pages/IndustryDetail.jsx';
 import { useLenis } from './lib/useLenis.js';
 import { useHashRoute } from './lib/useHashRoute.js';
 
-function HomePage() {
+function HomePage({ loaded }) {
   return (
     <>
-      <Hero />
+      <Hero loaded={loaded} />
       <AgencyIntro />
       <WhatWeBuild />
       <WhenYouNeedUs />
       <Industries />
-      <ERPSystems />
       <WorkTeaser />
       <Ecosystem />
       <WhyUs />
@@ -66,7 +69,7 @@ export default function App() {
     }
   }, [route]);
 
-  let page = <HomePage />;
+  let page = <HomePage loaded={loaded} />;
   if (route.path === '/work') page = <WorkPage />;
   else if (route.path === '/industries/:slug') page = <IndustryDetail slug={route.params.slug} />;
 
