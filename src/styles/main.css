@@ -159,6 +159,29 @@ body::before {
     radial-gradient(ellipse 60% 40% at 100% 30%, rgba(255, 213, 131, 0.04), transparent 60%);
 }
 
+/* Light theme keeps the same atmospheric depth: tinted glows + a faint grid,
+   so the background reads intentional rather than a flat white sheet. */
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(ellipse 90% 65% at 50% -5%, rgba(106, 75, 255, 0.10), transparent 60%),
+    radial-gradient(ellipse 70% 45% at 100% 25%, rgba(31, 143, 214, 0.08), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 80%, rgba(176, 125, 26, 0.06), transparent 60%);
+}
+/* Faint page-wide grid texture, masked so it fades toward the edges. */
+[data-theme="light"] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(20, 20, 28, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 20, 28, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, #000 30%, transparent 85%);
+}
+
 /* =========================================================
    Typography
    ========================================================= */
