@@ -292,6 +292,8 @@ body::before {
 }
 .nav.scrolled { mix-blend-mode: normal; padding: 14px var(--gutter); }
 .nav.scrolled .nav-inner { background: rgba(12,12,14,0.72); backdrop-filter: blur(12px); border: 1px solid var(--line); }
+/* When the mobile menu is open, drop blend mode so burger + logo read cleanly */
+.nav.menu-open { mix-blend-mode: normal; }
 .nav-inner {
   width: 100%;
   display: flex;
@@ -362,66 +364,76 @@ body::before {
 
 .nav-burger {
   display: none;
-  background: transparent;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(20, 22, 40, 0.6);
   border: 1px solid var(--line-strong);
-  width: 44px; height: 44px;
+  width: 46px; height: 46px;
   border-radius: 50%;
   color: #fff;
-  place-items: center;
+  padding: 0;
+  flex-shrink: 0;
 }
 .nav-burger span {
   display: block;
-  width: 16px; height: 1px;
+  width: 18px; height: 2px;
+  border-radius: 2px;
   background: currentColor;
-  margin: 3px 0;
   transition: transform 0.4s var(--ease-out), opacity 0.3s;
 }
-.nav-burger.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-burger.open span:nth-child(2) { opacity: 0; }
-.nav-burger.open span:nth-child(3) { transform: translateY(-4px) rotate(-45deg); }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 95;
   background: var(--bg);
-  display: grid;
-  align-content: center;
-  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px var(--gutter) 40px;
   transform: translateY(-100%);
-  transition: transform 0.7s var(--ease-out);
+  transition: transform 0.6s var(--ease-out);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
 }
-.mobile-menu.open { transform: translateY(0); }
+.mobile-menu.open { transform: translateY(0); visibility: visible; }
 .mobile-menu ul {
   list-style: none; padding: 0; margin: 0;
-  display: flex; flex-direction: column; gap: 4px;
+  display: flex; flex-direction: column; gap: 2px;
 }
-.mobile-menu li {
-  overflow: hidden;
-}
+.mobile-menu li { overflow: hidden; }
 .mobile-menu a {
   display: block;
-  font-size: clamp(30px, 7vw, 56px);
+  font-size: clamp(28px, 8vw, 48px);
   font-weight: 500;
   letter-spacing: -0.025em;
-  line-height: 1;
+  line-height: 1.15;
   padding: 8px 0;
   color: var(--fg);
-  transform: translateY(100%);
-  transition: transform 0.7s var(--ease-out);
+  transform: translateY(110%);
+  transition: transform 0.6s var(--ease-out);
 }
 .mobile-menu.open a { transform: translateY(0); }
-.mobile-menu li:nth-child(1) a { transition-delay: 0.15s; }
-.mobile-menu li:nth-child(2) a { transition-delay: 0.22s; }
-.mobile-menu li:nth-child(3) a { transition-delay: 0.29s; }
-.mobile-menu li:nth-child(4) a { transition-delay: 0.36s; }
-.mobile-menu li:nth-child(5) a { transition-delay: 0.43s; }
+.mobile-menu li:nth-child(1) a { transition-delay: 0.12s; }
+.mobile-menu li:nth-child(2) a { transition-delay: 0.17s; }
+.mobile-menu li:nth-child(3) a { transition-delay: 0.22s; }
+.mobile-menu li:nth-child(4) a { transition-delay: 0.27s; }
+.mobile-menu li:nth-child(5) a { transition-delay: 0.32s; }
+.mobile-menu li:nth-child(6) a { transition-delay: 0.37s; }
 
 .mobile-menu-footer {
-  margin-top: 60px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
   display: flex; justify-content: space-between;
   color: var(--fg-dim);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -3791,3 +3803,126 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
   transition: transform 0.6s var(--ease-out) 0.5s, opacity 0.6s ease 0.5s;
 }
 .mobile-menu.open .mobile-menu-cta { transform: translateY(0); opacity: 1; }
+
+/* =========================================================
+   RESPONSIVE HARDENING v2 — final consolidated layer
+   ========================================================= */
+
+/* ---- Tablet / small laptop ---- */
+@media (max-width: 900px) {
+  /* Burger visible, desktop nav + CTA hidden */
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+
+  /* Nav pill breathing room */
+  .nav { padding: 14px var(--gutter); }
+  .nav-inner {
+    background: rgba(12, 14, 30, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--line);
+    padding: 8px 8px 8px 18px;
+  }
+  .nav.scrolled .nav-inner { background: rgba(12, 14, 30, 0.82); }
+
+  /* ERP / grids that were 2-up drop appropriately */
+  .erp-benefits { grid-template-columns: repeat(2, 1fr); }
+  .cs-meta { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---- Phones ---- */
+@media (max-width: 640px) {
+  /* Body base text a touch larger for readability */
+  html { font-size: 15px; }
+
+  /* Universal section heading clamp — nothing overflows the gutter */
+  .h-section { font-size: clamp(26px, 8vw, 38px) !important; line-height: 1.06; }
+  .hero-headline { font-size: clamp(30px, 9.5vw, 44px) !important; line-height: 1.05; }
+  .intro-title { font-size: clamp(24px, 8vw, 36px) !important; }
+  .cta h2 { font-size: clamp(30px, 9.5vw, 50px) !important; }
+  .work-hero-title, .industry-title { font-size: clamp(30px, 9vw, 46px) !important; }
+
+  /* Eyebrows + meta */
+  .eyebrow { font-size: 10px; letter-spacing: 0.16em; }
+  .section-head .meta, .meta { font-size: 14px; }
+
+  /* Buttons — comfortable tap size, never cramped */
+  .btn { padding: 15px 22px; font-size: 13px; }
+  .nav-burger { width: 44px; height: 44px; }
+
+  /* WorkPage */
+  .work-page { padding-top: 92px; }
+  .work-hero { padding: 40px 0 24px; }
+  .work-grid { grid-template-columns: 1fr; gap: 40px; }
+  .work-filters { gap: 8px; }
+  .work-filter { padding: 9px 14px; font-size: 11px; }
+
+  /* Industry detail page */
+  .industry-page { padding-top: 92px; }
+  .industry-hero { padding: 40px 0 24px; }
+  .pkg-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .problems-strip { grid-template-columns: 1fr; }
+  .pkg-card { padding: 26px 22px; }
+  .industry-hero-cta { flex-direction: column; align-items: stretch; }
+  .industry-hero-cta .btn { width: 100%; justify-content: center; }
+
+  /* Case study modal — comfortable reading */
+  .case-overlay { padding: 28px 16px 60px; }
+  .case-close { top: 14px; right: 16px; width: 42px; height: 42px; }
+  .cs-hero { padding: 70px 0 30px; }
+  .cs-meta { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .cs-tech { grid-template-columns: 1fr; }
+  .cs-features { grid-template-columns: 1fr; }
+
+  /* ERP one-up on phones */
+  .erp-benefits { grid-template-columns: 1fr; }
+  .erp-sectors { grid-template-columns: 1fr; }
+
+  /* Trust stats 2-up stays, but tighten values */
+  .trust-value { font-size: clamp(44px, 14vw, 72px); }
+
+  /* Marquee doesn't overwhelm */
+  .marquee { padding: 16px 0; }
+
+  /* Solutions / mobile-capability cards */
+  .sol-card { min-height: 0; padding: 30px 24px; }
+  .mobile-platform { padding: 24px; }
+
+  /* Contact meta stack tidy */
+  .contact-meta-value { font-size: 16px; word-break: break-word; }
+
+  /* Footer */
+  .footer { padding: 60px 0 32px; }
+  .footer-top { gap: 36px; margin-bottom: 50px; }
+}
+
+/* ---- Small phones (≤400px) ---- */
+@media (max-width: 400px) {
+  html { font-size: 14.5px; }
+  .nav-logo { font-size: 12px; gap: 6px; }
+  .nav-logo .dot { width: 6px; height: 6px; }
+  .hero-headline { font-size: clamp(26px, 10vw, 34px) !important; }
+  .h-section { font-size: clamp(23px, 8.5vw, 30px) !important; }
+  .trust-grid { grid-template-columns: 1fr 1fr; }
+  .cs-meta { grid-template-columns: 1fr; }
+}
+
+/* ---- Landscape phones / ensure hero fits ---- */
+@media (max-height: 520px) and (max-width: 900px) {
+  .hero { padding-top: 90px; padding-bottom: 40px; }
+}
+
+/* ---- Touch devices: remove hover-only affordances that shift layout ---- */
+@media (hover: none) {
+  .wwb-head:hover .wwb-title,
+  .erp-sector:hover,
+  .cap-row:hover,
+  .wyn-row:hover { transform: none; padding-left: initial; padding-right: initial; }
+  .cursor-dot, .cursor-ring, .cursor-spotlight { display: none !important; }
+  body.has-custom-cursor, body.has-custom-cursor * { cursor: auto !important; }
+}
+
+/* Preloader fixed-width elements capped for tiny screens */
+.preloader-lines { max-width: 90vw; }
+.preloader .pl-cycle { max-width: 90vw; }
