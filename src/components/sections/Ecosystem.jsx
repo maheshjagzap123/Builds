@@ -56,7 +56,7 @@ export default function Ecosystem() {
       <div className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">06 — From idea to growth</span>
+            <span className="eyebrow">07 — From idea to growth</span>
             <h2 className="h-section" style={{ marginTop: 24 }}>
               <RevealText>From idea</RevealText>{' '}
               <em className="serif"><RevealText delay={0.1}>to growth.</RevealText></em>

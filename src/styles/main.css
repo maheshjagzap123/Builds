@@ -1301,15 +1301,23 @@ section { position: relative; }
 .footer-col a:hover { opacity: 1; }
 
 .footer-wordmark {
-  font-size: clamp(56px, 15vw, 240px);
+  font-size: clamp(40px, 10.5vw, 168px);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 0.9;
   color: var(--fg);
-  overflow: hidden;
   border-top: 1px solid var(--line);
   padding-top: 40px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  text-align: center;
+}
+@media (max-width: 480px) {
+  .footer-wordmark {
+    font-size: clamp(32px, 12vw, 60px);
+    text-align: left;
+  }
 }
 .footer-wordmark em { font-family: var(--font-serif); font-style: italic; color: var(--accent); }
 .footer-bottom {
@@ -3515,4 +3523,130 @@ section { position: relative; }
 @media (max-width: 1024px) {
   .eco-layout { grid-template-columns: 1fr; gap: 40px; }
   .eco-panel { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 24px; }
+}
+
+/* =========================================================
+   ERP Systems section
+   ========================================================= */
+.erp-section { padding: clamp(80px, 12vw, 160px) 0; }
+
+/* Two intro blocks: what/who */
+.erp-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 60px 0;
+}
+.erp-intro-block .erp-intro-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 16px;
+}
+.erp-intro-block p { color: var(--fg); max-width: 50ch; }
+
+/* Benefits — 3x2 grid of numbered cards */
+.erp-benefits-head { margin: 60px 0 24px; }
+.erp-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-bottom: 60px;
+}
+.erp-benefit {
+  background: var(--bg);
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 200px;
+  transition: background 0.3s;
+}
+.erp-benefit:hover { background: var(--bg-2); }
+.erp-benefit-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 34px;
+  color: var(--accent);
+  line-height: 1;
+}
+.erp-benefit h4 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 4px 0 0;
+}
+.erp-benefit p {
+  color: var(--fg-dim);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Sector-by-sector applications */
+.erp-sectors-head { margin: 20px 0 32px; }
+.erp-sectors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-bottom: 50px;
+}
+.erp-sector {
+  background: var(--bg);
+  padding: 26px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--fg);
+  transition: background 0.3s, padding-left 0.4s var(--ease-out);
+}
+.erp-sector:hover {
+  background: var(--bg-2);
+  padding-left: 40px;
+}
+.erp-sector-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.erp-sector h4 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.erp-sector-arrow {
+  color: var(--fg-dim);
+  transition: color 0.3s, transform 0.4s var(--ease-out);
+}
+.erp-sector:hover .erp-sector-arrow {
+  color: var(--accent);
+  transform: translate(4px, -4px);
+}
+.erp-sector p {
+  color: var(--fg-dim);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.erp-cta { display: flex; justify-content: flex-start; }
+
+@media (max-width: 1024px) {
+  .erp-intro { grid-template-columns: 1fr; gap: 30px; }
+  .erp-benefits { grid-template-columns: repeat(2, 1fr); }
+  .erp-sectors { grid-template-columns: 1fr; }
+  .erp-sector:hover { padding-left: 30px; }
+}
+@media (max-width: 640px) {
+  .erp-benefits { grid-template-columns: 1fr; }
 }

@@ -10,7 +10,7 @@ export default function Technology() {
       <div className="container">
         <div className="section-head">
           <div>
-            <span className="eyebrow">10 — Technology</span>
+            <span className="eyebrow">11 — Technology</span>
             <h2 className="h-section" style={{ marginTop: 24 }}>
               <RevealText>The technology</RevealText>{' '}
               <em className="serif"><RevealText delay={0.1}>behind the build.</RevealText></em>

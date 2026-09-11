@@ -11,6 +11,7 @@ import AgencyIntro from './components/sections/AgencyIntro.jsx';
 import WhatWeBuild from './components/sections/WhatWeBuild.jsx';
 import WhenYouNeedUs from './components/sections/WhenYouNeedUs.jsx';
 import Industries from './components/sections/Industries.jsx';
+import ERPSystems from './components/sections/ERPSystems.jsx';
 import WorkTeaser from './components/sections/WorkTeaser.jsx';
 import WhyUs from './components/sections/WhyUs.jsx';
 import Ecosystem from './components/sections/Ecosystem.jsx';
@@ -35,6 +36,7 @@ function HomePage() {
       <WhatWeBuild />
       <WhenYouNeedUs />
       <Industries />
+      <ERPSystems />
       <WorkTeaser />
       <Ecosystem />
       <WhyUs />

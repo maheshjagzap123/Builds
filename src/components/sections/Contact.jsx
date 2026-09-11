@@ -21,7 +21,7 @@ export default function Contact() {
     <section className="contact container" id="contact">
       <div className="section-head">
         <div>
-          <span className="eyebrow">12 — Contact</span>
+          <span className="eyebrow">13 — Contact</span>
           <h2 className="h-section" style={{ marginTop: 24 }}>
             <RevealText>Send a</RevealText>{' '}
             <em className="serif"><RevealText delay={0.1}>project enquiry.</RevealText></em>

@@ -12,7 +12,7 @@ export default function WorkTeaser() {
     <section className="section container work-teaser" id="work-teaser">
       <div className="section-head">
         <div>
-          <span className="eyebrow">05 — Work</span>
+          <span className="eyebrow">06 — Work</span>
           <h2 className="h-section" style={{ marginTop: 24 }}>
             <RevealText>What we've built.</RevealText>
           </h2>
