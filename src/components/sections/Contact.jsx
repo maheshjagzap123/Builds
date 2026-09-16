@@ -41,13 +41,15 @@ export default function Contact() {
           <div className="contact-meta">
             <div>
               <div className="contact-meta-label">Email</div>
-              <a href="mailto:hello@maheshbuilds.com" className="contact-meta-value" data-cursor="hover">
-                hello@maheshbuilds.com
+              <a href="mailto:maheshjagzap03@gmail.com" className="contact-meta-value" data-cursor="hover">
+                maheshjagzap03@gmail.com
               </a>
             </div>
             <div>
-              <div className="contact-meta-label">Prefer email?</div>
-              <div className="contact-meta-value">Send the brief directly — we read every enquiry.</div>
+              <div className="contact-meta-label">Phone</div>
+              <a href="tel:+917588174528" className="contact-meta-value" data-cursor="hover">
+                +91 7588174528
+              </a>
             </div>
           </div>
         </div>

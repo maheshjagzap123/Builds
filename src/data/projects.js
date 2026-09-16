@@ -5,13 +5,13 @@
 
 export const projects = [
   // ---------------------------------------------------------------------------
-  // MAHESH BUI — flagship project, details to be filled in as they land.
+  // MaheshBuilds — flagship project, details to be filled in as they land.
   // ---------------------------------------------------------------------------
   {
-    id: 'mahesh-bui',
+    id: 'maheshbuilds',
     number: '01',
-    slug: 'mahesh-bui',
-    title: 'Mahesh BUI',
+    slug: 'maheshbuilds',
+    title: 'MaheshBuilds',
     label: 'Client Project',
     projectType: 'client',
     categories: ['Web Application', 'Business Software'],

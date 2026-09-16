@@ -58,7 +58,8 @@ export default function Footer() {
           <div className="footer-col">
             <h5>Contact</h5>
             <ul>
-              <li><a href="mailto:hello@maheshbuilds.com" data-cursor="hover">hello@maheshbuilds.com</a></li>
+              <li><a href="mailto:maheshjagzap03@gmail.com" data-cursor="hover">maheshjagzap03@gmail.com</a></li>
+              <li><a href="tel:+917588174528" data-cursor="hover">+91 7588174528</a></li>
               <li><a href="#contact" data-cursor="hover">Start a Project ↗</a></li>
             </ul>
           </div>
