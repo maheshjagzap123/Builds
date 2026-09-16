@@ -60,6 +60,15 @@ export default function App() {
   const route = useHashRoute();
   useLenis();
 
+  // Failsafe: never let the preloader trap the page at opacity 0.
+  // If onDone hasn't fired for any reason (animation error, missing ref,
+  // etc.) force the content visible after a hard timeout.
+  useEffect(() => {
+    if (loaded) return;
+    const t = setTimeout(() => setLoaded(true), 6500);
+    return () => clearTimeout(t);
+  }, [loaded]);
+
   useEffect(() => {
     if (route.anchor) {
       setTimeout(() => {

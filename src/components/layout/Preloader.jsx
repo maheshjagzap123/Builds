@@ -33,6 +33,15 @@ export default function Preloader({ onDone }) {
       return;
     }
 
+    // If any required node is missing, skip the animation entirely rather
+    // than throwing (a throw here would leave the page blank forever).
+    if (!ringRef.current || !mbRef.current || !line1Ref.current ||
+        !line2Ref.current || !wordmarkRef.current) {
+      if (rootRef.current) rootRef.current.style.display = 'none';
+      onDone?.();
+      return;
+    }
+
     document.body.style.overflow = 'hidden';
 
     // Optional voice — never blocks the animation.
@@ -59,7 +68,9 @@ export default function Preloader({ onDone }) {
       onUpdate: () => setCount(Math.round(counter.v)),
     });
 
-    const tl = gsap.timeline({
+    let tl;
+    try {
+    tl = gsap.timeline({
       defaults: { ease: 'expo.out' },
       onComplete: () => {
         document.body.style.overflow = '';
@@ -116,9 +127,16 @@ export default function Preloader({ onDone }) {
     .to(wordmarkRef.current, { opacity: 0, duration: 0.6 }, 4.6)
     .to(rootRef.current, { autoAlpha: 0, duration: 0.55, ease: 'power2.out' }, 4.9)
     .set(rootRef.current, { display: 'none' });
+    } catch (_) {
+      // Animation failed to build — reveal the site anyway.
+      document.body.style.overflow = '';
+      if (rootRef.current) rootRef.current.style.display = 'none';
+      onDone?.();
+      return;
+    }
 
     return () => {
-      tl.kill();
+      tl?.kill();
       document.body.style.overflow = '';
       try { window.speechSynthesis?.cancel(); } catch (_) {}
     };
