@@ -2,6 +2,16 @@ import { useState } from 'react';
 import { whatWeBuild } from '../../data/services.js';
 import RevealText from '../animation/RevealText.jsx';
 import FadeUp from '../animation/FadeUp.jsx';
+import Link from '../layout/Link.jsx';
+
+const SERVICE_LINKS = [
+  '/services/website-development',
+  '/services/web-application-development',
+  '/services/mobile-app-development',
+  '/services/business-software-development',
+  '/services/business-software-development',
+  '/#contact',
+];
 
 export default function WhatWeBuild() {
   const [open, setOpen] = useState(0);
@@ -47,6 +57,9 @@ export default function WhatWeBuild() {
                       <li key={it}>{it}</li>
                     ))}
                   </ul>
+                  <Link to={SERVICE_LINKS[i]} className="wwb-service-link" data-cursor="hover">
+                    {i === 5 ? 'Discuss maintenance' : `Explore ${c.title}`} <span aria-hidden="true">↗</span>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from './Link.jsx';
+import { sectionHref } from '../../lib/router.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,11 +50,15 @@ export default function Footer() {
           <div className="footer-col">
             <h5>Explore</h5>
             <ul>
-              <li><a href="#/work" data-cursor="hover">Work</a></li>
-              <li><a href="#industries" data-cursor="hover">Industries</a></li>
-              <li><a href="#what-we-build" data-cursor="hover">Services</a></li>
-              <li><a href="#process" data-cursor="hover">Process</a></li>
-              <li><a href="#technology" data-cursor="hover">Technology</a></li>
+              <li><Link to="/work" data-cursor="hover">Work</Link></li>
+              <li><Link to={sectionHref('industries')} data-cursor="hover">Industries</Link></li>
+              <li><Link to="/services/website-development" data-cursor="hover">Website Development</Link></li>
+              <li><Link to="/services/web-application-development" data-cursor="hover">Web Applications</Link></li>
+              <li><Link to="/services/business-software-development" data-cursor="hover">Business Software</Link></li>
+              <li><Link to="/services/mobile-app-development" data-cursor="hover">Mobile Apps</Link></li>
+              <li><Link to="/website-development-pune" data-cursor="hover">Website Development in Pune</Link></li>
+              <li><Link to={sectionHref('process')} data-cursor="hover">Process</Link></li>
+              <li><Link to={sectionHref('technology')} data-cursor="hover">Technology</Link></li>
             </ul>
           </div>
           <div className="footer-col">
@@ -60,7 +66,7 @@ export default function Footer() {
             <ul>
               <li><a href="mailto:maheshjagzap03@gmail.com" data-cursor="hover">maheshjagzap03@gmail.com</a></li>
               <li><a href="tel:+917588174528" data-cursor="hover">+91 7588174528</a></li>
-              <li><a href="#contact" data-cursor="hover">Start a Project ↗</a></li>
+              <li><Link to={sectionHref('contact')} data-cursor="hover">Start a Project ↗</Link></li>
             </ul>
           </div>
         </div>

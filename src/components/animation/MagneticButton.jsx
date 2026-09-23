@@ -1,8 +1,16 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { useNavClick } from '../../lib/router.js';
 
 export default function MagneticButton({ children, className = '', href, onClick, type = 'button', strength = 0.35, ...rest }) {
   const ref = useRef(null);
+  const navClick = useNavClick();
+
+  // Internal path links ("/", "/work", ...) navigate via the History API.
+  const handleClick = (e) => {
+    onClick?.(e);
+    if (href && href.startsWith('/')) navClick(e);
+  };
 
   useEffect(() => {
     const el = ref.current;
@@ -34,7 +42,7 @@ export default function MagneticButton({ children, className = '', href, onClick
       ref={ref}
       className={className}
       href={href}
-      onClick={onClick}
+      onClick={handleClick}
       type={href ? undefined : type}
       data-cursor="hover"
       {...rest}

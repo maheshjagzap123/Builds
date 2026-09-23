@@ -4,9 +4,32 @@ import { getIndustryBySlug, industries } from '../data/industries.js';
 import RevealText from '../components/animation/RevealText.jsx';
 import FadeUp from '../components/animation/FadeUp.jsx';
 import MagneticButton from '../components/animation/MagneticButton.jsx';
+import { navigate } from '../lib/router.js';
+import { useDocumentMeta } from '../lib/useDocumentMeta.js';
 
 export default function IndustryDetail({ slug }) {
   const ind = getIndustryBySlug(slug);
+
+  useDocumentMeta({
+    title: ind ? `${ind.title} Website & Software Development | Mahesh Builds` : 'Industry not found | Mahesh Builds',
+    description: ind ? `${ind.tagline} Explore practical website, application and management-system options for ${ind.title.toLowerCase()} organisations.` : 'The requested industry page is not available.',
+    path: `/industries/${slug}`,
+    robots: ind ? 'index, follow' : 'noindex, follow',
+    schema: ind ? {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `${ind.title} digital systems development`,
+      description: ind.tagline,
+      provider: { '@type': 'Organization', name: 'Mahesh Builds', url: 'https://maheshbuilds.com/' },
+      areaServed: { '@type': 'Country', name: 'India' },
+      url: `https://maheshbuilds.com/industries/${slug}`,
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: `${ind.title} solution options`,
+        itemListElement: ind.packages.map((item) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: item.title, description: item.pitch } })),
+      },
+    } : undefined,
+  });
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -19,7 +42,7 @@ export default function IndustryDetail({ slug }) {
           Head back to explore the industries we build for.
         </p>
         <div style={{ marginTop: 30 }}>
-          <a href="#/" className="btn btn-ghost" data-cursor="hover">← Back to Home</a>
+          <MagneticButton href="/" className="btn btn-ghost" data-cursor="hover">← Back to Home</MagneticButton>
         </div>
       </section>
     );
@@ -39,10 +62,10 @@ export default function IndustryDetail({ slug }) {
         <FadeUp className="body-lg" delay={0.15}>{ind.tagline}</FadeUp>
 
         <div className="industry-hero-cta">
-          <MagneticButton href="#contact" className="btn" data-cursor-label="Start">
+          <MagneticButton href="/#contact" className="btn" data-cursor-label="Start">
             Build for my Business <span className="arrow">↗</span>
           </MagneticButton>
-          <MagneticButton href="#/" className="btn btn-ghost">← Back to Home</MagneticButton>
+          <MagneticButton href="/" className="btn btn-ghost">← Back to Home</MagneticButton>
         </div>
       </section>
 
@@ -93,7 +116,7 @@ export default function IndustryDetail({ slug }) {
                   </li>
                 ))}
               </ul>
-              <a href="#contact" className="pkg-cta" data-cursor="hover">
+              <a href="/#contact" onClick={(e) => { e.preventDefault(); navigate('/#contact'); }} className="pkg-cta" data-cursor="hover">
                 Start with Package {p.num}
                 <ArrowUpRight size={16} />
               </a>
@@ -118,7 +141,7 @@ export default function IndustryDetail({ slug }) {
         </div>
         <div className="related-grid">
           {otherIndustries.map((o) => (
-            <a key={o.slug} href={`#/industries/${o.slug}`} className="related-card" data-cursor="hover">
+            <a key={o.slug} href={`/industries/${o.slug}`} onClick={(e) => { e.preventDefault(); navigate(`/industries/${o.slug}`); }} className="related-card" data-cursor="hover">
               <span className="related-num">{String(industries.findIndex((i) => i.slug === o.slug) + 1).padStart(2, '0')}</span>
               <h3>{o.title}</h3>
               <p>{o.tagline}</p>
@@ -135,10 +158,10 @@ export default function IndustryDetail({ slug }) {
             <em className="serif"><RevealText delay={0.1}>in mind?</RevealText></em>
           </h2>
           <div className="cta-ctas" style={{ justifyContent: 'center', marginTop: 30 }}>
-            <MagneticButton href="#contact" className="btn" data-cursor-label="Start">
+            <MagneticButton href="/#contact" className="btn" data-cursor-label="Start">
               Start a Project <span className="arrow">↗</span>
             </MagneticButton>
-            <MagneticButton href="#/work" className="btn btn-ghost">
+            <MagneticButton href="/work" className="btn btn-ghost">
               View What We've Built
             </MagneticButton>
           </div>

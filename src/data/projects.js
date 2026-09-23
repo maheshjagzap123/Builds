@@ -1,219 +1,203 @@
-// Selected work — the single source of truth for case studies.
+// =============================================================================
+// Mahesh Builds — Work / Projects data (single source of truth)
 //
-// Only projects with active: true are surfaced in the UI.
-// Everything else stays in the file (as source data) but is hidden.
+// Two categories:
+//   • personal  — products Mahesh Builds built independently
+//   • client    — real client work (NONE public yet; add only verified data)
+//
+// STRICT RULES (see AUDIT_REPORT.md §18, §32):
+//   • Never invent clients, features, technologies, results, stats, testimonials.
+//   • Unknown fields use the string 'To Be Provided' or are left empty.
+//   • Images distinguish `source: 'supporting'` (licensed contextual stock)
+//     from `source: 'screenshot' | 'project-asset'` (real Mahesh Builds assets).
+//   • UI priority: screenshot > project-asset > supporting.
+//   • A supporting image must NEVER be labelled/presented as a real screenshot.
+//
+// Image object shape:
+//   {
+//     type: 'hero' | 'gallery',
+//     source: 'screenshot' | 'project-asset' | 'supporting' | 'external',
+//     src: '/path-or-url',
+//     alt: 'accurate description',
+//     caption: '',                       // optional
+//     license: '',                       // required for external/supporting
+//     attribution: '',                   // if the licence requires it
+//     sourceName: '', sourceUrl: '',      // provenance for supporting images
+//   }
+//
+// NOTE: The three personal projects currently use ZERO bundled supporting
+// images to avoid shipping heavy/unlicensed files. Supporting images should be
+// added here once sourced + license-verified (Unsplash / Pexels / Wikimedia /
+// public domain). Until then the UI falls back to a branded placeholder tile,
+// which is honest (clearly not a screenshot) and light-weight.
+// =============================================================================
+
+const TBD = 'To Be Provided';
 
 export const projects = [
   // ---------------------------------------------------------------------------
-  // MaheshBuilds — flagship project, details to be filled in as they land.
+  // PERSONAL PROJECTS
   // ---------------------------------------------------------------------------
   {
-    id: 'maheshbuilds',
+    id: 'tripwise',
+    slug: 'tripwise',
     number: '01',
-    slug: 'maheshbuilds',
-    title: 'MaheshBuilds',
-    label: 'Client Project',
-    projectType: 'client',
-    categories: ['Web Application', 'Business Software'],
-    industry: 'Business Software',
+    name: 'TripWise',
+    category: 'personal',
+    type: 'Mobile Application',
+    label: 'Personal Project',
+    status: 'Project / MVP',
     shortDescription:
-      'A custom digital product built end-to-end. Full case study coming soon.',
+      'Travel planning, budgeting and group expense management in one app.',
     overview:
-      'Detailed overview to be added once the project is ready to share publicly.',
-    challenge: 'To be documented as part of the full case study.',
-    approach: 'To be documented as part of the full case study.',
-    solution: 'To be documented as part of the full case study.',
-    features: [],
-    services: [],
+      'TripWise brings trip planning, budgeting and group expense management together in a single mobile application — so planning a trip and settling shared costs happens in one place.',
+    purpose:
+      'Help travellers plan trips, manage budgets, track expenses and handle group expenses without juggling separate tools.',
+    problem:
+      'Travel and group trips get messy when planning, budgeting, individual expenses, group expenses, bill splitting, settlements and overall spend live across different apps and notes.',
+    solution:
+      'A single app that unifies trip planning, budgets, expense tracking, group expenses, bill splitting, settlement tracking and spending analysis.',
+    targetUsers: ['Solo travellers', 'Friends travelling together', 'Families', 'Group travellers'],
+    features: [
+      'Trip planning',
+      'Budget management',
+      'Expense tracking',
+      'Group expense management',
+      'Bill splitting',
+      'Settlement tracking',
+      'Spending analysis',
+    ],
+    modules: [],
+    technologies: {
+      frontend: ['React Native'],
+      backend: ['.NET API'],
+      database: ['MSSQL', 'Supabase'],
+      integrations: [],
+      tools: [],
+    },
+    role: 'Design & full-stack development (personal product).',
+    duration: TBD,
+    images: [], // supporting travel imagery to be added once license-verified
+    links: {}, // no public links yet — do not invent
+    seo: {
+      title: 'TripWise — Travel Planning & Group Expense App | Mahesh Builds',
+      description:
+        'TripWise is a personal project by Mahesh Builds: a mobile app for trip planning, budgeting, group expenses, bill splitting and settlements.',
+      ogImage: '/assets/img/og-default.png',
+    },
+    featured: true,
+    active: true,
+  },
+  {
+    id: 'paithani-marketplace',
+    slug: 'paithani-marketplace',
+    number: '02',
+    name: 'Paithani Marketplace',
+    category: 'personal',
+    type: 'Website / Web Application',
+    label: 'Personal Project',
+    status: TBD,
+    shortDescription:
+      'An online marketplace connecting Paithani saree customers, sellers and artisans.',
+    overview:
+      'Paithani Marketplace is an online marketplace for Paithani sarees — helping customers discover and buy sarees online while giving sellers and artisans a direct channel to showcase and sell their work.',
+    purpose:
+      'Create a direct online connection between customers, sellers and Paithani artisans.',
+    problem:
+      'Paithani artisans and sellers lack a dedicated online channel to reach customers directly, and customers lack a focused place to discover and buy authentic Paithani sarees online.',
+    solution:
+      'A digital marketplace where customers discover and purchase Paithani sarees, and sellers/artisans showcase and sell their sarees online.',
+    targetUsers: ['Customers', 'Sellers', 'Artisans'],
+    features: [
+      'Dedicated Paithani saree marketplace',
+      'Customer product discovery',
+      'Online purchase journey',
+      'Seller and artisan product showcase',
+      'Direct online sales channel',
+    ],
+    modules: [],
     technologies: {
       frontend: [],
       backend: [],
       database: [],
-      mobile: [],
       integrations: [],
       tools: [],
     },
-    outcome: 'Outcome to be documented after launch.',
-    cover: '/assets/img/portfolio/portfolio-7.webp',
-    gallery: [],
-    liveUrl: '',
-    githubUrl: '',
+    role: 'Design & development (personal product).',
+    duration: TBD,
+    images: [], // supporting Paithani/saree imagery to be added once license-verified
+    links: {},
+    seo: {
+      title: 'Paithani Marketplace — Online Saree Marketplace | Mahesh Builds',
+      description:
+        'Paithani Marketplace is a personal project by Mahesh Builds: an online marketplace connecting Paithani saree customers, sellers and artisans.',
+      ogImage: '/assets/img/og-default.png',
+    },
     featured: true,
     active: true,
-    placeholder: true, // signals UI to show "details coming soon" affordances
+  },
+  {
+    id: 'milk-management-system',
+    slug: 'milk-management-system',
+    number: '03',
+    name: 'Milk Management System',
+    category: 'personal',
+    type: 'Web Application / Business Software',
+    label: 'Personal Project',
+    status: TBD,
+    shortDescription:
+      'Dairy/milk collection management with daily records and history for farmers.',
+    overview:
+      'The Milk Management System helps manage dairy/milk collection operations and gives farmers access to their daily milk records — quantity, rate and amount — with date-based history.',
+    purpose:
+      'Manage milk collection operations and let farmers view and track their daily milk-related records.',
+    problem:
+      'Farmers need an easy way to view and track daily milk quantity, rate and amount, and to review historical records over time.',
+    solution:
+      'A role-based system for dairy operations where farmers can review daily milk quantity (litres), rate and amount, see previous records, view the last 30 days and filter records by date.',
+    targetUsers: ['Farmers', 'Milk Collectors', 'Dairy Owners'],
+    features: [
+      'Daily milk quantity (litres)',
+      'Daily milk rate',
+      'Daily amount / value',
+      'Previous milk records',
+      'Last 30 days of daily milk information',
+      'Date-filtered milk records',
+    ],
+    modules: ['Farmer', 'Milk Collector', 'Dairy Owner'],
+    technologies: {
+      frontend: [],
+      backend: [],
+      database: [],
+      integrations: [],
+      tools: [],
+    },
+    role: 'Design & development (personal product).',
+    duration: TBD,
+    images: [], // supporting dairy/farming imagery to be added once license-verified
+    links: {},
+    seo: {
+      title: 'Milk Management System — Dairy Collection Software | Mahesh Builds',
+      description:
+        'Milk Management System is a personal project by Mahesh Builds: role-based dairy/milk collection software with daily records, 30-day history and date filtering.',
+      ogImage: '/assets/img/og-default.png',
+    },
+    featured: true,
+    active: true,
   },
 
   // ---------------------------------------------------------------------------
-  // Archived — real data preserved, hidden from UI until re-activated.
+  // CLIENT PROJECTS
+  // Currently NONE are public. Do NOT add fake clients. When real, permission-
+  // cleared client work is available, add entries with category: 'client' using
+  // the template in AUDIT_REPORT.md §18.6 and set active: true.
   // ---------------------------------------------------------------------------
-  {
-    id: 'majhi-paithani',
-    number: '02',
-    slug: 'majhi-paithani',
-    title: 'Majhi Paithani',
-    label: 'Client Project',
-    projectType: 'client',
-    categories: ['Website', 'E-commerce'],
-    industry: 'Heritage Retail',
-    shortDescription:
-      'A heritage-driven e-commerce experience for a traditional Paithani saree brand.',
-    overview:
-      'A digital storefront and brand experience for a legacy Paithani weaver — translating decades of craft into a considered online presence with a modern product-discovery flow.',
-    challenge:
-      'The brand had a strong offline reputation but no digital presence capable of representing the craft or supporting online enquiries and orders.',
-    approach:
-      'Started with the customer journey and the weave-story that makes each saree unique, then built the catalog, editorial sections and enquiry flow around it.',
-    solution:
-      'A bespoke storefront with editorial product presentation, weave-story sections, WhatsApp-first enquiry flow and a lightweight admin surface for catalog updates.',
-    features: [
-      'Custom product catalog',
-      'Editorial storytelling sections',
-      'WhatsApp enquiry integration',
-      'Admin catalog management',
-      'Mobile-first experience',
-      'SEO foundations',
-    ],
-    services: ['UI/UX Design', 'Frontend Development', 'Backend Development', 'Database Development', 'Deployment'],
-    technologies: {
-      frontend: ['React', 'Vite', 'CSS'],
-      backend: ['Node.js', 'REST APIs'],
-      database: ['MongoDB'],
-      integrations: ['WhatsApp'],
-      tools: ['Git', 'Cloud hosting'],
-    },
-    outcome:
-      'A live storefront ready for enquiries and orders, plus a repeatable base to grow the catalog and add sales channels.',
-    cover: '/assets/img/portfolio/MajhiPaithani-1.JPG',
-    gallery: [
-      '/assets/img/portfolio/MajhiPaithani-1.JPG',
-      '/assets/img/portfolio/MajhiPaithani-2.JPG',
-      '/assets/img/portfolio/MajhiPaithani-3.JPG',
-      '/assets/img/portfolio/MajhiPaithani-4.JPG',
-    ],
-    liveUrl: '',
-    githubUrl: '',
-    featured: true,
-    active: false,
-  },
-  {
-    id: 'hospitality-suite',
-    number: '03',
-    slug: 'hospitality-suite',
-    title: 'Hospitality Booking Suite',
-    label: 'Concept Build',
-    projectType: 'concept',
-    categories: ['Website', 'Web Application'],
-    industry: 'Hospitality',
-    shortDescription:
-      'A booking-first hotel experience with enquiry management for independent properties.',
-    overview:
-      'A concept build exploring how independent hotels can present rooms, availability and enquiry flows without depending on third-party platforms.',
-    challenge:
-      'Independent hospitality properties lose margin to aggregators and struggle to represent their identity on generic booking platforms.',
-    approach:
-      'Prioritized room presentation and direct enquiries over feature bloat, keeping the admin surface simple enough for front-desk staff.',
-    solution:
-      'A property-owned website with room presentation, direct enquiry, seasonal offers and a lightweight enquiry-management panel.',
-    features: [
-      'Room catalog with availability signals',
-      'Direct enquiry & callback flow',
-      'Seasonal offer surfaces',
-      'Admin enquiry panel',
-    ],
-    services: ['UI/UX Design', 'Frontend Development', 'Backend Development'],
-    technologies: {
-      frontend: ['React'],
-      backend: ['.NET', 'C#'],
-      database: ['SQL Server'],
-      tools: ['Git'],
-    },
-    outcome: 'A demonstration of what independent property websites can look like when built around direct bookings.',
-    cover: '/assets/img/portfolio/portfolio-7.webp',
-    gallery: ['/assets/img/portfolio/portfolio-7.webp'],
-    liveUrl: '',
-    githubUrl: '',
-    featured: true,
-    active: false,
-  },
-  {
-    id: 'edu-management',
-    number: '04',
-    slug: 'institute-management-system',
-    title: 'Institute Management System',
-    label: 'Concept Build',
-    projectType: 'concept',
-    categories: ['Web Application', 'Business Software'],
-    industry: 'Education',
-    shortDescription: 'Admissions, students and staff — one internal system for an education institute.',
-    overview: 'A concept internal platform showing how an education institute can move admissions, student records and attendance off spreadsheets and into a single system.',
-    challenge: 'Institutes juggle admissions, student records, fees, attendance and staff across scattered spreadsheets and paper.',
-    approach: 'Modelled the real academic workflow first, then wrapped each role in a dedicated surface — admin, staff and parent-facing.',
-    solution: 'A role-based admin platform with admissions, student profiles, attendance and fee tracking, plus a public-facing institute website.',
-    features: ['Admissions pipeline', 'Student & staff records', 'Attendance tracking', 'Fee & receipt management', 'Public institute website'],
-    services: ['UI/UX Design', 'Frontend Development', 'Backend Development', 'Database Development'],
-    technologies: {
-      frontend: ['React'],
-      backend: ['.NET', 'C#', 'REST APIs'],
-      database: ['SQL Server'],
-      tools: ['Git'],
-    },
-    outcome: 'A blueprint for institute operations that can be shaped to a specific campus.',
-    cover: '/assets/img/portfolio/portfolio-8.webp',
-    gallery: ['/assets/img/portfolio/portfolio-8.webp'],
-    liveUrl: '', githubUrl: '', featured: true, active: false,
-  },
-  {
-    id: 'commerce-ops',
-    number: '05',
-    slug: 'commerce-operations-dashboard',
-    title: 'Commerce Operations Dashboard',
-    label: 'Concept Build',
-    projectType: 'concept',
-    categories: ['Dashboard', 'Internal Tool'],
-    industry: 'E-commerce',
-    shortDescription: 'An internal dashboard for orders, inventory and customer support across a small e-commerce team.',
-    overview: 'A concept internal dashboard exploring how a small e-commerce operation can unify orders, inventory, support and analytics.',
-    challenge: 'Small e-commerce teams switch between five tools to run a single order — losing time and context on every step.',
-    approach: 'Designed for the daily rhythm of an operations team first, with role-based access so each function only sees what it needs.',
-    solution: 'A single dashboard consolidating orders, inventory, customer messages and daily KPIs, with role-based access for team members.',
-    features: ['Unified order view', 'Inventory alerts', 'Customer message inbox', 'Daily KPI overview', 'Role-based access'],
-    services: ['UI/UX Design', 'Frontend Development', 'Backend Development'],
-    technologies: {
-      frontend: ['React'], backend: ['Node.js', 'REST APIs'], database: ['PostgreSQL'], tools: ['Git'],
-    },
-    outcome: 'A pattern for consolidating fragmented e-commerce operations into a single internal surface.',
-    cover: '/assets/img/portfolio/portfolio-10.webp',
-    gallery: ['/assets/img/portfolio/portfolio-10.webp'],
-    liveUrl: '', githubUrl: '', featured: false, active: false,
-  },
-  {
-    id: 'realestate-crm',
-    number: '06',
-    slug: 'property-leads-crm',
-    title: 'Property Leads CRM',
-    label: 'Concept Build',
-    projectType: 'concept',
-    categories: ['Web Application', 'CRM'],
-    industry: 'Real Estate',
-    shortDescription: 'A property-listing site with a lead-management CRM for a growing real estate desk.',
-    overview: 'A concept build combining a property discovery site with a lightweight CRM to track enquiries from first tap to visit.',
-    challenge: 'Real estate teams collect enquiries across WhatsApp, calls and portals — with no single view of where each lead stands.',
-    approach: 'Built the lead pipeline first — where every enquiry lives — and layered the public site on top so nothing falls through the cracks.',
-    solution: 'A public property site backed by a lead CRM with stages, notes, follow-up reminders and assignment.',
-    features: ['Property listings & filters', 'Enquiry capture across channels', 'Lead stages & follow-ups', 'Agent assignment'],
-    services: ['UI/UX Design', 'Frontend Development', 'Backend Development', 'Database Development'],
-    technologies: {
-      frontend: ['React'], backend: ['Node.js', 'REST APIs'], database: ['PostgreSQL'], tools: ['Git'],
-    },
-    outcome: 'A pattern for real estate desks to consolidate lead pipelines without abandoning existing channels.',
-    cover: '/assets/img/portfolio/portfolio-11.webp',
-    gallery: ['/assets/img/portfolio/portfolio-11.webp'],
-    liveUrl: '', githubUrl: '', featured: false, active: false,
-  },
 ];
 
 export const activeProjects = projects.filter((p) => p.active);
+export const personalProjects = activeProjects.filter((p) => p.category === 'personal');
+export const clientProjects = activeProjects.filter((p) => p.category === 'client');
 
 export function getProjectBySlug(slug) {
-  return projects.find((p) => p.slug === slug);
+  return projects.find((p) => p.slug === slug && p.active);
 }

@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { industries } from '../../data/industries.js';
 import RevealText from '../animation/RevealText.jsx';
 import FadeUp from '../animation/FadeUp.jsx';
+import { navigate } from '../../lib/router.js';
 
 export default function Industries() {
   const [active, setActive] = useState(0);
@@ -35,7 +36,7 @@ export default function Industries() {
                 className={`ind-btn ${active === i ? 'is-active' : ''}`}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                onClick={() => { window.location.hash = `/industries/${ind.slug}`; }}
+                onClick={() => navigate(`/industries/${ind.slug}`)}
                 data-cursor="hover"
               >
                 <span className="ind-btn-num">{String(i + 1).padStart(2, '0')}</span>
@@ -59,7 +60,7 @@ export default function Industries() {
             ))}
           </div>
 
-          <a href={`#/industries/${current.slug}`} className="ind-cta" data-cursor="hover">
+          <a href={`/industries/${current.slug}`} onClick={(e) => { e.preventDefault(); navigate(`/industries/${current.slug}`); }} className="ind-cta" data-cursor="hover">
             Explore {current.title}
             <ArrowUpRight size={18} />
           </a>
@@ -70,7 +71,7 @@ export default function Industries() {
       <ul className="ind-mobile">
         {industries.map((ind, i) => (
           <li key={ind.id}>
-            <a href={`#/industries/${ind.slug}`} className="ind-mobile-card" data-cursor="hover">
+            <a href={`/industries/${ind.slug}`} onClick={(e) => { e.preventDefault(); navigate(`/industries/${ind.slug}`); }} className="ind-mobile-card" data-cursor="hover">
               <span className="ind-mobile-num">{String(i + 1).padStart(2, '0')}</span>
               <div>
                 <h3>{ind.title}</h3>

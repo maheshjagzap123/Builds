@@ -42,7 +42,13 @@ export default function CustomCursor() {
       const f = 1 - Math.pow(1 - follow, dt);
       state.rx += (state.x - state.rx) * f;
       state.ry += (state.y - state.ry) * f;
-      if (ring) ring.style.transform = `translate3d(${state.rx}px, ${state.ry}px, 0) translate(-50%, -50%)`;
+      if (ring) {
+        // Click feedback (scale) happens in place — we compose it into the
+        // same transform that positions the ring, so it never jumps to 0,0.
+        const scale = state.down ? 0.85 : 1;
+        ring.style.transform =
+          `translate3d(${state.rx}px, ${state.ry}px, 0) translate(-50%, -50%) scale(${scale})`;
+      }
       req = requestAnimationFrame(raf);
     };
     let req = requestAnimationFrame(raf);
@@ -61,8 +67,8 @@ export default function CustomCursor() {
       }
     };
 
-    const onDown = () => ring.classList.add('is-down');
-    const onUp = () => ring.classList.remove('is-down');
+    const onDown = () => { state.down = true; ring.classList.add('is-down'); };
+    const onUp = () => { state.down = false; ring.classList.remove('is-down'); };
     const onLeave = () => {
       gsap.to([dot, ring], { autoAlpha: 0, duration: 0.2 });
     };

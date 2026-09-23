@@ -1,0 +1,97 @@
+export const servicePages = [
+  {
+    slug: 'website-development',
+    title: 'Website Development Services',
+    seoTitle: 'Website Development Services in India | Mahesh Builds',
+    description: 'Professional, mobile-first business websites designed and developed for Indian businesses, institutes and growing teams.',
+    eyebrow: 'Website Development',
+    headline: 'Business websites built to earn trust and enquiries.',
+    intro: 'A business website should explain your value clearly, work on every screen and make the next step obvious. We design and develop fast, accessible websites around those goals.',
+    outcomes: ['A credible digital presence', 'Clear service and enquiry journeys', 'Mobile-first responsive layouts', 'Technical SEO foundations', 'Performance-focused implementation', 'A maintainable system that can grow'],
+    includes: ['Business and corporate websites', 'Institute and education websites', 'Landing pages', 'Portfolio websites', 'Website redesign and modernization', 'E-commerce storefronts'],
+    process: ['Understand the business, audience and conversion goal', 'Plan the page structure and content hierarchy', 'Design the responsive interface', 'Develop, test and optimise the website', 'Launch with SEO, analytics-ready markup and ongoing support options'],
+    industries: ['Education', 'Healthcare', 'Professional Services', 'Manufacturing', 'Hospitality', 'Retail'],
+    faq: [
+      { q: 'Do you build responsive websites?', a: 'Yes. Every website is planned and tested for mobile, tablet and desktop layouts.' },
+      { q: 'Is SEO included?', a: 'Technical and on-page SEO foundations are included: semantic HTML, metadata, crawlable URLs, structured data where relevant, sitemap support and performance-focused development.' },
+      { q: 'Can you redesign an existing website?', a: 'Yes. Existing websites can be audited, redesigned and rebuilt while preserving useful content and routes where practical.' },
+    ],
+  },
+  {
+    slug: 'web-application-development',
+    title: 'Web Application Development',
+    seoTitle: 'Custom Web Application Development in India | Mahesh Builds',
+    description: 'Custom web applications, portals, dashboards and internal tools designed around real business workflows.',
+    eyebrow: 'Web Applications',
+    headline: 'Web applications shaped around how your business works.',
+    intro: 'Generic tools often force teams into awkward processes. We design and build web applications around the users, permissions, data and workflows the business actually needs.',
+    outcomes: ['Centralised business information', 'Fewer repetitive manual tasks', 'Clear role-based workflows', 'Useful operational dashboards', 'Connected APIs and services', 'A foundation for future features'],
+    includes: ['Customer portals', 'Admin panels and dashboards', 'Internal business tools', 'SaaS products and MVPs', 'Booking and enquiry systems', 'API-connected applications'],
+    process: ['Map users, workflows and constraints', 'Define a practical first release', 'Design the interface and system structure', 'Develop with regular working previews', 'Test roles, edge cases and real usage', 'Launch, monitor and iterate'],
+    industries: ['Startups', 'Education', 'Healthcare', 'Real Estate', 'Professional Services', 'Retail'],
+    faq: [
+      { q: 'Can you build an MVP?', a: 'Yes. The first release can focus on the smallest useful workflow, then expand after real users provide feedback.' },
+      { q: 'Can an application integrate with existing tools?', a: 'Yes. API, payment, email, WhatsApp, analytics and other integrations can be scoped where the provider supports them.' },
+      { q: 'Do you provide maintenance?', a: 'Yes. Ongoing maintenance, fixes and feature development can continue after launch.' },
+    ],
+  },
+  {
+    slug: 'business-software-development',
+    title: 'Custom Business Software',
+    seoTitle: 'Custom Business Software Development in India | Mahesh Builds',
+    description: 'CRM, management systems, dashboards, workflow automation and ERP-style software for growing businesses.',
+    eyebrow: 'Business Software',
+    headline: 'Replace scattered spreadsheets with software built for the workflow.',
+    intro: 'When important work is spread across spreadsheets, messages and disconnected tools, visibility and follow-up suffer. Custom software can bring the process into one controlled system.',
+    outcomes: ['One source of operational information', 'Structured roles and access', 'Less duplicate data entry', 'Faster follow-up and reporting', 'Workflows matched to the team', 'Room for automation and integrations'],
+    includes: ['CRM systems', 'Inventory and order systems', 'Institute management platforms', 'Booking and appointment systems', 'Employee and operations tools', 'ERP-style business platforms'],
+    process: ['Document the current workflow and pain points', 'Prioritise users, modules and reports', 'Prototype the highest-risk workflows', 'Develop the system in reviewable stages', 'Test permissions, data and operational scenarios', 'Deploy with support and a growth roadmap'],
+    industries: ['Manufacturing', 'Education', 'Healthcare', 'Real Estate', 'Retail', 'Professional Services'],
+    faq: [
+      { q: 'Is custom software right for every business?', a: 'No. If a reliable existing product fits the workflow, that may be the better choice. Custom development is most useful when the workflow or integration needs are genuinely specific.' },
+      { q: 'Can you modernise an existing system?', a: 'Yes. A system can be assessed and improved incrementally where a full rewrite is unnecessary.' },
+      { q: 'Can the software support different user roles?', a: 'Yes. Roles and permissions can be designed around the approved operational requirements.' },
+    ],
+  },
+  {
+    slug: 'mobile-app-development',
+    title: 'Mobile App Development',
+    seoTitle: 'Mobile App Development Services in India | Mahesh Builds',
+    description: 'Android, iOS and cross-platform mobile application design and development for customers and internal teams.',
+    eyebrow: 'Mobile Applications',
+    headline: 'Mobile experiences for customers, teams and operations.',
+    intro: 'A mobile app should solve a recurring need better than a mobile website alone. We plan and build focused customer-facing and internal applications connected to the systems behind them.',
+    outcomes: ['A focused mobile user journey', 'Connected data and backend workflows', 'Responsive interfaces for real devices', 'A practical MVP path', 'Clear app roles and permissions', 'Post-launch improvement options'],
+    includes: ['Customer applications', 'Booking and service apps', 'Business and workforce apps', 'Cross-platform applications', 'Mobile dashboards', 'API-connected experiences'],
+    process: ['Validate the use case and target users', 'Scope the smallest valuable release', 'Design core mobile journeys', 'Build the app and required backend connections', 'Test across supported devices', 'Prepare launch and ongoing iteration'],
+    industries: ['Startups', 'Hospitality', 'Fitness', 'Retail', 'Education', 'Professional Services'],
+    faq: [
+      { q: 'Do you build Android and iOS apps?', a: 'Yes. Native or cross-platform direction is chosen according to the product requirements and long-term maintenance needs.' },
+      { q: 'Can the app connect to a web dashboard?', a: 'Yes. Mobile applications can share APIs and data with a web-based administration or operations dashboard.' },
+      { q: 'Can you start with an MVP?', a: 'Yes. A focused MVP is often the safest way to validate the product before expanding it.' },
+    ],
+  },
+];
+
+export const localPage = {
+  slug: 'website-development-pune',
+  title: 'Website Development in Pune',
+  seoTitle: 'Website Development in Pune for Businesses | Mahesh Builds',
+  description: 'Website design and development for businesses, institutes and organisations in Pune, Maharashtra, with remote delivery across India.',
+  eyebrow: 'Pune · Maharashtra · India',
+  headline: 'Website development for Pune businesses that need more than a template.',
+  intro: 'Mahesh Builds works with businesses and organisations that need a clear, professional website or a connected digital system. Projects can be delivered for Pune-based teams and remotely across Maharashtra and India.',
+  outcomes: ['Business and corporate websites', 'Institute and admissions websites', 'Website redesign and modernization', 'Lead and enquiry flows', 'Mobile-first and accessible interfaces', 'Technical SEO and performance foundations'],
+  includes: ['Discovery and content structure', 'Responsive UI design', 'Frontend and backend development', 'Forms and approved integrations', 'SEO-ready technical implementation', 'Launch and maintenance support'],
+  process: ['Share the business goal or current website', 'Review scope, audience and required content', 'Agree the practical first release', 'Design and build with regular previews', 'Test, launch and plan ongoing improvements'],
+  industries: ['Institutes and education', 'Local service businesses', 'Healthcare organisations', 'Manufacturers', 'Professional firms', 'Hospitality and retail'],
+  faq: [
+    { q: 'Do you only work with clients in Pune?', a: 'No. Mahesh Builds can work remotely with businesses across Maharashtra and India.' },
+    { q: 'Can you redesign an existing local business website?', a: 'Yes. The current website can be reviewed for content, usability, mobile performance and SEO before the redesign is scoped.' },
+    { q: 'Can you build an institute website and management system?', a: 'Yes. Public website, enquiries or admissions, and internal management workflows can be planned as separate phases or one connected system.' },
+  ],
+};
+
+export function getServicePageBySlug(slug) {
+  return servicePages.find((page) => page.slug === slug);
+}

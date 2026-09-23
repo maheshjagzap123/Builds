@@ -1,69 +1,37 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import MagneticButton from '../animation/MagneticButton.jsx';
 
-const HeroScene = lazy(() => import('../three/HeroScene.jsx'));
-
 export default function Hero({ loaded = true }) {
   const rootRef = useRef(null);
-  const [webglReady, setWebglReady] = useState(false);
 
-  // Load WebGL only on desktop, only after the preloader has handed off.
   useEffect(() => {
-    if (!loaded) return;
-    const isSmall = window.matchMedia('(max-width: 768px)').matches;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!isSmall && !reduced) {
-      const t = setTimeout(() => setWebglReady(true), 400);
-      return () => clearTimeout(t);
-    }
-  }, [loaded]);
-
-  // Run the entrance animation when the Hero becomes visible (post-preloader),
-  // so the headline reveal isn't wasted behind the intro overlay.
-  useEffect(() => {
-    if (!loaded) return;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
+    if (!loaded || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.hero-headline .word > span',
-        { yPercent: 110 },
-        {
-          yPercent: 0,
-          duration: 1.2,
-          ease: 'expo.out',
-          stagger: 0.07,
-          delay: 0.1,
-        }
-      );
-      gsap.fromTo(
-        '.hero-top, .hero-bottom, .hero-scroll',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1, delay: 0.7 }
-      );
+      gsap.fromTo('.hero-headline .word > span', { yPercent: 110 }, { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: 0.045 });
+      gsap.fromTo('.hero-top, .hero-bottom, .hero-scroll', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.65, ease: 'expo.out', stagger: 0.08, delay: 0.35 });
     }, rootRef);
     return () => ctx.revert();
   }, [loaded]);
 
   return (
-    <section ref={rootRef} className="hero" id="top">
+    <section ref={rootRef} className="hero" id="top" aria-labelledby="hero-heading">
       <div className="hero-grid" aria-hidden="true" />
-      {webglReady && (
-        <div className="hero-canvas" aria-hidden="true">
-          <Suspense fallback={null}>
-            <HeroScene />
-          </Suspense>
-        </div>
-      )}
+      <div className="hero-atmosphere" aria-hidden="true">
+        <span className="hero-orbit hero-orbit-one" />
+        <span className="hero-orbit hero-orbit-two" />
+        <span className="hero-star hero-star-one" />
+        <span className="hero-star hero-star-two" />
+        <span className="hero-star hero-star-three" />
+      </div>
 
       <div className="container hero-content">
         <div className="hero-top">
-          <span className="eyebrow">Digital Product &amp; Software Studio</span>
-          <span className="location">India · Available Worldwide</span>
+          <span className="eyebrow">Website &amp; Software Development Studio</span>
+          <span className="location">Pune · India · Available Worldwide</span>
         </div>
 
-        <h1 className="hero-headline">
+        <h1 className="hero-headline" id="hero-heading">
           <span className="word"><span>We&nbsp;</span></span>
           <span className="word"><span>build&nbsp;</span></span>
           <span className="word"><span><em>digital</em>&nbsp;</span></span>
@@ -73,26 +41,18 @@ export default function Hero({ loaded = true }) {
           <span className="word"><span>move&nbsp;</span></span>
           <span className="word"><span>business&nbsp;</span></span>
           <span className="word"><span><em>forward.</em></span></span>
-          {/* headline reads: "We build digital products that move business forward." */}
         </h1>
 
         <div className="hero-bottom">
-          <p className="hero-sub">
-            Websites, web applications, mobile apps and custom business software — designed to help
-            businesses attract customers, simplify operations and grow.
-          </p>
+          <p className="hero-sub">Websites, web applications, mobile apps and custom business software — designed to help businesses attract customers, simplify operations and grow.</p>
           <div className="hero-ctas">
-            <MagneticButton href="#contact" className="btn" data-cursor-label="Start">
-              Start a Project <span className="arrow">↗</span>
-            </MagneticButton>
-            <MagneticButton href="#work-teaser" className="btn btn-ghost">
-              View What We've Built ↓
-            </MagneticButton>
+            <MagneticButton href="#contact" className="btn" data-cursor-label="Start">Start a Project <span className="arrow">↗</span></MagneticButton>
+            <MagneticButton href="/work" className="btn btn-ghost">View Our Work</MagneticButton>
           </div>
         </div>
       </div>
 
-      <div className="hero-scroll">Scroll</div>
+      <div className="hero-scroll" aria-hidden="true">Scroll</div>
     </section>
   );
 }

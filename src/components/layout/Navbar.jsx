@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import ThemeToggle from './ThemeToggle.jsx';
+import Link from './Link.jsx';
+import { sectionHref } from '../../lib/router.js';
 
+// `page: true` = real route (History API); otherwise an on-page section anchor.
 const LINKS = [
-  { href: '#/work', label: 'Work' },
-  { href: '#industries', label: 'Industries' },
-  { href: '#what-we-build', label: 'Services' },
-  { href: '#process', label: 'Process' },
-  { href: '#technology', label: 'Technology' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/work', label: 'Work', page: true },
+  { href: 'industries', label: 'Industries' },
+  { href: '/services/website-development', label: 'Services', page: true },
+  { href: 'process', label: 'Process' },
+  { href: 'technology', label: 'Technology' },
+  { href: 'contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
@@ -40,22 +43,22 @@ export default function Navbar() {
     <>
       <nav className={`nav ${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
         <div className="nav-inner">
-          <a href="#/" className="nav-logo" data-cursor="hover" onClick={close}>
+          <Link to="/" className="nav-logo" data-cursor="hover" onClick={close}>
             <span className="dot" />
             MAHESH BUILDS
-          </a>
+          </Link>
           <ul className="nav-links">
             {LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href} data-cursor="hover">{l.label}</a>
+                <Link to={l.page ? l.href : sectionHref(l.href)} data-cursor="hover">{l.label}</Link>
               </li>
             ))}
           </ul>
           <div className="nav-actions">
             <ThemeToggle className="nav-theme" />
-            <a href="#contact" className="nav-cta" data-cursor="hover">
+            <Link to={sectionHref('contact')} className="nav-cta" data-cursor="hover">
               Start a Project ↗
-            </a>
+            </Link>
           </div>
           <ThemeToggle className="nav-theme-mobile" />
           <button
@@ -73,13 +76,13 @@ export default function Navbar() {
         <ul>
           {LINKS.map((l) => (
             <li key={l.href}>
-              <a href={l.href} onClick={close} tabIndex={open ? 0 : -1}>{l.label}</a>
+              <Link to={l.page ? l.href : sectionHref(l.href)} onClick={close} tabIndex={open ? 0 : -1}>{l.label}</Link>
             </li>
           ))}
         </ul>
-        <a href="#contact" className="mobile-menu-cta" onClick={close} tabIndex={open ? 0 : -1}>
+        <Link to={sectionHref('contact')} className="mobile-menu-cta" onClick={close} tabIndex={open ? 0 : -1}>
           Start a Project ↗
-        </a>
+        </Link>
         <div className="mobile-menu-footer">
           <span>Mahesh Builds</span>
           <ThemeToggle className="mobile-theme" />

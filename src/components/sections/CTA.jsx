@@ -19,7 +19,7 @@ export default function CTA() {
           <MagneticButton href="#contact" className="btn" data-cursor-label="Start">
             Start a Project <span className="arrow">↗</span>
           </MagneticButton>
-          <MagneticButton href="#/work" className="btn btn-ghost">
+          <MagneticButton href="/work" className="btn btn-ghost">
             View What We've Built
           </MagneticButton>
         </div>

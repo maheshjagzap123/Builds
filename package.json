@@ -5,20 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:ci": "node --max-old-space-size=4096 ./node_modules/vite/bin/vite.js build",
+    "prebuild": "node scripts/gen-seo.mjs && node scripts/gen-og.mjs",
+    "build": "vite build && node scripts/prerender.mjs",
+    "build:ci": "node scripts/gen-seo.mjs && node scripts/gen-og.mjs && node --max-old-space-size=4096 ./node_modules/vite/bin/vite.js build && node scripts/prerender.mjs",
+    "seo": "node scripts/gen-seo.mjs && node scripts/gen-og.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^9.114.0",
-    "@react-three/fiber": "^8.17.10",
-    "framer-motion": "^11.11.17",
     "gsap": "^3.12.5",
     "lenis": "^1.1.14",
     "lucide-react": "^0.454.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "three": "^0.169.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",
