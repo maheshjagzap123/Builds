@@ -9,6 +9,12 @@ const CONTACT_EMAIL = 'maheshjagzap003@gmail.com';
 const INSTAGRAM_URL = 'https://www.instagram.com/buildwithmahesh__/';
 const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || 'https://formspree.io/f/mkjgbdlb';
 
+function createEnquiryReference() {
+  const timestamp = new Date().toISOString().replace(/\D/g, '').slice(0, 14);
+  const suffix = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `MB-${timestamp}-${suffix}`;
+}
+
 export default function Contact() {
   const [status, setStatus] = useState('idle');
 
@@ -24,6 +30,10 @@ export default function Contact() {
       return;
     }
     delete data.website;
+
+    const enquiryReference = createEnquiryReference();
+    data.enquiry_reference = enquiryReference;
+    data.subject = `New enquiry [${enquiryReference}] — ${data.name} — ${data.project_type || 'Project'}`;
 
     if (ENDPOINT) {
       setStatus('loading');
@@ -42,7 +52,7 @@ export default function Contact() {
       return;
     }
 
-    const subject = `Project enquiry — ${data.name}`;
+    const subject = data.subject;
     const body = [
       `Name: ${data.name}`,
       `Company: ${data.company || 'Not provided'}`,
