@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Check } from 'lucide-react';
+import { Check, Instagram } from 'lucide-react';
 import RevealText from '../animation/RevealText.jsx';
 import FadeUp from '../animation/FadeUp.jsx';
 import MagneticButton from '../animation/MagneticButton.jsx';
 import WhatsAppButton from '../layout/WhatsAppButton.jsx';
 
-const CONTACT_EMAIL = 'maheshjagzap03@gmail.com';
-const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || '';
+const CONTACT_EMAIL = 'maheshjagzap003@gmail.com';
+const INSTAGRAM_URL = 'https://www.instagram.com/buildwithmahesh__/';
+const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || 'https://formspree.io/f/mkjgbdlb';
 
 export default function Contact() {
   const [status, setStatus] = useState('idle');
@@ -74,8 +75,22 @@ export default function Contact() {
             <div><div className="contact-meta-label">Phone</div><a href="tel:+917588174528" className="contact-meta-value" data-cursor="hover">+91 7588174528</a></div>
           </div>
           <div className="contact-direct">
-            <WhatsAppButton label="Discuss on WhatsApp" />
-            <p>Prefer a quick conversation? WhatsApp opens with a pre-filled introduction. You decide what to send.</p>
+            <div className="contact-direct-actions">
+              <WhatsAppButton label="Discuss on WhatsApp" />
+              <a
+                href={INSTAGRAM_URL}
+                className="btn btn-instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow Mahesh Builds on Instagram"
+                data-cursor="hover"
+              >
+                <Instagram size={18} aria-hidden="true" />
+                <span>Follow on Instagram</span>
+                <span className="arrow" aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <p>Prefer a quick conversation? Use WhatsApp, or follow project updates on Instagram.</p>
           </div>
         </div>
 

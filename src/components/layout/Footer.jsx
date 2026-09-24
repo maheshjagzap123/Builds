@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Instagram } from 'lucide-react';
 import Link from './Link.jsx';
 import { sectionHref } from '../../lib/router.js';
 
@@ -64,8 +65,13 @@ export default function Footer() {
           <div className="footer-col">
             <h5>Contact</h5>
             <ul>
-              <li><a href="mailto:maheshjagzap03@gmail.com" data-cursor="hover">maheshjagzap03@gmail.com</a></li>
+              <li><a href="mailto:maheshjagzap003@gmail.com" data-cursor="hover">maheshjagzap003@gmail.com</a></li>
               <li><a href="tel:+917588174528" data-cursor="hover">+91 7588174528</a></li>
+              <li>
+                <a className="footer-social-link" href="https://www.instagram.com/buildwithmahesh__/" target="_blank" rel="noopener noreferrer" data-cursor="hover" aria-label="Follow Mahesh Builds on Instagram">
+                  <Instagram size={15} aria-hidden="true" /> Instagram ↗
+                </a>
+              </li>
               <li><Link to={sectionHref('contact')} data-cursor="hover">Start a Project ↗</Link></li>
             </ul>
           </div>

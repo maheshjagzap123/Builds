@@ -4638,3 +4638,13 @@ html, body, #root {
   .pc-slide { transition: none; }
   .pc-slider-controls { display: none; }
 }
+
+/* Contact social links */
+.contact-direct-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn-instagram { background: transparent; color: var(--fg); border: 1px solid var(--line-strong); }
+.btn-instagram:hover { background: var(--surface-hover); border-color: var(--accent); }
+.footer-social-link { display: inline-flex; align-items: center; gap: 7px; }
+@media (max-width: 480px) {
+  .contact-direct-actions { align-items: stretch; }
+  .contact-direct-actions .btn { width: 100%; justify-content: center; }
+}

@@ -24,13 +24,13 @@ The build pipeline automatically:
 
 ## Contact form
 
-Copy `.env.example` to `.env.local` and set `VITE_CONTACT_ENDPOINT` to a JSON-compatible form endpoint:
+The production form currently uses the public Formspree endpoint `https://formspree.io/f/mkjgbdlb`. You can optionally override it by copying `.env.example` to `.env.local` and changing `VITE_CONTACT_ENDPOINT`:
 
 ```text
 VITE_CONTACT_ENDPOINT=https://your-form-endpoint.example
 ```
 
-If no endpoint is configured, the form clearly continues in the visitor's email application and provides WhatsApp as an alternative. It never displays a false sent state.
+If the configured endpoint is unavailable, the form displays a real error and provides email and WhatsApp alternatives. It never displays a false sent state.
 
 Before production launch, submit a test enquiry through the configured endpoint and verify receipt. Add server-side validation, rate limiting and/or spam protection at the endpoint.
 
