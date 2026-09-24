@@ -141,6 +141,20 @@ export const projects = [
         alt: 'Paithani Marketplace customer studio showing product filters and saree listings',
         caption: 'Customer marketplace interface.',
       },
+      {
+        type: 'gallery',
+        source: 'screenshot',
+        src: '/assets/img/portfolio/MajhiPaithani-2.JPG',
+        alt: 'Paithani Marketplace product detail page with saree images, pricing and purchase controls',
+        caption: 'Product detail and purchase interface.',
+      },
+      {
+        type: 'gallery',
+        source: 'screenshot',
+        src: '/assets/img/portfolio/MajhiPaithani-4.JPG',
+        alt: 'Paithani Marketplace shopping cart with product summary and checkout action',
+        caption: 'Shopping cart and checkout interface.',
+      },
     ],
     links: {},
     seo: {

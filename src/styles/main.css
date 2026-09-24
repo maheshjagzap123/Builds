@@ -4237,6 +4237,7 @@ html, body, #root {
 
 /* Project card */
 .pc-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--line);
@@ -4250,10 +4251,17 @@ html, body, #root {
   border-color: var(--line-strong);
   background: var(--surface-hover);
 }
-.pc-card:focus-visible {
+.pc-card:has(.pc-card-link:focus-visible) {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+.pc-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+}
+.pc-card-link:focus-visible { outline: none; }
 .pc-media {
   position: relative;
   aspect-ratio: 16 / 10;
@@ -4614,3 +4622,19 @@ html, body, #root {
 
 .wwb-service-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; color: var(--accent); font-size: 14px; font-weight: 700; }
 .wwb-service-link:hover { color: var(--fg); }
+
+/* Accessible automatic project-card gallery */
+.pc-slider, .pc-slides { position: relative; width: 100%; height: 100%; }
+.pc-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .65s ease, transform .7s var(--ease-out); }
+.pc-slide.is-active { opacity: 1; visibility: visible; }
+.pc-card:hover .pc-slide.is-active { transform: scale(1.035); }
+.pc-slider-controls { position: absolute; z-index: 6; left: 50%; bottom: 12px; transform: translateX(-50%); display: flex; align-items: center; gap: 9px; padding: 6px 8px; border-radius: 999px; color: #fff; background: rgba(5,6,13,.72); backdrop-filter: blur(8px); }
+.pc-slider-dots { display: flex; align-items: center; gap: 6px; }
+.pc-slider-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.42); transition: width .25s ease, background .25s ease; }
+.pc-slider-dots button.is-active { width: 20px; border-radius: 999px; background: #fff; }
+.pc-slider-toggle { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-left: 1px solid rgba(255,255,255,.2); background: transparent; color: #fff; }
+.pc-supporting, .pc-tag { z-index: 5; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .pc-slide { transition: none; }
+  .pc-slider-controls { display: none; }
+}

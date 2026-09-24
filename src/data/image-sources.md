@@ -28,7 +28,7 @@ Alt text:
 
 ## Records
 
-- **Paithani Marketplace:** `MajhiPaithani-1.JPG` is used as a real interface screenshot already bundled with the project.
+- **Paithani Marketplace:** `MajhiPaithani-1.JPG`, `MajhiPaithani-2.JPG` and `MajhiPaithani-4.JPG` are used as real interface screenshots already bundled with the project. The former profile screenshot was deleted because it contained personal account details.
 - **TripWise:** `tripwise-cover.svg` is an internally created branded project cover, clearly labelled as not being an application screenshot.
 - **Milk Management System:** `milk-management-cover.svg` is an internally created branded project cover, clearly labelled as not being an application screenshot.
 

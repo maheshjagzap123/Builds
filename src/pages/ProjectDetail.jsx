@@ -4,7 +4,7 @@ import { getProjectBySlug } from '../data/projects.js';
 import RevealText from '../components/animation/RevealText.jsx';
 import FadeUp from '../components/animation/FadeUp.jsx';
 import MagneticButton from '../components/animation/MagneticButton.jsx';
-import { pickHeroImage } from '../components/work/ProjectCard.jsx';
+import { pickHeroImage } from '../lib/projectMedia.js';
 import { useDocumentMeta } from '../lib/useDocumentMeta.js';
 import { navigate } from '../lib/router.js';
 
