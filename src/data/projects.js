@@ -16,7 +16,7 @@
 // Image object shape:
 //   {
 //     type: 'hero' | 'gallery',
-//     source: 'screenshot' | 'project-asset' | 'supporting' | 'external',
+//     source: 'screenshot' | 'project-asset' | 'brand-visual' | 'supporting' | 'external',
 //     src: '/path-or-url',
 //     alt: 'accurate description',
 //     caption: '',                       // optional
@@ -77,7 +77,15 @@ export const projects = [
     },
     role: 'Design & full-stack development (personal product).',
     duration: TBD,
-    images: [], // supporting travel imagery to be added once license-verified
+    images: [
+      {
+        type: 'hero',
+        source: 'brand-visual',
+        src: '/assets/img/portfolio/tripwise-cover.svg',
+        alt: 'TripWise project cover illustrating travel planning, budgeting and group expense splitting',
+        caption: 'Branded project cover — not an application screenshot.',
+      },
+    ],
     links: {}, // no public links yet — do not invent
     seo: {
       title: 'TripWise — Travel Planning & Group Expense App | Mahesh Builds',
@@ -125,7 +133,15 @@ export const projects = [
     },
     role: 'Design & development (personal product).',
     duration: TBD,
-    images: [], // supporting Paithani/saree imagery to be added once license-verified
+    images: [
+      {
+        type: 'hero',
+        source: 'screenshot',
+        src: '/assets/img/portfolio/MajhiPaithani-1.JPG',
+        alt: 'Paithani Marketplace customer studio showing product filters and saree listings',
+        caption: 'Customer marketplace interface.',
+      },
+    ],
     links: {},
     seo: {
       title: 'Paithani Marketplace — Online Saree Marketplace | Mahesh Builds',
@@ -174,7 +190,15 @@ export const projects = [
     },
     role: 'Design & development (personal product).',
     duration: TBD,
-    images: [], // supporting dairy/farming imagery to be added once license-verified
+    images: [
+      {
+        type: 'hero',
+        source: 'brand-visual',
+        src: '/assets/img/portfolio/milk-management-cover.svg',
+        alt: 'Milk Management System project cover illustrating dairy quantity, rate and daily amount records',
+        caption: 'Branded project cover — not an application screenshot.',
+      },
+    ],
     links: {},
     seo: {
       title: 'Milk Management System — Dairy Collection Software | Mahesh Builds',

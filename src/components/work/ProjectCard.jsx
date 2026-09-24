@@ -24,9 +24,9 @@ export default function ProjectCard({ project }) {
               loading="lazy"
               decoding="async"
             />
-            {hero.source === 'supporting' && (
-              <span className="pc-supporting" title="Contextual image, not a product screenshot">
-                Supporting visual
+            {['supporting', 'brand-visual'].includes(hero.source) && (
+              <span className="pc-supporting" title={hero.source === 'brand-visual' ? 'Branded project cover, not a product screenshot' : 'Contextual image, not a product screenshot'}>
+                {hero.source === 'brand-visual' ? 'Project cover' : 'Supporting visual'}
               </span>
             )}
           </>
@@ -59,7 +59,7 @@ export default function ProjectCard({ project }) {
 
 function pickHeroImage(images = []) {
   if (!images.length) return null;
-  const priority = ['screenshot', 'project-asset', 'supporting', 'external'];
+  const priority = ['screenshot', 'project-asset', 'brand-visual', 'supporting', 'external'];
   const heroes = images.filter((i) => i.type === 'hero');
   const pool = heroes.length ? heroes : images;
   return [...pool].sort(

@@ -123,9 +123,9 @@ export default function ProjectDetail({ slug }) {
         {hero ? (
           <figure className="pd-cover-fig">
             <img src={hero.src} alt={hero.alt} loading="eager" decoding="async" />
-            {hero.source === 'supporting' && (
+            {['supporting', 'brand-visual'].includes(hero.source) && (
               <figcaption className="pd-supporting-caption">
-                Supporting visual — contextual image, not a screenshot of the application.
+                {hero.source === 'brand-visual' ? 'Branded project cover — not an application screenshot.' : 'Supporting visual — contextual image, not a screenshot of the application.'}
               </figcaption>
             )}
           </figure>

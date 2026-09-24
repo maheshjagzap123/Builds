@@ -9,8 +9,9 @@ Rules:
   Wikimedia Commons, public-domain, or other clearly licensed sources).
 - If licensing cannot be verified, **do not use the image**.
 - A supporting image is NEVER a screenshot. Never present it as real project UI.
+- An internally created `brand-visual` is a designed project cover, not a UI screenshot.
 - When a real screenshot is provided, it takes priority (`screenshot >
-  project-asset > supporting`) — update `src/data/projects.js` `images[]`.
+  project-asset > brand-visual > supporting`).
 
 ## Record template
 
@@ -27,9 +28,11 @@ Alt text:
 
 ## Records
 
-_No external supporting images are in use yet. The three personal projects
-currently render a branded placeholder tile (clearly not a screenshot) until
-either supporting imagery (recorded here) or real screenshots are provided._
+- **Paithani Marketplace:** `MajhiPaithani-1.JPG` is used as a real interface screenshot already bundled with the project.
+- **TripWise:** `tripwise-cover.svg` is an internally created branded project cover, clearly labelled as not being an application screenshot.
+- **Milk Management System:** `milk-management-cover.svg` is an internally created branded project cover, clearly labelled as not being an application screenshot.
+
+_No external supporting images are currently in use._
 
 <!-- Example (fill in when a real image is added):
 Project: TripWise
