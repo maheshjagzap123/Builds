@@ -85,6 +85,20 @@ export const projects = [
         alt: 'TripWise project cover illustrating travel planning, budgeting and group expense splitting',
         caption: 'Branded project cover — not an application screenshot.',
       },
+      {
+        type: 'gallery',
+        source: 'brand-visual',
+        src: '/assets/img/portfolio/tripwise-budget-cover.svg',
+        alt: 'TripWise feature cover illustrating trip budgeting and expense categories',
+        caption: 'Branded budgeting feature cover — not an application screenshot.',
+      },
+      {
+        type: 'gallery',
+        source: 'brand-visual',
+        src: '/assets/img/portfolio/tripwise-groups-cover.svg',
+        alt: 'TripWise feature cover illustrating group expense splitting and settlement tracking',
+        caption: 'Branded group-expense feature cover — not an application screenshot.',
+      },
     ],
     links: {}, // no public links yet — do not invent
     seo: {
@@ -211,6 +225,20 @@ export const projects = [
         src: '/assets/img/portfolio/milk-management-cover.svg',
         alt: 'Milk Management System project cover illustrating dairy quantity, rate and daily amount records',
         caption: 'Branded project cover — not an application screenshot.',
+      },
+      {
+        type: 'gallery',
+        source: 'brand-visual',
+        src: '/assets/img/portfolio/milk-history-cover.svg',
+        alt: 'Milk Management feature cover illustrating daily records and date-filtered history',
+        caption: 'Branded record-history feature cover — not an application screenshot.',
+      },
+      {
+        type: 'gallery',
+        source: 'brand-visual',
+        src: '/assets/img/portfolio/milk-roles-cover.svg',
+        alt: 'Milk Management feature cover illustrating farmer, collector and dairy owner roles',
+        caption: 'Branded role-workflow feature cover — not an application screenshot.',
       },
     ],
     links: {},

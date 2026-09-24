@@ -1,6 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Pause, Play } from 'lucide-react';
 
+const SLIDE_INTERVAL_MS = 4000;
+// Every carousel derives its active slide from the same module-level epoch.
+// This prevents independent setIntervals from drifting apart over time.
+const SLIDER_EPOCH = Date.now();
+
+function getSynchronizedIndex(imageCount) {
+  const elapsed = Date.now() - SLIDER_EPOCH;
+  return Math.floor(elapsed / SLIDE_INTERVAL_MS) % imageCount;
+}
+
+function getTimeUntilNextTick() {
+  const elapsed = Date.now() - SLIDER_EPOCH;
+  const remainder = elapsed % SLIDE_INTERVAL_MS;
+  return remainder === 0 ? SLIDE_INTERVAL_MS : SLIDE_INTERVAL_MS - remainder;
+}
+
 export default function ProjectMediaCarousel({ images, projectName }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -17,8 +33,21 @@ export default function ProjectMediaCarousel({ images, projectName }) {
 
   useEffect(() => {
     if (images.length < 2 || paused || interacting || reducedMotion) return undefined;
-    const timer = window.setInterval(() => setActive((index) => (index + 1) % images.length), 4000);
-    return () => window.clearInterval(timer);
+
+    // Rejoin the shared position immediately after hover/focus/pause ends.
+    const synchronize = () => setActive(getSynchronizedIndex(images.length));
+    synchronize();
+
+    let intervalId;
+    const timeoutId = window.setTimeout(() => {
+      synchronize();
+      intervalId = window.setInterval(synchronize, SLIDE_INTERVAL_MS);
+    }, getTimeUntilNextTick());
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (intervalId) window.clearInterval(intervalId);
+    };
   }, [images.length, paused, interacting, reducedMotion]);
 
   if (!images.length) return null;

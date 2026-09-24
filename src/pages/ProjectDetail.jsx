@@ -189,8 +189,10 @@ export default function ProjectDetail({ slug }) {
           {gallery.map((img, i) => (
             <figure key={i} className="pd-gallery-fig">
               <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
-              {img.source === 'supporting' && (
-                <figcaption className="pd-supporting-caption">Supporting visual</figcaption>
+              {['supporting', 'brand-visual'].includes(img.source) && (
+                <figcaption className="pd-supporting-caption">
+                  {img.source === 'brand-visual' ? (img.caption || 'Branded project cover — not an application screenshot.') : 'Supporting visual'}
+                </figcaption>
               )}
             </figure>
           ))}
