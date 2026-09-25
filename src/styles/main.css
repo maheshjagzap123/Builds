@@ -414,10 +414,14 @@ body::before {
   align-items: center;
   gap: 8px;
 }
-.nav-logo .dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--accent);
+.nav-logo-image {
+  width: 46px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 7px;
+  flex-shrink: 0;
 }
+.nav-logo-text { white-space: nowrap; }
 .nav-links {
   display: flex;
   gap: 34px;
@@ -4030,7 +4034,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; }
 @media (max-width: 400px) {
   html { font-size: 14.5px; }
   .nav-logo { font-size: 12px; gap: 6px; }
-  .nav-logo .dot { width: 6px; height: 6px; }
+  .nav-logo-image { width: 36px; height: 27px; }
   .hero-headline { font-size: clamp(26px, 10vw, 34px) !important; }
   .h-section { font-size: clamp(23px, 8.5vw, 30px) !important; }
   .trust-grid { grid-template-columns: 1fr 1fr; }
@@ -4647,4 +4651,17 @@ html, body, #root {
 @media (max-width: 480px) {
   .contact-direct-actions { align-items: stretch; }
   .contact-direct-actions .btn { width: 100%; justify-content: center; }
+}
+
+/* Mahesh Builds brand logo */
+.footer-brand .footer-logo-heading { width: min(300px, 100%); margin: 0 0 22px; line-height: 0; }
+.footer-logo-heading a { display: block; border-radius: var(--radius-m); overflow: hidden; }
+.footer-logo-image { width: 100%; height: auto; background: #06101f; }
+@media (max-width: 640px) {
+  .nav-logo-image { width: 40px; height: 30px; border-radius: 6px; }
+  .footer-brand .footer-logo-heading { width: min(260px, 82vw); }
+}
+@media (max-width: 400px) {
+  .nav-logo-image { width: 36px; height: 27px; }
+  .nav-logo-text { font-size: 11px; }
 }

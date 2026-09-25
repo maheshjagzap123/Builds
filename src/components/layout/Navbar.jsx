@@ -43,9 +43,9 @@ export default function Navbar() {
     <>
       <nav className={`nav ${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
         <div className="nav-inner">
-          <Link to="/" className="nav-logo" data-cursor="hover" onClick={close}>
-            <span className="dot" />
-            MAHESH BUILDS
+          <Link to="/" className="nav-logo" data-cursor="hover" onClick={close} aria-label="Mahesh Builds home">
+            <img className="nav-logo-image" src="/assets/img/mahesh-builds-logo.png" alt="" width="512" height="384" decoding="async" />
+            <span className="nav-logo-text">MAHESH BUILDS</span>
           </Link>
           <ul className="nav-links">
             {LINKS.map((l) => (

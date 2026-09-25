@@ -41,7 +41,11 @@ export default function Footer() {
       <div className="container">
         <div className="footer-top">
           <div className="footer-brand">
-            <h3>Mahesh Builds</h3>
+            <h3 className="footer-logo-heading">
+              <Link to="/" data-cursor="hover" aria-label="Mahesh Builds home">
+                <img className="footer-logo-image" src="/assets/img/mahesh-builds-logo.png" alt="Mahesh Builds — websites, software, mobile apps and solutions" width="512" height="384" loading="lazy" decoding="async" />
+              </Link>
+            </h3>
             <p>Digital Product &amp; Software Studio.</p>
             <p className="footer-sub">
               We design, build, launch and maintain websites, mobile apps and custom
