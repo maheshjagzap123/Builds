@@ -48,8 +48,11 @@ export default function RevealText({ children, as: Tag = 'span', delay = 0, clas
   return (
     <Tag ref={ref} className={`rt ${className}`.trim()}>
       {parts.map((part, i) => (
-        <span key={i} className="rt-word">
-          <span className="rt-inner">{part}{splitBy === 'word' && i < parts.length - 1 ? '\u00A0' : ''}</span>
+        <span key={`${part}-${i}`}>
+          <span className="rt-word">
+            <span className="rt-inner">{part}</span>
+          </span>
+          {splitBy === 'word' && i < parts.length - 1 ? ' ' : ''}
         </span>
       ))}
     </Tag>

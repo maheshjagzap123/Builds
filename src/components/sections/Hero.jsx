@@ -32,14 +32,14 @@ export default function Hero({ loaded = true }) {
         </div>
 
         <h1 className="hero-headline" id="hero-heading">
-          <span className="word"><span>We&nbsp;</span></span>
-          <span className="word"><span>build&nbsp;</span></span>
-          <span className="word"><span><em>digital</em>&nbsp;</span></span>
+          <span className="word"><span>We</span></span>{' '}
+          <span className="word"><span>build</span></span>{' '}
+          <span className="word"><span><em>digital</em></span></span>{' '}
           <span className="word"><span>products</span></span>
           <br />
-          <span className="word"><span>that&nbsp;</span></span>
-          <span className="word"><span>move&nbsp;</span></span>
-          <span className="word"><span>business&nbsp;</span></span>
+          <span className="word"><span>that</span></span>{' '}
+          <span className="word"><span>move</span></span>{' '}
+          <span className="word"><span>business</span></span>{' '}
           <span className="word"><span><em>forward.</em></span></span>
         </h1>
 

@@ -4665,3 +4665,106 @@ html, body, #root {
   .nav-logo-image { width: 36px; height: 27px; }
   .nav-logo-text { font-size: 11px; }
 }
+
+/* =========================================================
+   MOBILE TEXT FLOW & OVERFLOW HARDENING
+   Break text where users expect it; preserve visual masks separately.
+   ========================================================= */
+.rt { max-width: 100%; }
+.rt-word { display: inline-block; max-width: 100%; overflow: hidden; vertical-align: bottom; }
+.rt-inner { display: inline-block; max-width: 100%; }
+
+:where(h1, h2, h3, h4, h5, h6, p, li, label, summary, strong) {
+  overflow-wrap: break-word;
+}
+:where(.container, .section-head > *, .contact-grid > *, .footer-top > *, .pc-body, .pd-meta > *, .service-point > *) {
+  min-width: 0;
+}
+:where(.contact-meta-value, .footer-col a, .pc-tech, .pd-tech-item, .pd-meta p, .form-status, .contact-success, .pkg-ideal, .industry-note p) {
+  overflow-wrap: anywhere;
+}
+.form-field :where(input, textarea, select) { width: 100%; min-width: 0; }
+.pc-meta { flex-wrap: wrap; row-gap: 4px; }
+.related-card { padding-right: 64px; }
+.pd-inline-link, .pd-link, .pkg-cta, .wwb-service-link { white-space: normal; min-height: 44px; }
+.wyn-solution { flex-wrap: wrap; }
+.footer-col a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Make compact gallery controls easy to tap without enlarging the visual dots. */
+.pc-slider-dots button {
+  position: relative;
+  width: 32px;
+  height: 36px;
+  background: transparent;
+}
+.pc-slider-dots button::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.42);
+  transform: translate(-50%, -50%);
+  transition: width .25s ease, background .25s ease;
+}
+.pc-slider-dots button.is-active { width: 32px; background: transparent; }
+.pc-slider-dots button.is-active::after { width: 20px; border-radius: 999px; background: #fff; }
+.pc-slider-toggle { width: 40px; height: 40px; }
+
+@media (max-width: 640px) {
+  .pd-title {
+    max-width: 100%;
+    font-size: clamp(30px, 10vw, 40px);
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+  }
+  .service-title {
+    max-width: 100%;
+    font-size: clamp(32px, 10vw, 46px);
+    line-height: 1.03;
+    letter-spacing: -0.045em;
+  }
+  .service-final-cta { width: auto; }
+  .maintenance-items { grid-template-columns: minmax(0, 1fr); }
+  .mobile-menu-footer { flex-wrap: wrap; gap: 16px; }
+  .footer-wordmark {
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: normal;
+    line-height: .9;
+  }
+  .not-found h1 { font-size: clamp(36px, 11vw, 50px); line-height: 1.02; }
+  .pd-tech-block { min-width: 0; flex: 1 1 100%; }
+  .pd-footer-nav, .pd-links { align-items: stretch; }
+  .pd-footer-nav .btn, .pd-links .pd-link { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .pd-meta { grid-template-columns: minmax(0, 1fr); }
+  .pd-tag-row { gap: 8px; }
+  .pd-badge { max-width: 100%; white-space: normal; }
+  .not-found-actions .btn { width: 100%; justify-content: center; }
+  .pc-slider-controls { bottom: 8px; padding: 2px 5px; gap: 3px; }
+}
+
+@media (max-width: 360px) {
+  .nav-logo-text { display: none; }
+  .nav-inner { padding-inline: 10px; }
+}
+
+/* Final page-level mobile containment */
+.btn { max-width: 100%; white-space: normal; text-align: center; }
+.pd-tag-row, .industry-hero-cta, .service-actions, .hero-ctas, .cta-ctas { max-width: 100%; }
+.pc-title, .pc-desc, .work-category-note, .service-point span, .service-list strong, .service-process p, .service-faq summary, .service-faq p, .related-card h3, .related-card p, .pkg-title, .pkg-pitch, .pkg-features span {
+  overflow-wrap: break-word;
+}
+@media (max-width: 640px) {
+  .pd-hero, .service-hero, .industry-hero, .work-hero { overflow: visible; }
+  .pd-meta { gap: 18px 12px; }
+  .pd-meta > div { padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .pd-footer-cta h2, .industry-cta h2, .cta h2 { max-width: 100%; }
+  .service-final-cta { margin-inline: var(--gutter); padding-inline: 20px; }
+  .contact-form button[type="submit"] { width: 100%; justify-content: center; }
+  .footer-col ul { gap: 2px; }
+  .footer-bottom > * { max-width: 100%; overflow-wrap: anywhere; }
+}
